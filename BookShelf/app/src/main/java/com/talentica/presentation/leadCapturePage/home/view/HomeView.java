@@ -1,10 +1,18 @@
-package main.java.presentation.leadCapturePage.home.view;
+package com.talentica.presentation.leadCapturePage.home.view;
 
-public interface HomeView {
 
-    void displayRecentlyAddedBooks();
+import com.talentica.presentation.leadCapturePage.base.view.LoadDataView;
+import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 
-    void displayMostReadBooks();
+import java.util.Collection;
+
+public interface HomeView extends LoadDataView {
+
+    void displayRecentlyAddedBooks(Collection<BookModel> books);
+
+    void displayMostReadBooks(Collection<BookModel> books);
+
+    void viewBook(BookModel bookModel);
 
 
 }

@@ -1,4 +1,4 @@
-package app.src.main.java.data.networking;
+package com.talentica.data.networking.volley;
 
 
 import android.util.Log;
@@ -6,12 +6,12 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.talentica.presentation.BookShelfApplication;
 
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 
-import talentica.com.booksharingapp.presentation.BookApplication;
 
 
 public class VolleyApiRequest {
@@ -72,7 +72,7 @@ public class VolleyApiRequest {
 //
 //        };
 
-        VolleySingleton.getInstance(BookApplication.getAppContext()).addToRequestQueue(jsonObjReq, tag_json_obj);
+        VolleySingleton.getInstance(BookShelfApplication.getAppContext()).addToRequestQueue(jsonObjReq, tag_json_obj);
     }
 
     private void getResponse(JSONObject response) {

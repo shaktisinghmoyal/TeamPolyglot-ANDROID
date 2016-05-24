@@ -1,14 +1,17 @@
-package main.java.presentation.navigation;
+package com.talentica.presentation.navigation;
 //import javax.inject.Inject;
 //import javax.inject.Singleton;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Class used to navigate through the application.
  */
-//@Singleton
+@Singleton
 public class Navigator {
 
-    //@Inject
+    @Inject
     public Navigator() {
         //empty
     }

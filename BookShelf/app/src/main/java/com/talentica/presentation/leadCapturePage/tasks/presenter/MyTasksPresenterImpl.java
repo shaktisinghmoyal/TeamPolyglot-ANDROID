@@ -1,4 +1,4 @@
-package main.java.presentation.leadCapturePage.tasks.presenter;
+package com.talentica.presentation.leadCapturePage.tasks.presenter;
 
 public class MyTasksPresenterImpl implements MyTasksPresenter {
     @Override

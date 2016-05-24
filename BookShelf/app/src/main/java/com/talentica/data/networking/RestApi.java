@@ -1,6 +1,10 @@
-package app.src.main.java.data.networking;
+package com.talentica.data.networking;
+
+import com.talentica.data.entity.BookEntity;
 
 import java.util.List;
+
+import rx.Observable;
 
 public interface RestApi extends BaseURL {
     //for book report operations
@@ -10,9 +14,12 @@ public interface RestApi extends BaseURL {
     String API_ABSTRACT_BOOK_SEARCH = API_BASE_URL + API_SEPERATOR + "search";
 
 
-    Observable<List<Book>> recentlyAddedBookList();
+    Observable<List<BookEntity>> recentlyAddedBookList();
 
-    Observable<List<Book>> mostReadBookList();
+    Observable<List<BookEntity>> mostReadBookList();
 
-    Observable<List<Book>> abstractSearch(final String stringForSearch);
+    Observable<List<BookEntity>> abstractSearch(final String stringForSearch);
+
+
+
 }

@@ -1,4 +1,4 @@
-package main.java.presentation.leadCapturePage.notifications.presenter;
+package com.talentica.presentation.leadCapturePage.notifications.presenter;
 
 public interface NotificationPagePresenter {
 }

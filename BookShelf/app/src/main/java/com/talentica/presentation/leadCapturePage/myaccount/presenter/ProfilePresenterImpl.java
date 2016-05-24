@@ -1,4 +1,6 @@
-package main.java.presentation.leadCapturePage.myaccount.presenter;
+package com.talentica.presentation.leadCapturePage.myaccount.presenter;
+
+
 
 public class ProfilePresenterImpl implements ProfilePresenter {
     @Override

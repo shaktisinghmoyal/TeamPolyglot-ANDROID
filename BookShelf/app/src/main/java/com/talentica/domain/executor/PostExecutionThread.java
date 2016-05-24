@@ -1,5 +1,5 @@
 
-package main.java.domain.executor;
+package com.talentica.domain.executor;
 
 import rx.Scheduler;
 

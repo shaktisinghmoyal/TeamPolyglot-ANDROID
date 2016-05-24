@@ -1,18 +1,20 @@
-package main.java.data.executor;
+package com.talentica.data.executor;
+
+import com.talentica.domain.executor.ThreadExecutor;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+
 
 /**
  * Decorated {@link java.util.concurrent.ThreadPoolExecutor}
  */
-@Singleton
 public class JobExecutor implements ThreadExecutor {
 
     private static final int INITIAL_POOL_SIZE = 3;
@@ -23,11 +25,9 @@ public class JobExecutor implements ThreadExecutor {
 
     // Sets the Time Unit to seconds
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
-
+    private static volatile JobExecutor sThreadExecutor;
     private final BlockingQueue<Runnable> workQueue;
-
     private final ThreadPoolExecutor threadPoolExecutor;
-
     private final ThreadFactory threadFactory;
 
     @Inject
@@ -36,6 +36,14 @@ public class JobExecutor implements ThreadExecutor {
         this.threadFactory = new JobThreadFactory();
         this.threadPoolExecutor = new ThreadPoolExecutor(INITIAL_POOL_SIZE, MAX_POOL_SIZE,
                 KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT, this.workQueue, this.threadFactory);
+    }
+
+    public static Executor getInstance() {
+        if (sThreadExecutor == null) {
+            sThreadExecutor = new JobExecutor();
+        }
+
+        return sThreadExecutor;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package main.java.presentation.leadCapturePage.base.view;
+package com.talentica.presentation.leadCapturePage.base.view;
 
 public interface LeadCapturePageView {
 

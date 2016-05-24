@@ -13,8 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.src.main.java.domain.usecases;
+package com.talentica.domain.usecases;
 
+
+import android.util.Log;
+
+import com.talentica.domain.executor.PostExecutionThread;
+import com.talentica.domain.executor.ThreadExecutor;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -56,7 +61,8 @@ public abstract class BaseUseCase {
      */
     @SuppressWarnings("unchecked")
     public void execute(Subscriber UseCaseSubscriber) {
-        this.subscription = this.buildUseCaseObservable()
+        Log.e("execute", "called");
+        subscription = this.buildUseCaseObservable()
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(UseCaseSubscriber);

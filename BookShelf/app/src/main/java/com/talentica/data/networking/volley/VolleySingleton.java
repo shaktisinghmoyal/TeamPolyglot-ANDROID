@@ -1,4 +1,4 @@
-package app.src.main.java.data.networking;
+package com.talentica.data.networking.volley;
 
 import android.content.Context;
 import android.text.TextUtils;

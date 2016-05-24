@@ -1,11 +1,33 @@
-package main.java.presentation.leadCapturePage.base.presenter;
+package com.talentica.presentation.leadCapturePage.base.presenter;
 
-public interface LeadCapturePagePresenter {
+public class LeadCapturePagePresenter implements ILeadCapturePagePresenter, Presenter {
+    @Override
+    public void navigatePage() {
 
-    // this function wil be used to navigate between fragments for bottom menu item click
-    void navigatePage();
+    }
 
-    void getCurrentPage();
+    @Override
+    public void getCurrentPage() {
 
-    void onBottomMenuItemClick();
+    }
+
+    @Override
+    public void onBottomMenuItemClick() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
 }

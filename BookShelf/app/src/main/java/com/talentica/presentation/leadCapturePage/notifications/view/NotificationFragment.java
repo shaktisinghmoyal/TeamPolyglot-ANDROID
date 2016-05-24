@@ -1,4 +1,6 @@
-package main.java.presentation.leadCapturePage.notifications.view;
+package com.talentica.presentation.leadCapturePage.notifications.view;
+
+
 
 public class NotificationFragment implements NotificationView {
 
