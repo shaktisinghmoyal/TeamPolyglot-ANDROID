@@ -1,7 +1,7 @@
 package com.talentica.presentation.leadCapturePage.base.view;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 import com.talentica.presentation.internal.di.HasComponent;
 

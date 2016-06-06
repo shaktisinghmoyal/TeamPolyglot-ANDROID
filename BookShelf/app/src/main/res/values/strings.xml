@@ -4,6 +4,46 @@
     <string name="most_read_text">Most Read</string>
     <string name="view_all_text">View All</string>
 
+    <string name="search_hint">Search Book Name,Auther, ISBN Number</string>
+    <string name="search_option">Search Books</string>
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+
+
+    <string name="science_fiction">Science Fiction</string>
+    <string name="satire">Satire </string>
+    <string name="drama">Drama</string>
+    <string name="action">Action and Adventure</string>
+    <string name="romance">Romance</string>
+    <string name="mystery">Mystery</string>
+    <string name="horror">Horror</string>
+    <string name="self_help">Self Help </string>
+    <string name="health">Health</string>
+    <string name="guide">Guide</string>
+    <string name="travel">Travel</string>
+    <string name="children">Children\'s</string>
+    <string name="religious">Religion Spirituality New Age </string>
+    <string name="science">Science</string>
+    <string name="history">History</string>
+
+    <string-array name="nav_drawer_items">
+        <item>Science Fiction</item>
+        <item>Satire </item>
+        <item>Drama</item>
+        <item>Action and Adventure</item>
+        <item>Romance</item>
+        <item>Mystery</item>
+        <item>Horror</item>
+        <item>Self Help </item>
+        <item>Health</item>
+        <item>Guide</item>
+        <item>Travel</item>
+        <item>Children\'s</item>
+        <item>Religion Spirituality New Age </item>
+        <item>Science</item>
+        <item>History</item>
+
+    </string-array>
 
     //Exception messages
     <string name="exception_message_generic">There was an application error</string>

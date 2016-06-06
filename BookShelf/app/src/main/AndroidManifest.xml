@@ -5,18 +5,26 @@
     <application
         android:name=".presentation.BookShelfApplication"
         android:allowBackup="true"
-                 android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
 
-        <activity android:name=".presentation.leadCapturePage.base.view.MainActivity">
+        <activity
+            android:name=".presentation.leadCapturePage.base.view.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop">
 
             <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
 
 

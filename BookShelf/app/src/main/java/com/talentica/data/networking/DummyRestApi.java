@@ -35,14 +35,21 @@ public class DummyRestApi extends BaseClassForMethods {
 //        });
     }
 
+    public Observable<List<BookEntity>> mostReadBookList() {
+        Log.e("DummyRestApi", "recentlyAddedBookList");
+        return Observable.just(makeBookList());
+//        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
+//
+    }
+
     public List<BookEntity> makeBookList() {
         List<BookEntity> bookEntityList = new ArrayList<BookEntity>();
         BookEntity bookEntity;
         for (int i = 0; i < 5; i++) {
             bookEntity = new BookEntity();
-            bookEntity.setBookName("BookName" + i);
-            bookEntity.setLenderName("LenderName" + i);
-            bookEntity.setAuthersName("AutherName" + i);
+            bookEntity.setBookName(" BookName" + i);
+            bookEntity.setLenderName(" LenderName" + i);
+            bookEntity.setAuthersName(" AutherName" + i);
             bookEntityList.add(bookEntity);
         }
 

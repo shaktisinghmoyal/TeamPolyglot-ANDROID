@@ -25,13 +25,17 @@ import javax.inject.Named;
 public class HomePagePresenter implements IHomePagePresenter, Presenter {
 
 
-    private final BaseUseCase getBookListUseCase;
+    private final BaseUseCase getRecentlyAddedBookListUseCase;
+    private final BaseUseCase getMostReadBookListUseCase;
     private final BookModelDataMapper bookModelDataMapper;
+    private final int RECENT_ADDED_BOOKS_QUERY = 1;
+    private final int MOST_READ_BOOK_QUERY = 2;
     private HomeView homeView;
 
     @Inject
-    public HomePagePresenter(@Named("bookList") BaseUseCase getBookListUseCase, BookModelDataMapper bookModelDataMapper) {
-        this.getBookListUseCase = getBookListUseCase;
+    public HomePagePresenter(@Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedBookListUseCase, @Named("mostReadBookList") BaseUseCase getMostReadBookListUseCase, BookModelDataMapper bookModelDataMapper) {
+        this.getRecentlyAddedBookListUseCase = getRecentlyAddedBookListUseCase;
+        this.getMostReadBookListUseCase = getMostReadBookListUseCase;
         this.bookModelDataMapper = bookModelDataMapper;
 
     }
@@ -44,16 +48,18 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
      * Initializes the presenter by start retrieving the book list.
      */
     public void initialize() {
-        loadUserList();
+        hideViewRetry();
+        showViewLoading();
+        loadRecentlyAddedBooks();
+        loadMostReadBooks();
     }
 
     /**
      * Loads all users.
      */
-    private void loadUserList() {
-        hideViewRetry();
+    public void loadNextBooksList(int i) {
         showViewLoading();
-        getBookList();
+        getNextBookList(i);
     }
 
     private void showViewLoading() {
@@ -72,9 +78,14 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
         homeView.hideRetry();
     }
 
-    private void getBookList() {
-        Log.e("getBookList", "called");
-        this.getBookListUseCase.execute(new BookListSubscriber());
+    private void getNextBookList(int typeOfBooks) {
+        Log.e("getNextBookList", "called");
+        if (typeOfBooks == RECENT_ADDED_BOOKS_QUERY) {
+            loadNextRecentlyAddedBooksOnSwipe();
+        } else if (typeOfBooks == MOST_READ_BOOK_QUERY) {
+            loadNextMostReadBooksOnSwipe();
+        }
+
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
@@ -83,29 +94,37 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
         this.homeView.showError(errorMessage);
     }
 
-    private void showBooksCollectionInView(Collection<Book> usersCollection) {
+    private void showBooksCollectionInView(Collection<Book> usersCollection, int queryNo) {
         final Collection<BookModel> bookModelsCollection =
                 this.bookModelDataMapper.transform(usersCollection);
-        homeView.displayRecentlyAddedBooks(bookModelsCollection);
+        if (queryNo == 1) {
+            homeView.displayRecentlyAddedBooks(bookModelsCollection);
+        } else {
+            homeView.displayMostReadBooks(bookModelsCollection);
+        }
     }
 
     @Override
     public void loadRecentlyAddedBooks() {
+        getRecentlyAddedBookListUseCase.execute(new BookListSubscriber(RECENT_ADDED_BOOKS_QUERY));
 
     }
 
     @Override
     public void loadMostReadBooks() {
+        getMostReadBookListUseCase.execute(new BookListSubscriber(MOST_READ_BOOK_QUERY));
 
     }
 
     @Override
     public void loadNextRecentlyAddedBooksOnSwipe() {
+        getRecentlyAddedBookListUseCase.execute(new BookListSubscriber(RECENT_ADDED_BOOKS_QUERY));
 
     }
 
     @Override
     public void loadNextMostReadBooksOnSwipe() {
+        getMostReadBookListUseCase.execute(new BookListSubscriber(MOST_READ_BOOK_QUERY));
 
     }
 
@@ -131,12 +150,17 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
 
     @Override
     public void destroy() {
-        this.getBookListUseCase.unsubscribe();
+        getRecentlyAddedBookListUseCase.unsubscribe();
+        getMostReadBookListUseCase.unsubscribe();
         this.homeView = null;
     }
 
     private final class BookListSubscriber extends DefaultSubscriber<List<Book>> {
+        int queryNo;
 
+        public BookListSubscriber(int queryNo) {
+            this.queryNo = queryNo;
+        }
         @Override
         public void onCompleted() {
             hideViewLoading();
@@ -152,7 +176,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
         @Override
         public void onNext(List<Book> books) {
 
-            showBooksCollectionInView(books);
+            showBooksCollectionInView(books, queryNo);
         }
     }
 }

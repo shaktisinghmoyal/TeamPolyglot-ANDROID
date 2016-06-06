@@ -3,7 +3,8 @@ package com.talentica.presentation.internal.di.modules;
 
 
 import com.talentica.domain.usecases.BaseUseCase;
-import com.talentica.domain.usecases.GetBookList;
+import com.talentica.domain.usecases.GetMostReadBookList;
+import com.talentica.domain.usecases.GetRecentlyAddedBookList;
 import com.talentica.presentation.internal.di.PerActivity;
 
 import javax.inject.Named;
@@ -28,11 +29,15 @@ public class BookModule {
 
     @Provides
     @PerActivity
-    @Named("bookList")
-    BaseUseCase provideGetBookListBaseUseCase(
-            GetBookList getBookList) {
-        return getBookList;
+    @Named("recentlyAddedBookList")
+    BaseUseCase provideGetRecentlyAddedBookListBaseUseCase(GetRecentlyAddedBookList getRecentlyAddedBookList) {
+        return getRecentlyAddedBookList;
     }
 
-
+    @Provides
+    @PerActivity
+    @Named("mostReadBookList")
+    BaseUseCase provideGetMostReadBookListBaseUseCase(GetMostReadBookList getMostReadBookList) {
+        return getMostReadBookList;
+    }
 }

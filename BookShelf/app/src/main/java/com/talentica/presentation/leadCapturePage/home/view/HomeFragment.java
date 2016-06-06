@@ -2,6 +2,7 @@ package com.talentica.presentation.leadCapturePage.home.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.talentica.R;
+import com.talentica.databinding.HomeFragmentBinding;
 import com.talentica.presentation.internal.di.components.BookComponent;
 import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.HomePagePresenter;
+import com.talentica.presentation.utils.DividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.inject.Inject;
@@ -24,50 +26,61 @@ import javax.inject.Inject;
 public class HomeFragment extends BaseFragment implements HomeView {
 
 
+    private final int RECENTLY_ADDED_BOOKS = 1;
+    private final int MOST_READ_BOOKS = 2;
     @Inject
     HomePagePresenter homePagePresenter;
     @Inject
-    HomeFragmentRecyclerViewAdapter recyclerViewAdapter1;
+    HomeFragmentRecyclerViewAdapter recentlyAddedBooksRecylerAdapter;
     @Inject
-    HomeFragmentRecyclerViewAdapter recyclerViewAdapter2;
-    RecyclerView recycler_view1;
-    RecyclerView recycler_view2;
-    ArrayList<BookModel> mostReadBooks;
-    ArrayList<BookModel> recentlyAddedReadBooks;
+    HomeFragmentRecyclerViewAdapter mostReadBooksReyclerAdapter;
+    RecyclerView recentlyAddedBooksRecylerView;
+    RecyclerView mostReadBooksReyclerView;
+    private HomeFragmentBinding homeFragmentBinding;
     private BookListListener bookListListener;
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-        int firstVisibleItem, visibleItemCount, totalItemCount;
-        private int previousTotal = 0; // The total number of items in the dataset after the last load
-        private boolean loading = true; // True if we are still waiting for the last set of data to load.
-        private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
-        private LinearLayoutManager mLinearLayoutManager;
 
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            mLinearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            visibleItemCount = recyclerView.getChildCount();
-            totalItemCount = mLinearLayoutManager.getItemCount();
-            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+    private RecyclerView.OnScrollListener onScrollListener1 = getScrollListener();
+    private RecyclerView.OnScrollListener onScrollListener2 = getScrollListener();
 
-            if (loading) {
-                if (totalItemCount > previousTotal) {
-                    loading = false;
-                    previousTotal = totalItemCount;
+    private RecyclerView.OnScrollListener getScrollListener() {
+        return new RecyclerView.OnScrollListener() {
+            int firstVisibleItem, visibleItemCount, totalItemCount;
+            private int previousTotal = 0; // The total number of items in the dataset after the last load
+            private boolean loading = true; // True if we are still waiting for the last set of data to load.
+            private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
+            private LinearLayoutManager mLinearLayoutManager;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mLinearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                visibleItemCount = recyclerView.getChildCount();
+                totalItemCount = mLinearLayoutManager.getItemCount();
+                firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false;
+                        previousTotal = totalItemCount;
+                    }
                 }
+                if (!loading && (totalItemCount - visibleItemCount)
+                        <= (firstVisibleItem + visibleThreshold)) {
+                    // End has been reached
+
+                    // Do something
+                    if (recyclerView.getId() == R.id.recycler_view_recently_added_list) {
+                        homePagePresenter.loadNextBooksList(RECENTLY_ADDED_BOOKS);
+                    } else {
+                        homePagePresenter.loadNextBooksList(MOST_READ_BOOKS);
+                    }
+
+                    loading = true;
+                }
+
             }
-            if (!loading && (totalItemCount - visibleItemCount)
-                    <= (firstVisibleItem + visibleThreshold)) {
-                // End has been reached
-
-                // Do something
-                loadBookList();
-
-                loading = true;
-            }
-
-        }
-    };
+        };
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -86,7 +99,10 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View fragmentView = inflater.inflate(R.layout.home_fragment, container, false);
+
+        homeFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
+        final View fragmentView = homeFragmentBinding.getRoot();
+        //homeFragmentBinding.setMarsdata(this);
         setupRecyclerViews(fragmentView);
 
         return fragmentView;
@@ -95,14 +111,15 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         homePagePresenter.setView(this);
         if (savedInstanceState == null) {
-            loadBookList();
+            initializeBooksList();
         }
 
     }
 
-    private void loadBookList() {
+    private void initializeBooksList() {
         homePagePresenter.initialize();
     }
 
@@ -110,15 +127,15 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void displayRecentlyAddedBooks(Collection<BookModel> books) {
         Log.e("displaybooks", "called");
         if (books != null) {
-            this.recyclerViewAdapter1.setUsersCollection(books);
-            // this.recyclerViewAdapter2.setUsersCollection(books);
+            recentlyAddedBooksRecylerAdapter.setUsersCollection(books);
+
         }
     }
 
     @Override
     public void displayMostReadBooks(Collection<BookModel> books) {
         if (books != null) {
-            this.recyclerViewAdapter2.setUsersCollection(books);
+            mostReadBooksReyclerAdapter.setUsersCollection(books);
         }
     }
 
@@ -142,8 +159,8 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        recycler_view1.setAdapter(null);
-        recycler_view2.setAdapter(null);
+        recentlyAddedBooksRecylerView.setAdapter(null);
+        mostReadBooksReyclerView.setAdapter(null);
 
     }
 
@@ -189,29 +206,23 @@ public class HomeFragment extends BaseFragment implements HomeView {
         return getActivity().getApplicationContext();
     }
 
+
     private void setupRecyclerViews(View view) {
 
-        mostReadBooks = new ArrayList<BookModel>();
-        recentlyAddedReadBooks = new ArrayList<BookModel>();
 
-        for (int j = 0; j <= 5; j++) {
-            mostReadBooks.add(new BookModel(" Mahabharta", " Arvind", " Shakti "));
-            recentlyAddedReadBooks.add(new BookModel("Ramayana", " Tomy ", " Akash "));
-        }
+        recentlyAddedBooksRecylerView = homeFragmentBinding.recyclerViewRecentlyAddedList;
+        mostReadBooksReyclerView = homeFragmentBinding.recyclerViewMostReadList;
+        recentlyAddedBooksRecylerView.addOnScrollListener(onScrollListener1);
+        mostReadBooksReyclerView.addOnScrollListener(onScrollListener2);
 
-        recycler_view1 = (RecyclerView) view.findViewById(R.id.recycler_view_recently_added_list);
-        recycler_view2 = (RecyclerView) view.findViewById(R.id.recycler_view_most_list);
-        recycler_view1.addOnScrollListener(onScrollListener);
+        recentlyAddedBooksRecylerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        mostReadBooksReyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        recycler_view1.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        recycler_view2.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        recentlyAddedBooksRecylerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider));
+        mostReadBooksReyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider));
 
-        recycler_view1.setAdapter(recyclerViewAdapter1);
-        recycler_view2.setAdapter(recyclerViewAdapter2);
-
-
-        recyclerViewAdapter1.setUsersCollection(recentlyAddedReadBooks);
-        recyclerViewAdapter2.setUsersCollection(mostReadBooks);
+        recentlyAddedBooksRecylerView.setAdapter(recentlyAddedBooksRecylerAdapter);
+        mostReadBooksReyclerView.setAdapter(mostReadBooksReyclerAdapter);
 
     }
 

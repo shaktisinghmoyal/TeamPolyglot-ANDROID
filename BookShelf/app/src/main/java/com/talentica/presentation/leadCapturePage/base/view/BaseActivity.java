@@ -1,9 +1,9 @@
 package com.talentica.presentation.leadCapturePage.base.view;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import com.talentica.presentation.BookShelfApplication;
 import com.talentica.presentation.internal.di.components.ApplicationComponent;
@@ -12,7 +12,7 @@ import com.talentica.presentation.navigation.Navigator;
 
 import javax.inject.Inject;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Inject
     Navigator navigator;
@@ -23,10 +23,15 @@ public abstract class BaseActivity extends Activity {
     }
 
 
-    protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-        fragmentTransaction.add(containerViewId, fragment);
-        fragmentTransaction.commit();
+    protected void addFragment(int containerViewId, Fragment fragment, String tag) {
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (tag == "search_fragment") {
+            fragmentTransaction.replace(containerViewId, fragment, tag).addToBackStack(tag);
+        } else {
+            fragmentTransaction.replace(containerViewId, fragment, tag);
+        }
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     /**

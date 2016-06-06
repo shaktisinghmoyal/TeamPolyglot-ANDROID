@@ -40,7 +40,15 @@ public class HomeRepository implements IHomeRepository {
 
     @Override
     public Observable<List<Book>> askForMostReadBooks() {
-        return null;
+        Log.e("HomeRepository", "askForMostReadBooks");
+        DummyRestApi dri = new DummyRestApi();
+        return dri.recentlyAddedBookList().map(new Func1<List<BookEntity>, List<Book>>() {
+            @Override
+            public List<Book> call(List<BookEntity> bookEntities) {
+                Log.e("HomeRepository", "call");
+                return bookEntityDataMapper.transform(bookEntities);
+            }
+        });
     }
 
     @Override
