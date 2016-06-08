@@ -47,9 +47,9 @@ public class DummyRestApi extends BaseClassForMethods {
         BookEntity bookEntity;
         for (int i = 0; i < 5; i++) {
             bookEntity = new BookEntity();
-            bookEntity.setBookName(" BookName" + i);
-            bookEntity.setLenderName(" LenderName" + i);
-            bookEntity.setAuthersName(" AutherName" + i);
+            bookEntity.setBookName("BookName" + i);
+            bookEntity.setLenderName("LenderName" + i);
+            bookEntity.setAuthersName("AutherName" + i);
             bookEntityList.add(bookEntity);
         }
 
