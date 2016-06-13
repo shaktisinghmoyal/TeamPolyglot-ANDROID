@@ -9,12 +9,12 @@ import com.talentica.databinding.BookThumbnailCardviewItemBinding;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 
 public class BookViewHolder extends RecyclerView.ViewHolder {
-    private BookThumbnailCardviewItemBinding binding;
+    private BookThumbnailCardviewItemBinding itemBinding;
 
     private BookViewHolder(BookThumbnailCardviewItemBinding binding) {
         super(binding.getRoot());
         binding.getRoot().setLayoutParams(new LinearLayout.LayoutParams(Util.getDeviceWidth() / 2, ViewGroup.LayoutParams.WRAP_CONTENT));
-        binding = binding;
+        itemBinding = binding;
     }
 
     public static BookViewHolder create(LayoutInflater inflater, ViewGroup parent) {
@@ -25,7 +25,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
 
 
     public void bindTo(BookModel user) {
-        binding.setBookModel(user);
-        binding.executePendingBindings();
+        itemBinding.setBookModel(user);
+        itemBinding.executePendingBindings();
     }
 }
