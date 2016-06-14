@@ -5,11 +5,10 @@
     android:background="#E8E8E8">
 
     <TextView
+        style="@style/category"
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical"
-        android:text="Categories(31)"
-        android:textSize="16dp" />
+        android:text="Categories(31)" />
 </RelativeLayout>

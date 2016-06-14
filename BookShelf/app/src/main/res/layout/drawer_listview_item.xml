@@ -6,12 +6,12 @@
 
     <TextView
         android:id="@+id/rowListTextView"
+        style="@style/ClearRegular15"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical"
         android:text="regregreg"
-        android:textColor="@drawable/drawer_item_color"
-        android:textSize="15dp" />
+        android:textColor="@drawable/drawer_item_color" />
 
 </RelativeLayout>

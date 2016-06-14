@@ -30,10 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/toolbar"
-
-
                 android:orientation="vertical">
-
             </LinearLayout>
 
             <View
@@ -190,8 +187,7 @@
             android:id="@+id/left_drawer_nav"
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#FFFFFF">
+            android:layout_gravity="start">
 
             <RelativeLayout
                 android:layout_width="match_parent"

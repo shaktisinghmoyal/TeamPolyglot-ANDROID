@@ -6,13 +6,135 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#2A2D35</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-
+        <item name="android:fontFamily">@style/RobotoTextViewStyle</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="RobotoTextViewStyleMediumn" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="ButtonStyle" parent="android:Widget.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">#00BE7D</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="InactiveButtonStyle" parent="android:Widget.Button">
+        <item name="android:textColor">#00BE7D</item>
+        <item name="android:background">#FFFFFF</item>
+
+    </style>
+
+    <style name="Opaque">
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="SemiOpaque">
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="Clear">
+        <item name="android:textColor">#444444</item>
+    </style>
+
+    <style name="OpaqueRegular14" parent="Opaque">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="OpaqueRegular12" parent="Opaque">
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="OpaqueRegular11" parent="Opaque">
+        <item name="android:textSize">11dp</item>
+    </style>
+
+    <style name="OpaqueMedium12" parent="Opaque">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="SemiOpaqueRegular14" parent="SemiOpaque">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="SemiOpaqueRegular12" parent="SemiOpaque">
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="SemiOpaqueRegular15" parent="SemiOpaque">
+        <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="SemiOpaqueMedium15" parent="SemiOpaque">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">15dp</item>
+
+    </style>
+
+
+    <style name="ClearRegular16" parent="Clear">
+        <item name="android:textSize">16dp</item>
+
+    </style>
+
+    <style name="ClearRegular15" parent="Clear">
+        <item name="android:textSize">15dp</item>
+
+    </style>
+
+    <style name="ClearRegular14" parent="Clear">
+        <item name="android:textSize">14dp</item>
+
+    </style>
+
+    <style name="ClearRegular12" parent="Clear">
+        <item name="android:textSize">12dp</item>
+
+    </style>
+
+
+    <style name="ClearMedium18" parent="Clear">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">18dp</item>
+
+    </style>
+
+
+    <style name="ClearMedium14" parent="Clear">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">14dp</item>
+
+    </style>
+
+    <style name="ClearMedium16" parent="Clear">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">16dp</item>
+
+    </style>
+
+    <style name="ClearBold14" parent="Clear">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+
+    </style>
+
+    <style name="category">
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">#888888</item>
+
+    </style>
+
+    <style name="ConfirmationText">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#2BB432</item>
+
+    </style>
 
 </resources>

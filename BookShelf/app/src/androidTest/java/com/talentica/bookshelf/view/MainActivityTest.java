@@ -151,7 +151,7 @@ public class MainActivityTest {
         onView(withId(R.id.search)).perform(click());
         pressBack();
         pressBack();
-        assertThat(homeFragment.getClass().getSimpleName(), not("HomeFragment"));
+        assertThat(homeFragment.getClass().getSimpleName(), is("HomeFragment"));
 
 
         onView(withId(R.id.search)).perform(click());
