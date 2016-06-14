@@ -24,7 +24,6 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
 }
 
 jacoco {
-    toolVersion = "0.7.6.201602180812"
 
 }
 
