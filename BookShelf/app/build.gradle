@@ -11,7 +11,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
 
     jacocoClasspath = configurations['androidJacocoAnt']
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/*$ViewInjector*.*', '**/BuildConfig.class', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
     def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
