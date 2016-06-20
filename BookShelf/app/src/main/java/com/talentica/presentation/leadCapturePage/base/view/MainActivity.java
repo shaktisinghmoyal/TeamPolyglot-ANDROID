@@ -31,8 +31,8 @@ import com.talentica.presentation.internal.di.HasComponent;
 import com.talentica.presentation.internal.di.components.BookComponent;
 import com.talentica.presentation.internal.di.components.DaggerBookComponent;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.leadCapturePage.home.view.HomeFragment;
 import com.talentica.presentation.leadCapturePage.home.view.SearchFragment;
+import com.talentica.presentation.leadCapturePage.home.view.fragment.HomeFragment;
 
 public class MainActivity extends BaseActivity implements LeadCapturePageView, HasComponent<BookComponent>, HomeFragment.BookListListener {
 
@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     private MainActivityBinding mainActivityBinding;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         initializeInjector();
         activity = bookComponent.activity();
         if (savedInstanceState == null) {
-            addFragment(R.id.main_fragment_container, new HomeFragment(), "home_fragment");
+            navigator.addFragment(this, R.id.main_fragment_container, new HomeFragment(), "home_fragment");
         }
         intializevariables();
         initializeActivityComponents();
@@ -239,7 +238,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                     @Override
                     public void onClick(View v) {
                         Log.e("searchView", "" + "searchView");
-                        addFragment(R.id.main_fragment_container, new SearchFragment(), "search_fragment");
+                        navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), "search_fragment");
                     }
                 });
                 SearchView.SearchAutoComplete searchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);

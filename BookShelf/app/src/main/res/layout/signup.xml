@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/signup_name_text_id"
+        style="@style/ClearRegular16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_name_text" />
+
+    <EditText
+        android:id="@+id/signup_full_name_edit_text_id"
+        style="@style/CustomEditText"
+        android:layout_marginTop="8dp"
+        android:hint="@string/signup_name_hint_text" />
+
+    <TextView
+        android:id="@+id/signup_email_text_id"
+        style="@style/ClearRegular16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_mail_text" />
+
+    <EditText
+        android:id="@+id/signup_email_edit_text_id"
+        style="@style/CustomEditText"
+        android:layout_marginTop="8dp"
+        android:hint="@string/signup_mail_text_hint" />
+
+    <TextView
+        android:id="@+id/signup_pass_text_id"
+        style="@style/ClearRegular16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_pass_text" />
+
+    <EditText
+        android:id="@+id/signup_password_edit_text_id"
+        style="@style/CustomEditText"
+        android:layout_marginTop="8dp"
+        android:hint="@string/signup_pass_text_hint" />
+
+    <Button
+        android:id="@+id/signup_button"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/signup_button_text" />
+</LinearLayout>

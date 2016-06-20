@@ -18,10 +18,21 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="CustomEditText" parent="android:Widget.EditText">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/custom_edit_text</item>
+        <item name="android:textColorHint">#999999</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingLeft">16dp</item>
+
+    </style>
+
     <style name="ButtonStyle" parent="android:Widget.Button">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">#00BE7D</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">18dp</item>
     </style>
 
     <style name="InactiveButtonStyle" parent="android:Widget.Button">
@@ -40,6 +51,12 @@
 
     <style name="Clear">
         <item name="android:textColor">#444444</item>
+    </style>
+
+    <style name="loginText">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">#2a2d35</item>
+        <item name="android:textSize">40dp</item>
     </style>
 
     <style name="OpaqueRegular14" parent="Opaque">
@@ -69,6 +86,10 @@
 
     <style name="SemiOpaqueRegular15" parent="SemiOpaque">
         <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="SemiOpaqueRegular16" parent="SemiOpaque">
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="SemiOpaqueMedium15" parent="SemiOpaque">

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/app_name"
+        style="@style/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:text="@string/login_page_app_name" />
+
+    <EditText
+        android:id="@+id/login_email"
+        style="@style/CustomEditText"
+        android:layout_below="@+id/app_name"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="40dp"
+        android:hint="@string/login_page_email_hint"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+
+        android:id="@+id/login_password"
+        style="@style/CustomEditText"
+        android:layout_below="@+id/login_email"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="1dp"
+        android:hint="@string/login_page_pass_hint"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/signin_button"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/login_password"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/signin_button" />
+
+    <TextView
+        android:id="@+id/forget_password"
+        style="@style/OpaqueRegular14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signin_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/login_page_forgot_pass_text" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/signup_text"
+        android:layout_alignParentBottom="false"
+        android:background="#CCCCCC">
+
+    </View>
+
+    <TextView
+        android:id="@+id/signup_text"
+        style="@style/SemiOpaqueRegular16"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:gravity="center_vertical"
+        android:text="@string/login_page_signup_text" />
+
+</RelativeLayout>

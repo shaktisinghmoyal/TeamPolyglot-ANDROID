@@ -15,6 +15,7 @@
  */
 package com.talentica.presentation.internal.di.components;
 
+
 import android.app.Activity;
 
 import com.talentica.presentation.internal.di.PerActivity;

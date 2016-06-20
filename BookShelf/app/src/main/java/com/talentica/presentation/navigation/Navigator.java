@@ -2,9 +2,12 @@ package com.talentica.presentation.navigation;
 //import javax.inject.Inject;
 //import javax.inject.Singleton;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 /**
  * Class used to navigate through the application.
  */
@@ -16,6 +19,16 @@ public class Navigator {
         //empty
     }
 
+    public void addFragment(AppCompatActivity activity, int containerViewId, Fragment fragment, String tag) {
+
+        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+        if (tag == "search_fragment") {
+            fragmentTransaction.replace(containerViewId, fragment, tag).addToBackStack(tag);
+        } else {
+            fragmentTransaction.replace(containerViewId, fragment, tag);
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+    }
     /**
      * Goes to the user list screen.
      *
