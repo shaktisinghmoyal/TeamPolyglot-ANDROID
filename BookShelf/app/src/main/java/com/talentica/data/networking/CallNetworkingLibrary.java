@@ -6,9 +6,11 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 
+import rx.Observable;
+
 public class CallNetworkingLibrary {
 
-    static JSONObject callApiRequest(String URL, int method, JSONObject objectToSend) throws MalformedURLException {
+    public static Observable<JSONObject> callApiRequest(String URL, int method, JSONObject objectToSend) throws MalformedURLException {
 
         return VolleyApiRequest.createVolleyApiRequestObject(URL).VolleyJsonRequest(method, objectToSend);
     }

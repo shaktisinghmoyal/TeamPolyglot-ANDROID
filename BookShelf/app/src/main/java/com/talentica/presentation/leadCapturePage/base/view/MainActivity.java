@@ -77,7 +77,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
     private void initializeActivityComponents() {
         initializeBottomMenuItemIds();
-        setActionBar();
+        setActionViewBar();
         setNavigationDrawer();
     }
 
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
     }
 
-    public void setActionBar() {
+    public void setActionViewBar() {
         mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
         setSupportActionBar(mainActivityBinding.toolbar);
         mainActivityBinding.toolbar.setPadding(0, 0, 10, 0);

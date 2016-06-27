@@ -13,12 +13,17 @@ public interface RestApi extends BaseURL {
     //for book abstract search  operation
     String API_ABSTRACT_BOOK_SEARCH = API_BASE_URL + API_SEPERATOR + "search";
 
+    String API_AUTHENTICATION = API_BASE_URL + API_SEPERATOR + "authentication";
+    String API_LOGIN = API_AUTHENTICATION + API_SEPERATOR + "login";
+
 
     Observable<List<BookEntity>> recentlyAddedBookList();
 
     Observable<List<BookEntity>> mostReadBookList();
 
     Observable<List<BookEntity>> abstractSearch(final String stringForSearch);
+
+    Observable<String> callSignInApi(String username, String password);
 
 
 

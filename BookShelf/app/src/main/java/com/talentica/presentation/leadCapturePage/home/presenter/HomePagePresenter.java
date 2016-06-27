@@ -34,6 +34,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
 
     @Inject
     public HomePagePresenter(@Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedBookListUseCase, @Named("mostReadBookList") BaseUseCase getMostReadBookListUseCase, BookModelDataMapper bookModelDataMapper) {
+        Log.e("SignInPresenter", "signInStatusUseCase");
         this.getRecentlyAddedBookListUseCase = getRecentlyAddedBookListUseCase;
         this.getMostReadBookListUseCase = getMostReadBookListUseCase;
         this.bookModelDataMapper = bookModelDataMapper;

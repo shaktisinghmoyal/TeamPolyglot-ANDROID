@@ -1,4 +1,4 @@
-package com.talentica.data.entity.mapper;
+package com.talentica.data.entity.mapper.book;
 
 import com.talentica.data.entity.BookEntity;
 

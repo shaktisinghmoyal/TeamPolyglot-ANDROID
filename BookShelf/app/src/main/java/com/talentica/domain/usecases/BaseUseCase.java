@@ -37,10 +37,10 @@ import rx.subscriptions.Subscriptions;
  */
 public abstract class BaseUseCase {
 
-    private final ThreadExecutor threadExecutor;
-    private final PostExecutionThread postExecutionThread;
+    final ThreadExecutor threadExecutor;
+    final PostExecutionThread postExecutionThread;
 
-    private Subscription subscription = Subscriptions.empty();
+    Subscription subscription = Subscriptions.empty();
 
     protected BaseUseCase(ThreadExecutor threadExecutor,
                           PostExecutionThread postExecutionThread) {
@@ -61,11 +61,12 @@ public abstract class BaseUseCase {
      */
     @SuppressWarnings("unchecked")
     public void execute(Subscriber UseCaseSubscriber) {
-        Log.e("execute", "called");
+        Log.e("execute", "original called");
         subscription = this.buildUseCaseObservable()
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
                 .subscribe(UseCaseSubscriber);
+
     }
 
     /**

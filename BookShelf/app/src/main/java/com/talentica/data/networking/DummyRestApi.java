@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.talentica.data.entity.BookEntity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,12 @@ public class DummyRestApi extends BaseClassForMethods {
 //
     }
 
+    public Observable<JSONObject> dummyLoginModule() {
+        Log.e("DummyRestApi", "recentlyAddedBookList");
+        return Observable.just(new JSONObject());
+//        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
+//
+    }
     public List<BookEntity> makeBookList() {
         List<BookEntity> bookEntityList = new ArrayList<BookEntity>();
         BookEntity bookEntity;

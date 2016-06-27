@@ -1,7 +1,9 @@
 package com.talentica.presentation.login.view;
 
-public interface SignUpView {
+import com.talentica.presentation.leadCapturePage.base.view.LoadDataView;
+
+public interface SignUpView extends LoadDataView {
     void signUp();
 
-    void displayErrorOnSignUp();
+
 }

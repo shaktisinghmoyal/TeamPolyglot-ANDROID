@@ -4,7 +4,7 @@ package com.talentica.data.repository;
 import android.util.Log;
 
 import com.talentica.data.entity.BookEntity;
-import com.talentica.data.entity.mapper.BookEntityDataMapper;
+import com.talentica.data.entity.mapper.book.BookEntityDataMapper;
 import com.talentica.data.networking.DummyRestApi;
 import com.talentica.domain.model.Book;
 import com.talentica.domain.repository.IHomeRepository;

@@ -1,12 +1,14 @@
 package com.talentica.presentation.login.view;
 
-public interface SignInView {
+import com.talentica.presentation.leadCapturePage.base.view.LoadDataView;
+
+public interface SignInView extends LoadDataView {
     void signIn();
 
     void moveToSignUp();
 
     void moveToForgotPassword();
 
-    void displayErrorOnSignIn();
+    void moveToLeadCapturePage();
 
 }

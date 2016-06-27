@@ -17,6 +17,8 @@ package com.talentica.presentation.internal.di.modules;
 
 import android.app.Activity;
 
+import com.talentica.presentation.internal.di.PerActivity;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -35,7 +37,7 @@ public class ActivityModule {
      * Expose the activity to dependents in the graph.
      */
     @Provides
-    @com.talentica.presentation.internal.di.PerActivity
+    @PerActivity
     Activity activity() {
         return this.activity;
     }

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.talentica">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".presentation.BookShelfApplication"
         android:allowBackup="true"
@@ -11,14 +14,24 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".presentation.login.view.activity.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".presentation.leadCapturePage.base.view.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
@@ -28,16 +41,13 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+
         <activity android:name=".presentation.leadCapturePage.base.view.SplashActivity">
 
 
         </activity>
 
-        <activity
-            android:name=".presentation.login.view.activity.LoginActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden">
 
-        </activity>
 
 
     </application>

@@ -20,6 +20,9 @@ import android.content.Context;
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.IHomeRepository;
+import com.talentica.domain.repository.IResetPassRepository;
+import com.talentica.domain.repository.ISignInRepository;
+import com.talentica.domain.repository.ISignUpRepository;
 import com.talentica.presentation.internal.di.modules.ApplicationModule;
 import com.talentica.presentation.leadCapturePage.base.view.BaseActivity;
 
@@ -43,4 +46,10 @@ public interface ApplicationComponent {
     PostExecutionThread postExecutionThread();
 
     IHomeRepository homeRepository();
+
+    ISignInRepository signInRepository();
+
+    ISignUpRepository signUpRepository();
+
+    IResetPassRepository resetPassRepository();
 }

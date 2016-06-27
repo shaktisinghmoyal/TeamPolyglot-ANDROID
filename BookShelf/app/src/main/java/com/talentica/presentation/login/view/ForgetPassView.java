@@ -1,7 +1,8 @@
 package com.talentica.presentation.login.view;
 
-public interface ForgetPassView {
+import com.talentica.presentation.leadCapturePage.base.view.LoadDataView;
+
+public interface ForgetPassView extends LoadDataView {
     void sendLinkToResetPass();
 
-    void displayError();
 }

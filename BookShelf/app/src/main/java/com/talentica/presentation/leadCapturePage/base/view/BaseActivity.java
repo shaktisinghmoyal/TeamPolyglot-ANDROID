@@ -8,17 +8,16 @@ import com.talentica.presentation.internal.di.components.ApplicationComponent;
 import com.talentica.presentation.internal.di.modules.ActivityModule;
 import com.talentica.presentation.navigation.Navigator;
 
-import javax.inject.Inject;
-
 public abstract class BaseActivity extends AppCompatActivity {
 
-    @Inject
+    // @Inject
     public Navigator navigator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getApplicationComponent().inject(this);
+        navigator = new Navigator();
     }
 
 //    protected void addFragment(int containerViewId, Fragment fragment, String tag) {
