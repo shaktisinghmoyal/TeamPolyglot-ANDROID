@@ -4,17 +4,25 @@ import android.util.Log;
 
 import com.talentica.data.entity.BookEntity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 
 public class DummyRestApi extends BaseClassForMethods {
 
+    @Inject
+    public DummyRestApi() {
+
+    }
+
     public Observable<List<BookEntity>> recentlyAddedBookList() {
-        Log.e("DummyRestApi", "recentlyAddedBookList");
+//        Log.e("DummyRestApi", "recentlyAddedBookList");
         return Observable.just(makeBookList());
 //        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
 //
@@ -44,12 +52,27 @@ public class DummyRestApi extends BaseClassForMethods {
 //
     }
 
-    public Observable<JSONObject> dummyLoginModule() {
-        Log.e("DummyRestApi", "recentlyAddedBookList");
-        return Observable.just(new JSONObject());
+    public Observable<JSONObject> dummyLoginModule(String username, String password) {
+//        Log.e("DummyRestApi", "dummyLoginModule");
+        JSONObject object = new JSONObject();
+
+        try {
+            if (username.equals("reshakt") & password.equals("SHAmoy123")) {
+
+                object.put("result", "true");
+            } else {
+                object.put("result", "false");
+            }
+
+        } catch (JSONException e) {
+
+        }
+        return Observable.just(object);
 //        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
 //
     }
+
+
     public List<BookEntity> makeBookList() {
         List<BookEntity> bookEntityList = new ArrayList<BookEntity>();
         BookEntity bookEntity;

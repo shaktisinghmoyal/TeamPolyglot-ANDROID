@@ -3,6 +3,7 @@ package com.talentica.presentation.login.view.fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.talentica.presentation.internal.di.components.AuthenticationComponent
 import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
 import com.talentica.presentation.login.presenter.SignUpPresenter;
 import com.talentica.presentation.login.view.SignUpView;
+import com.talentica.presentation.login.view.activity.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -59,10 +61,16 @@ public class SignUpFragment extends BaseFragment implements SignUpView, View.OnC
 
     @Override
     public void signUp() {
-        signUpPresenter.getSignUpStatus(signUpBinding.signUpFullNameEditTextId.getText().toString(), signUpBinding.signUpEmailEditTextId.getText().toString(), signUpBinding.signUpPasswordEditTextId.getText().toString());
+        signUpBinding.errorText.setVisibility(View.INVISIBLE);
+        signUpPresenter.getSignUpStatus(signUpBinding.signUpEmailEditTextId.getText().toString(), signUpBinding.signUpPasswordEditTextId.getText().toString(), signUpBinding.signUpFullNameEditTextId.getText().toString());
 
     }
 
+    @Override
+    public void moveToSignIn() {
+        ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new SignInFragment(), "sign_in_fragment");
+        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.SIGNIN);// inject karna chahiye
+    }
 
     @Override
     public void onClick(View v) {
@@ -91,7 +99,8 @@ public class SignUpFragment extends BaseFragment implements SignUpView, View.OnC
 
     @Override
     public void showError(String message) {
-
+        Log.e("showError", "message  " + message);
+        signUpBinding.errorText.setVisibility(View.VISIBLE);
     }
 
     @Override

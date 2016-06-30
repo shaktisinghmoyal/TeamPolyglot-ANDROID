@@ -6,7 +6,6 @@ import android.util.Log;
 import com.talentica.domain.exception.ErrorBundle;
 import com.talentica.domain.usecases.BaseUseCase;
 import com.talentica.domain.usecases.DefaultSubscriber;
-import com.talentica.domain.usecases.GetSignInStatus;
 import com.talentica.presentation.exception.ErrorMessageFactory;
 import com.talentica.presentation.internal.di.PerActivity;
 import com.talentica.presentation.leadCapturePage.base.presenter.Presenter;
@@ -48,17 +47,30 @@ public class SignInPresenter implements Presenter {
     private void showErrorMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(signInView.context(),
                 errorBundle.getException());
-        this.signInView.showError(errorMessage);
+        signInView.showError(errorMessage);
     }
 
     public void getSignInStatus(String username, String password) {
-        ((GetSignInStatus) getSignInStatus).execute(username, password, new SignInStatusSubscriber());
+        Log.e("getSignInStatus", "username " + username + " password " + password);
+
+        if (username.length() == 0 || password.length() == 0) {
+            signInView.showError("");
+        } else {
+            getSignInStatus.execute(username, password, new SignInStatusSubscriber());
+        }
+
     }
 
 
-    private void actAsPerStatusOnView(String status) {
+    private void actAsPerResult(String status) {
+        if (status == "false") {
+            signInView.showError("");
+        }
         //not implemented fullly
-        signInView.moveToLeadCapturePage();
+        else {
+            signInView.moveToLeadCapturePage();
+
+        }
 
     }
 
@@ -101,7 +113,7 @@ public class SignInPresenter implements Presenter {
         @Override
         public void onNext(String status) {
             Log.e("SignInPresenter", "" + status);
-            actAsPerStatusOnView(status);
+            actAsPerResult(status);
         }
     }
 

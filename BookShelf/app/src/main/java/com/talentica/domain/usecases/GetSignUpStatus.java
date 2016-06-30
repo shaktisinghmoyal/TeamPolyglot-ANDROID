@@ -12,6 +12,7 @@ public class GetSignUpStatus extends BaseUseCase {
 
     private final ISignUpRepository iSignUpRepository;
 
+
     @Inject
     public GetSignUpStatus(ISignUpRepository iSignUpRepository, ThreadExecutor threadExecutor,
                            PostExecutionThread postExecutionThread) {
@@ -20,7 +21,7 @@ public class GetSignUpStatus extends BaseUseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return iSignUpRepository.tryForSignUp();
+    public Observable buildUseCaseObservable() {
+        return iSignUpRepository.tryForSignUp(username, password, fullName);
     }
 }

@@ -1,8 +1,10 @@
 package com.talentica.presentation.login.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import com.talentica.R;
 import com.talentica.databinding.SignInBinding;
 import com.talentica.presentation.internal.di.components.AuthenticationComponent;
 import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
+import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
 import com.talentica.presentation.login.presenter.SignInPresenter;
 import com.talentica.presentation.login.view.SignInView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
@@ -65,11 +68,13 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
     @Override
     public void moveToLeadCapturePage() {
-
+        Intent myIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(myIntent);
     }
 
     @Override
     public void signIn() {
+        signInBinding.errorText.setVisibility(View.INVISIBLE);
         signInPresenter.getSignInStatus(signInBinding.loginEmail.getText().toString(), signInBinding.loginPassword.getText().toString());
 
     }
@@ -131,6 +136,9 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
     @Override
     public void showError(String message) {
+        Log.e("showError", "message  " + message);
+        signInBinding.errorText.setVisibility(View.VISIBLE);
+
 
     }
 

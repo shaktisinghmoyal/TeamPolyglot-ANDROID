@@ -21,7 +21,7 @@ public class GetMostReadBookList extends BaseUseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    public Observable buildUseCaseObservable() {
         return iHomeRepository.askForMostReadBooks();
     }
 }

@@ -1,6 +1,7 @@
 package com.talentica.presentation.login.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.talentica.domain.exception.DefaultErrorBundle;
 import com.talentica.domain.exception.ErrorBundle;
@@ -47,13 +48,30 @@ public class ForgetPassPresenter implements Presenter {
     private void showErrorMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(forgetPassView.context(),
                 errorBundle.getException());
-        this.forgetPassView.showError(errorMessage);
+        forgetPassView.showError(errorMessage);
     }
 
     public void getForgetPassStatus(String email) {
-        forgetPassStatus.execute(new SignInStatusSubscriber());
+        Log.e("getSignInStatus", "email " + email + "  ");
+
+        if (email.length() == 0) {
+            forgetPassView.showError("");
+        } else {
+            forgetPassStatus.execute(email, new SignInStatusSubscriber());
+        }
     }
 
+    private void actAsPerResult(String status) {
+        //not implemented fullly
+        if (status == "false") {
+            forgetPassView.showError("");
+        }
+        //not implemented fullly
+        else {
+            forgetPassView.moveToSignIn();
+        }
+
+    }
 
     private void hideViewLoading() {
         forgetPassView.hideLoading();
@@ -93,7 +111,7 @@ public class ForgetPassPresenter implements Presenter {
         @Override
         public void onNext(String status) {
 
-
+            actAsPerResult(status);
         }
     }
 }

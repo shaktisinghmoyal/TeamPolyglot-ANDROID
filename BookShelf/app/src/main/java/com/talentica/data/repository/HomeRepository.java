@@ -19,16 +19,19 @@ import rx.functions.Func1;
 public class HomeRepository implements IHomeRepository {
 
     private final BookEntityDataMapper bookEntityDataMapper;
+    private DummyRestApi dri;
 
     @Inject
-    public HomeRepository(BookEntityDataMapper bookEntityDataMapper) {
+    public HomeRepository(BookEntityDataMapper bookEntityDataMapper, DummyRestApi dri) {
         this.bookEntityDataMapper = bookEntityDataMapper;
+        this.dri = dri;
+
     }
 
     @Override
     public Observable<List<Book>> askForRecentlyAddedBooks() {
-        Log.e("HomeRepository", "askForRecentlyAddedBooks");
-        DummyRestApi dri = new DummyRestApi();
+//        Log.e("HomeRepository", "askForRecentlyAddedBooks");
+
         return dri.recentlyAddedBookList().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
@@ -40,9 +43,8 @@ public class HomeRepository implements IHomeRepository {
 
     @Override
     public Observable<List<Book>> askForMostReadBooks() {
-        Log.e("HomeRepository", "askForMostReadBooks");
-        DummyRestApi dri = new DummyRestApi();
-        return dri.recentlyAddedBookList().map(new Func1<List<BookEntity>, List<Book>>() {
+//        Log.e("HomeRepository", "askForMostReadBooks");
+        return dri.mostReadBookList().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
                 Log.e("HomeRepository", "call");

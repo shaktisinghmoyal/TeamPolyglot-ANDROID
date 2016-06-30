@@ -16,6 +16,8 @@
     <string name="signin_button">Sign In</string>
     <string name="login_page_email_hint">Email ID</string>
     <string name="login_page_pass_hint">Password</string>
+    <string name="login_error_message">invalid user credentials</string>
+
 
     <string name="signup_name_text">Name</string>
     <string name="signup_name_hint_text">Full Name </string>

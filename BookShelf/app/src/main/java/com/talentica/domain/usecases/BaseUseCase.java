@@ -16,8 +16,6 @@
 package com.talentica.domain.usecases;
 
 
-import android.util.Log;
-
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
 
@@ -39,8 +37,11 @@ public abstract class BaseUseCase {
 
     final ThreadExecutor threadExecutor;
     final PostExecutionThread postExecutionThread;
-
+    String username;
+    String password;
+    String fullName;
     Subscription subscription = Subscriptions.empty();
+    private Subscriber useCaseSubscriber;
 
     protected BaseUseCase(ThreadExecutor threadExecutor,
                           PostExecutionThread postExecutionThread) {
@@ -51,7 +52,7 @@ public abstract class BaseUseCase {
     /**
      * Builds an Observable which will be used when executing the current UseCase.
      */
-    protected abstract Observable buildUseCaseObservable();
+    public abstract Observable buildUseCaseObservable();
 
     /**
      * Executes the current use case.
@@ -59,13 +60,44 @@ public abstract class BaseUseCase {
      * @param UseCaseSubscriber The guy who will be listen to the observable build
      *                          with {@link #buildUseCaseObservable()}.
      */
+
     @SuppressWarnings("unchecked")
     public void execute(Subscriber UseCaseSubscriber) {
-        Log.e("execute", "original called");
+        useCaseSubscriber = UseCaseSubscriber;
+        execute();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void execute(String email, Subscriber UseCaseSubscriber) {
+        useCaseSubscriber = UseCaseSubscriber;
+        this.username = email;
+        execute();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void execute(String username, String password, Subscriber UseCaseSubscriber) {
+        this.username = username;
+        this.password = password;
+        useCaseSubscriber = UseCaseSubscriber;
+        execute();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void execute(String username, String password, String fullName, Subscriber UseCaseSubscriber) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        useCaseSubscriber = UseCaseSubscriber;
+        execute();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public void execute() {
         subscription = this.buildUseCaseObservable()
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler())
-                .subscribe(UseCaseSubscriber);
+                .subscribe(useCaseSubscriber);
 
     }
 

@@ -1,6 +1,7 @@
 package com.talentica.presentation.login.presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.talentica.domain.exception.DefaultErrorBundle;
 import com.talentica.domain.exception.ErrorBundle;
@@ -51,8 +52,15 @@ public class SignUpPresenter implements Presenter {
         this.signUpView.showError(errorMessage);
     }
 
-    public void getSignUpStatus(String name, String email, String password) {
-        getSignUpStatus.execute(new SignUpStatusSubscriber());
+    public void getSignUpStatus(String username, String password, String fullName) {
+        Log.e("getSignInStatus", "email/username " + username + " fullName " + fullName + " password " + password);
+
+
+        if (username.length() == 0 || password.length() == 0 || fullName.length() == 0) {
+            signUpView.showError("");
+        } else {
+            getSignUpStatus.execute(username, password, fullName, new SignUpStatusSubscriber());
+        }
     }
 
 
@@ -76,6 +84,18 @@ public class SignUpPresenter implements Presenter {
         this.signUpView = null;
     }
 
+    private void actAsPerResult(String status) {
+        //not implemented fullly
+        if (status == "false") {
+            signUpView.showError("");
+        }
+        //not implemented fullly
+        else {
+            signUpView.moveToSignIn();
+        }
+
+    }
+
     private final class SignUpStatusSubscriber extends DefaultSubscriber<String> {
 
 
@@ -94,7 +114,7 @@ public class SignUpPresenter implements Presenter {
         @Override
         public void onNext(String status) {
 
-
+            actAsPerResult(status);
         }
     }
 }

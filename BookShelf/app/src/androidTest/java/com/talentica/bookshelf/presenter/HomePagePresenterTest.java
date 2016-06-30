@@ -1,7 +1,7 @@
 package com.talentica.bookshelf.presenter;
 
 import android.content.Context;
-import android.support.test.filters.LargeTest;
+import android.support.test.filters.SmallTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -13,6 +13,7 @@ import com.talentica.presentation.leadCapturePage.home.view.HomeView;
 import com.talentica.presentation.mapper.BookModelDataMapper;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -24,11 +25,12 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-@LargeTest
+@SmallTest
 public class HomePagePresenterTest {
 
-
+    @Rule
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
+
     private HomePagePresenter homePagePresenter;
     private Context mockContext;
     private HomeView homeViewMock;

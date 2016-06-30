@@ -3,6 +3,7 @@ package com.talentica.presentation.login.view.fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.talentica.presentation.internal.di.components.AuthenticationComponent
 import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
 import com.talentica.presentation.login.presenter.ForgetPassPresenter;
 import com.talentica.presentation.login.view.ForgetPassView;
+import com.talentica.presentation.login.view.activity.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -34,6 +36,13 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
     }
 
     @Override
+    public void moveToSignIn() {
+        ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new SignInFragment(), "sign_in_fragment");
+        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.SIGNIN);// inject karna chahiye
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         forgetPassBinding = DataBindingUtil.inflate(inflater, R.layout.forget_password, container, false);
@@ -52,7 +61,7 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        forgetPassBinding.forgetPassButton.setOnClickListener(this);
+        forgetPassBinding.sendMailButton.setOnClickListener(this);
 
     }
 
@@ -63,6 +72,7 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
 
     @Override
     public void sendLinkToResetPass() {
+        forgetPassBinding.errorText.setVisibility(View.INVISIBLE);
         forgetPassPresenter.getForgetPassStatus(forgetPassBinding.emailForForgetPass.getText().toString());
 
     }
@@ -91,6 +101,9 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
 
     @Override
     public void showError(String message) {
+        Log.e("showError", "message  " + message);
+        forgetPassBinding.errorText.setVisibility(View.VISIBLE);
+
 
     }
 

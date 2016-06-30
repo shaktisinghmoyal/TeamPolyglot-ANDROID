@@ -28,7 +28,7 @@ public class HomeFragmentTest {
 
 
     @Test
-    public void otherTextTest() {
+    public void textViewsTest() {
         onView(withId(R.id.recently_added_text)).check(matches(withText(R.string.recently_added_text)));
         onView(withId(R.id.recently_added_view_all_text)).check(matches(withText(R.string.view_all_text)));
 

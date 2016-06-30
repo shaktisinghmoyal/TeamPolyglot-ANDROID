@@ -12,6 +12,7 @@ public class GetForgetPassStatus extends BaseUseCase {
 
     private final IResetPassRepository iResetPassRepository;
 
+
     @Inject
     public GetForgetPassStatus(IResetPassRepository iResetPassRepository, ThreadExecutor threadExecutor,
                                PostExecutionThread postExecutionThread) {
@@ -19,8 +20,9 @@ public class GetForgetPassStatus extends BaseUseCase {
         this.iResetPassRepository = iResetPassRepository;
     }
 
+
     @Override
-    protected Observable buildUseCaseObservable() {
-        return iResetPassRepository.tryForResetPass();
+    public Observable buildUseCaseObservable() {
+        return iResetPassRepository.tryForResetPass(username);
     }
 }
