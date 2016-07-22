@@ -1,6 +1,7 @@
 package com.talentica.presentation.leadCapturePage.myaccount.presenter;
 
 public class MyBookPresenterImpl implements MyBookPresenter, BookOperationPresenter {
+    private final String Tag = "MyBookPresenterImpl";
     @Override
     public void onClickBookEdit() {
 

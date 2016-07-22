@@ -10,7 +10,7 @@ import rx.Observable;
 
 public class GetMostReadBookList extends BaseUseCase {
 
-
+    private final String Tag = "GetMostReadBookList";
     private final IHomeRepository iHomeRepository;
 
     @Inject

@@ -18,6 +18,7 @@ import rx.functions.Func1;
 
 public class HomeRepository implements IHomeRepository {
 
+    private final String Tag = "HomeRepository";
     private final BookEntityDataMapper bookEntityDataMapper;
     private DummyRestApi dri;
 
@@ -35,7 +36,7 @@ public class HomeRepository implements IHomeRepository {
         return dri.recentlyAddedBookList().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
-                Log.e("HomeRepository", "call");
+                Log.e(Tag, "recentlyAddedBookList call");
                 return bookEntityDataMapper.transform(bookEntities);
             }
         });
@@ -47,7 +48,7 @@ public class HomeRepository implements IHomeRepository {
         return dri.mostReadBookList().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
-                Log.e("HomeRepository", "call");
+                Log.e(Tag, "askForMostReadBooks map call");
                 return bookEntityDataMapper.transform(bookEntities);
             }
         });
@@ -55,6 +56,12 @@ public class HomeRepository implements IHomeRepository {
 
     @Override
     public Observable<List<Book>> searchBooks() {
-        return null;
+        return dri.predictiveSearch().map(new Func1<List<BookEntity>, List<Book>>() {
+            @Override
+            public List<Book> call(List<BookEntity> bookEntities) {
+                Log.e(Tag, "searchBooks map call");
+                return bookEntityDataMapper.transform(bookEntities);
+            }
+        });
     }
 }

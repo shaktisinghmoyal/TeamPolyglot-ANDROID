@@ -3,6 +3,7 @@ package com.talentica.presentation.leadCapturePage.home.presenter;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.talentica.R;
 import com.talentica.domain.exception.DefaultErrorBundle;
 import com.talentica.domain.exception.ErrorBundle;
 import com.talentica.domain.model.Book;
@@ -24,7 +25,7 @@ import javax.inject.Named;
 @PerActivity
 public class HomePagePresenter implements IHomePagePresenter, Presenter {
 
-
+    private final String Tag = "HomePagePresenter";
     private final BaseUseCase getRecentlyAddedBookListUseCase;
     private final BaseUseCase getMostReadBookListUseCase;
     private final BookModelDataMapper bookModelDataMapper;
@@ -49,6 +50,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
      * Initializes the presenter by start retrieving the book list.
      */
     public void initialize() {
+        setActionBar();
         hideViewRetry();
         showViewLoading();
         loadRecentlyAddedBooks();
@@ -61,6 +63,10 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
     public void loadNextBooksList(int i) {
         showViewLoading();
         getNextBookList(i);
+    }
+
+    private void setActionBar() {
+        homeView.setActionSearchBar();
     }
 
     private void showViewLoading() {
@@ -80,7 +86,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
     }
 
     private void getNextBookList(int typeOfBooks) {
-        Log.e("getNextBookList", "called");
+        Log.e(Tag, "getNextBookList " + "called");
         if (typeOfBooks == RECENT_ADDED_BOOKS_QUERY) {
             loadNextRecentlyAddedBooksOnSwipe();
         } else if (typeOfBooks == MOST_READ_BOOK_QUERY) {
@@ -135,8 +141,18 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
     }
 
     @Override
-    public void onBookClick() {
+    public void onBookClick(BookModel bookModel) {
+        homeView.viewBook(bookModel);
+    }
 
+    @Override
+    public void recentlyAddedViewAllClicked() {
+        homeView.moveToBooksGridView(R.string.recently_added_text);
+    }
+
+    @Override
+    public void mostReadViewAllClicked() {
+        homeView.moveToBooksGridView(R.string.most_read_text);
     }
 
     @Override

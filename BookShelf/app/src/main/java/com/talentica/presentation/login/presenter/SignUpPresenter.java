@@ -18,7 +18,7 @@ import javax.inject.Named;
 @PerActivity
 public class SignUpPresenter implements Presenter {
 
-
+    private final String Tag = "SignUpPresenter";
     private final BaseUseCase getSignUpStatus;
     private SignUpView signUpView;
 
@@ -53,7 +53,7 @@ public class SignUpPresenter implements Presenter {
     }
 
     public void getSignUpStatus(String username, String password, String fullName) {
-        Log.e("getSignInStatus", "email/username " + username + " fullName " + fullName + " password " + password);
+        Log.e(Tag, "getSignInStatus" + "email/username " + username + " fullName " + fullName + " password " + password);
 
 
         if (username.length() == 0 || password.length() == 0 || fullName.length() == 0) {

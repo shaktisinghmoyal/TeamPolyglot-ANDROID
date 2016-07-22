@@ -1,5 +1,7 @@
 package com.talentica.presentation.leadCapturePage.home.presenter;
 
+import com.talentica.presentation.leadCapturePage.home.model.BookModel;
+
 public interface IHomePagePresenter {
 
     void loadRecentlyAddedBooks();
@@ -12,5 +14,9 @@ public interface IHomePagePresenter {
 
     void onSearch(String string);
 
-    void onBookClick();
+    void onBookClick(BookModel bookModel);
+
+    void recentlyAddedViewAllClicked();
+
+    void mostReadViewAllClicked();
 }

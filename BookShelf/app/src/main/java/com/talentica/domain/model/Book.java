@@ -3,7 +3,7 @@ package com.talentica.domain.model;
 import android.widget.ImageView;
 
 public class Book {
-
+    private final String Tag = "Book";
     private String bookName;
     private String bookURL;
     private ImageView bookImage;

@@ -17,6 +17,7 @@ import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
 import com.talentica.presentation.login.presenter.SignInPresenter;
 import com.talentica.presentation.login.view.SignInView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
+import com.talentica.presentation.utils.Enums;
 
 import javax.inject.Inject;
 
@@ -25,7 +26,7 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
 //    @Inject
 //    public Navigator navigator;
-
+private final String Tag = "SignInFragment";
     @Inject
     public SignInPresenter signInPresenter;
 
@@ -74,24 +75,28 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
     @Override
     public void signIn() {
-        signInBinding.errorText.setVisibility(View.INVISIBLE);
-        signInPresenter.getSignInStatus(signInBinding.loginEmail.getText().toString(), signInBinding.loginPassword.getText().toString());
+        signInPresenter.signInButtonClicked(signInBinding.loginEmail.getText().toString(), signInBinding.loginPassword.getText().toString());
 
     }
+
 
     @Override
     public void moveToSignUp() {
         ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new SignUpFragment(), "sign_up_fragment");
-        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.SIGNUP);// inject karna chahiye
+        ((LoginActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.SIGNUP);// inject karna chahiye
     }
 
 
     @Override
     public void moveToForgotPassword() {
         ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new ForgetPassFragment(), "forget_pass_fragment");
-        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.FORGOTPASS);// inject karna chahiye
+        ((LoginActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.FORGOTPASS);// inject karna chahiye
     }
 
+    @Override
+    public void setActionSearchBar() {
+
+    }
 
     @Override
     public void onClick(final View v) {
@@ -103,11 +108,11 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
                 break;
 
             case R.id.signup_text:
-                moveToSignUp();
+                signInPresenter.signUpTextClicked();
                 break;
 
             case R.id.forget_password:
-                moveToForgotPassword();
+                signInPresenter.forgetPassTextClicked();
                 break;
 
 
@@ -116,12 +121,12 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
     @Override
     public void showLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(true);
+        //getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(false);
+        //getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override
@@ -136,16 +141,23 @@ public class SignInFragment extends BaseFragment implements SignInView, View.OnC
 
     @Override
     public void showError(String message) {
-        Log.e("showError", "message  " + message);
+        Log.e(Tag, "showError" + " message  " + message);
         signInBinding.errorText.setVisibility(View.VISIBLE);
 
 
     }
 
     @Override
+    public void disableError() {
+        Log.e(Tag, "disableError" + "  ");
+        signInBinding.errorText.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public Context context() {
         return null;
     }
+
 
     @Override
     public void onResume() {

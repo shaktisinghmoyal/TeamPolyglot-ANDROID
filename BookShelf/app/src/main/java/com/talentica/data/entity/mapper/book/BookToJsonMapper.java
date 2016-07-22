@@ -8,9 +8,9 @@ import org.json.JSONObject;
 
 public class BookToJsonMapper {
     static JSONObject finalJsonForBook, jsonForComment, jsonForPublisher, jsonForPublisherAddress;
-
     static JSONArray jsonAuthersArray;
     static JSONArray commentsArray;
+    private final String Tag = "BookToJsonMapper";
 
     public static JSONObject getJsonObjectOfBook(BookEntity book) throws JSONException, IllegalAccessException {
 

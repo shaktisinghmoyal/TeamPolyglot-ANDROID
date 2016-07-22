@@ -16,6 +16,7 @@ import rx.Observable;
  */
 public class GetRecentlyAddedBookList extends BaseUseCase {
 
+    private final String Tag = "GetRecentlyAddedBookList";
     private final IHomeRepository iHomeRepository;
 
     @Inject

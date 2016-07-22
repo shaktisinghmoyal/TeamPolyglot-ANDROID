@@ -8,4 +8,6 @@ public interface ILeadCapturePagePresenter {
     void getCurrentPage();
 
     void onBottomMenuItemClick();
+
+    void saveForRecentSearches(String recentSearches);
 }

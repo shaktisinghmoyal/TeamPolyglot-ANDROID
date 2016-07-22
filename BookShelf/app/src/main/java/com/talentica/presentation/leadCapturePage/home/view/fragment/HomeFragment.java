@@ -1,6 +1,5 @@
 package com.talentica.presentation.leadCapturePage.home.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -13,21 +12,25 @@ import android.view.ViewGroup;
 
 import com.talentica.R;
 import com.talentica.databinding.HomeFragmentBinding;
-import com.talentica.presentation.internal.di.components.BookComponent;
+import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
 import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
+import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.HomePagePresenter;
 import com.talentica.presentation.leadCapturePage.home.view.HomeView;
 import com.talentica.presentation.leadCapturePage.home.view.adapter.HomeFragmentRecyclerViewAdapter;
+import com.talentica.presentation.utils.ClickListenerInterface;
 import com.talentica.presentation.utils.DividerItemDecoration;
+import com.talentica.presentation.utils.Enums;
 
 import java.util.Collection;
 
 import javax.inject.Inject;
 
-public class HomeFragment extends BaseFragment implements HomeView {
+public class HomeFragment extends BaseFragment implements HomeView, View.OnClickListener {
 
 
+    private final String Tag = "HomeFragment";
     private final int RECENTLY_ADDED_BOOKS = 1;
     private final int MOST_READ_BOOKS = 2;
     @Inject
@@ -39,10 +42,23 @@ public class HomeFragment extends BaseFragment implements HomeView {
     RecyclerView recentlyAddedBooksRecylerView;
     RecyclerView mostReadBooksReyclerView;
     private HomeFragmentBinding homeFragmentBinding;
-    private BookListListener bookListListener;
+    private ClickListenerInterface bookListListener;
 
     private RecyclerView.OnScrollListener onScrollListener1 = getScrollListener();
     private RecyclerView.OnScrollListener onScrollListener2 = getScrollListener();
+    /**
+     * Interface for listening user list events.
+     */
+
+    private HomeFragmentRecyclerViewAdapter.OnItemClickListener onItemClickListener =
+            new HomeFragmentRecyclerViewAdapter.OnItemClickListener() {
+                @Override
+                public void onBookItemClicked(BookModel bookModel) {
+                    if (HomeFragment.this.homePagePresenter != null && bookModel != null) {
+                        HomeFragment.this.homePagePresenter.onBookClick(bookModel);
+                    }
+                }
+            };
 
     private RecyclerView.OnScrollListener getScrollListener() {
         return new RecyclerView.OnScrollListener() {
@@ -87,15 +103,15 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Activity) {
-            this.bookListListener = (BookListListener) context;
+        if (context instanceof ClickListenerInterface) {
+            this.bookListListener = (ClickListenerInterface) context;
         }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent(BookComponent.class).inject(this);
+        getComponent(LeadCaptureComponent.class).inject(this);
     }
 
     @Override
@@ -105,7 +121,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
         homeFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
         final View fragmentView = homeFragmentBinding.getRoot();
         //homeFragmentBinding.setMarsdata(this);
-        setupRecyclerViews(fragmentView);
+        setupRecyclerViews();
 
         return fragmentView;
     }
@@ -115,19 +131,25 @@ public class HomeFragment extends BaseFragment implements HomeView {
         super.onViewCreated(view, savedInstanceState);
 
         homePagePresenter.setView(this);
+
         if (savedInstanceState == null) {
-            initializeBooksList();
+            initializeItems();
         }
 
     }
 
-    private void initializeBooksList() {
+    @Override
+    public void setActionSearchBar() {
+        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.HOME);
+    }
+
+    private void initializeItems() {
         homePagePresenter.initialize();
     }
 
     @Override
     public void displayRecentlyAddedBooks(Collection<BookModel> books) {
-        Log.e("displaybooks", "called");
+        Log.e(Tag, "displaybooks" + "called");
         if (books != null) {
             recentlyAddedBooksRecylerAdapter.setUsersCollection(books);
 
@@ -142,8 +164,20 @@ public class HomeFragment extends BaseFragment implements HomeView {
     }
 
     @Override
-    public void viewBook(BookModel bookModel) {
+    public void moveToBooksGridView(int fragmentTitleId) {
 
+        Bundle fragmentTitleBundle = new Bundle();
+        fragmentTitleBundle.putInt(((MainActivity) getActivity()).fragmentTitle, fragmentTitleId);
+        BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
+        booksGridViewFragment.setArguments(fragmentTitleBundle);
+        ((MainActivity) getActivity()).navigator.addFragment((MainActivity) getActivity(), R.id.main_fragment_container, booksGridViewFragment, "books_grid_view_fragment");
+    }
+
+    @Override
+    public void viewBook(BookModel bookModel) {
+        if (this.bookListListener != null) {
+            this.bookListListener.onRecyclerViewBookClicked(bookModel);
+        }
     }
 
     @Override
@@ -176,16 +210,17 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void onDetach() {
         super.onDetach();
         homePagePresenter = null;
+        bookListListener = null;
     }
 
     @Override
     public void showLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(true);
+        // getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-        this.getActivity().setProgressBarIndeterminateVisibility(false);
+        // this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override
@@ -204,14 +239,21 @@ public class HomeFragment extends BaseFragment implements HomeView {
     }
 
     @Override
+    public void disableError() {
+
+    }
+
+    @Override
     public Context context() {
         return getActivity().getApplicationContext();
     }
 
+    private void setupRecyclerViews() {
 
-    private void setupRecyclerViews(View view) {
-
-
+        recentlyAddedBooksRecylerAdapter.setOnItemClickListener(onItemClickListener);
+        mostReadBooksReyclerAdapter.setOnItemClickListener(onItemClickListener);
+        homeFragmentBinding.mostReadViewAllText.setOnClickListener(this);
+        homeFragmentBinding.recentlyAddedViewAllText.setOnClickListener(this);
         recentlyAddedBooksRecylerView = homeFragmentBinding.recyclerViewRecentlyAddedList;
         mostReadBooksReyclerView = homeFragmentBinding.recyclerViewMostReadList;
         recentlyAddedBooksRecylerView.addOnScrollListener(onScrollListener1);
@@ -228,11 +270,21 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     }
 
-    /**
-     * Interface for listening user list events.
-     */
-    public interface BookListListener {
-        void onBookClicked(final BookModel book);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+
+            case R.id.recently_added_view_all_text:
+                homePagePresenter.recentlyAddedViewAllClicked();
+                break;
+
+            case R.id.most_read_view_all_text:
+                homePagePresenter.mostReadViewAllClicked();
+                break;
+
+
+        }
     }
 
 }

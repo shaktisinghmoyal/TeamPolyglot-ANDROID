@@ -1,6 +1,8 @@
 package com.talentica.presentation.leadCapturePage.myaccount.presenter;
 
 public class BorrowedBookPresenterImpl implements BorrowedBookPresenter, BookOperationPresenter {
+
+    private final String Tag = "BorrowedBookPresenterImpl";
     @Override
     public void onClickBorrowAgain() {
 

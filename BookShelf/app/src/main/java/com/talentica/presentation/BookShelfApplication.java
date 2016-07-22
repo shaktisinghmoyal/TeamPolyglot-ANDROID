@@ -9,8 +9,8 @@ import com.talentica.presentation.internal.di.modules.ApplicationModule;
 
 public class BookShelfApplication extends Application {
 
-
     private static ApplicationComponent applicationComponent;
+    private final String Tag = "BookShelfApplication";
 
     public static Context getAppContext() {
         return applicationComponent.context();

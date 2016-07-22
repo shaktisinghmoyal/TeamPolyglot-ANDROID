@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookEntityJsonMapper {
-
+    private final String Tag = "BookEntityJsonMapper";
     public static boolean getStatus(JSONObject jsonObject) throws JSONException, IllegalAccessException {
 
         return jsonObject.getBoolean("status");

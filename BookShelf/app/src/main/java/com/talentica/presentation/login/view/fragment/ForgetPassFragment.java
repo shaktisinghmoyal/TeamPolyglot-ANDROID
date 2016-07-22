@@ -15,6 +15,7 @@ import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
 import com.talentica.presentation.login.presenter.ForgetPassPresenter;
 import com.talentica.presentation.login.view.ForgetPassView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
+import com.talentica.presentation.utils.Enums;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
 
 //    @Inject
 //    public Navigator navigator;
-
+private final String Tag = "ForgetPassFragment";
     @Inject
     public ForgetPassPresenter forgetPassPresenter;
 
@@ -38,7 +39,7 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
     @Override
     public void moveToSignIn() {
         ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new SignInFragment(), "sign_in_fragment");
-        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.SIGNIN);// inject karna chahiye
+        ((LoginActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.SIGNIN);// inject karna chahiye
 
     }
 
@@ -80,12 +81,12 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
 
     @Override
     public void showLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(true);
+        //getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(false);
+        //getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
 
@@ -101,15 +102,25 @@ public class ForgetPassFragment extends BaseFragment implements ForgetPassView, 
 
     @Override
     public void showError(String message) {
-        Log.e("showError", "message  " + message);
+        Log.e(Tag, "showError" + " message  " + message);
         forgetPassBinding.errorText.setVisibility(View.VISIBLE);
 
 
     }
 
     @Override
+    public void disableError() {
+
+    }
+
+    @Override
     public Context context() {
         return null;
+    }
+
+    @Override
+    public void setActionSearchBar() {
+
     }
 
     @Override

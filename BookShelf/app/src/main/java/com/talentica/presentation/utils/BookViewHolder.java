@@ -1,6 +1,7 @@
 package com.talentica.presentation.utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import com.talentica.databinding.BookThumbnailCardviewItemBinding;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 
 public class BookViewHolder extends RecyclerView.ViewHolder {
+    private static final String Tag = "BookViewHolder";
     private BookThumbnailCardviewItemBinding itemBinding;
 
     private BookViewHolder(BookThumbnailCardviewItemBinding binding) {
@@ -18,6 +20,7 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     }
 
     public static BookViewHolder create(LayoutInflater inflater, ViewGroup parent) {
+        Log.e(Tag, "BookViewHolder create ");
         BookThumbnailCardviewItemBinding binding = BookThumbnailCardviewItemBinding.inflate(inflater, parent, false);
 
         return new BookViewHolder(binding);

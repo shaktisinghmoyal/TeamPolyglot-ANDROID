@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class GetForgetPassStatus extends BaseUseCase {
-
+    private final String Tag = "GetForgetPassStatus";
     private final IResetPassRepository iResetPassRepository;
 
 

@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import com.talentica.presentation.internal.di.HasComponent;
 
 public class BaseFragment extends Fragment {
-
+    private final String Tag = "BaseFragment";
     /**
      * Gets a component for dependency injection by its type.
      */

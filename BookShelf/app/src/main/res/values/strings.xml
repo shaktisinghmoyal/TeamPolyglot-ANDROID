@@ -10,6 +10,17 @@
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
 
+
+    <string name="sign_up_title">Sign Up</string>
+    <string name="forgot_pass_title">Forgot Password</string>
+    <string name="book_detail_title">Book Detail</string>
+    <string name="home_title">Home</string>
+
+
+    <string name="recent_searches">Recent Searches</string>
+    <string name="top_searches">Top Searches</string>
+    <string name="results_string">Search Results</string>
+
     <string name="login_page_app_name">BookShelf</string>
     <string name="login_page_signup_text">Sign Up </string>
     <string name="login_page_forgot_pass_text">Forgot Password</string>

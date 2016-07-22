@@ -5,6 +5,7 @@ package com.talentica.presentation.navigation;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,7 +14,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class Navigator {
-
+    private final String Tag = "Navigator";
     @Inject
     public Navigator() {
         //empty
@@ -22,12 +23,17 @@ public class Navigator {
     public void addFragment(AppCompatActivity activity, int containerViewId, Fragment fragment, String tag) {
 
         FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-        if (tag == "search_fragment") {
-            fragmentTransaction.replace(containerViewId, fragment, tag).addToBackStack(tag);
-        } else {
+        if (tag.equals("first")) {
+            Log.e(Tag, "" + "add first Fragment  ");
             fragmentTransaction.replace(containerViewId, fragment, tag);
+        } else {
+            Log.e(Tag, "" + "addFragment  ");
+            fragmentTransaction.replace(containerViewId, fragment, tag).addToBackStack(tag);
+
         }
-        fragmentTransaction.commitAllowingStateLoss();
+
+        fragmentTransaction.commit();
+        activity.getSupportFragmentManager().executePendingTransactions();
     }
     /**
      * Goes to the user list screen.

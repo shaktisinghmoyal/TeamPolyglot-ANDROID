@@ -13,6 +13,7 @@ import com.talentica.data.exception.NetworkConnectionException;
  */
 public class ErrorMessageFactory {
 
+    private final String Tag = "ErrorMessageFactory";
     private ErrorMessageFactory() {
         //empty
     }

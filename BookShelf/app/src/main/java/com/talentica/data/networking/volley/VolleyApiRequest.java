@@ -23,6 +23,7 @@ import rx.subjects.ReplaySubject;
 
 
 public class VolleyApiRequest {
+
     private static final String CONTENT_TYPE_LABEL = "Content-Type";
     private static final String CONTENT_TYPE_VALUE_JSON = "application/json";
     // Tag used to cancel the request

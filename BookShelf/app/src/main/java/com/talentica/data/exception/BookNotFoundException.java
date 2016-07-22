@@ -5,7 +5,7 @@ package com.talentica.data.exception;
  * Exception throw by the application when a Book search can't return a valid result.
  */
 public class BookNotFoundException extends Exception {
-
+    private final String Tag = "BookNotFoundException";
     public BookNotFoundException() {
         super();
     }

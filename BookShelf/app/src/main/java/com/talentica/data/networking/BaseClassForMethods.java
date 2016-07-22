@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 
 public class BaseClassForMethods {
+    private final String Tag = "BaseClassForMethods";
 
     @Inject
     Context context;

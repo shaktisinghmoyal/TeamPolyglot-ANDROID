@@ -15,13 +15,14 @@ import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
 import com.talentica.presentation.login.presenter.SignUpPresenter;
 import com.talentica.presentation.login.view.SignUpView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
+import com.talentica.presentation.utils.Enums;
 
 import javax.inject.Inject;
 
 public class SignUpFragment extends BaseFragment implements SignUpView, View.OnClickListener {
 //    @Inject
 //    public Navigator navigator;
-
+private final String Tag = "SignUpFragment";
     @Inject
     public SignUpPresenter signUpPresenter;
     private SignUpBinding signUpBinding;
@@ -69,7 +70,7 @@ public class SignUpFragment extends BaseFragment implements SignUpView, View.OnC
     @Override
     public void moveToSignIn() {
         ((LoginActivity) getActivity()).navigator.addFragment((LoginActivity) getActivity(), R.id.login_page_fragment_container, new SignInFragment(), "sign_in_fragment");
-        ((LoginActivity) getActivity()).setActionViewBar(LoginActivity.actionBarTypeEnum.SIGNIN);// inject karna chahiye
+        ((LoginActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.SIGNIN);// inject karna chahiye
     }
 
     @Override
@@ -79,12 +80,12 @@ public class SignUpFragment extends BaseFragment implements SignUpView, View.OnC
 
     @Override
     public void showLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(true);
+        //  getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-        getActivity().setProgressBarIndeterminateVisibility(false);
+        //getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override
@@ -99,13 +100,23 @@ public class SignUpFragment extends BaseFragment implements SignUpView, View.OnC
 
     @Override
     public void showError(String message) {
-        Log.e("showError", "message  " + message);
+        Log.e(Tag, "showError" + "message  " + message);
         signUpBinding.errorText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void disableError() {
+
     }
 
     @Override
     public Context context() {
         return null;
+    }
+
+    @Override
+    public void setActionSearchBar() {
+
     }
 
     @Override

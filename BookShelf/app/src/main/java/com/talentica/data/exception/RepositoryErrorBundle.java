@@ -8,7 +8,7 @@ import com.talentica.domain.exception.ErrorBundle;
  * Wrapper around Exceptions used to manage errors in the repository.
  */
 public class RepositoryErrorBundle implements ErrorBundle {
-
+    private final String Tag = "RepositoryErrorBundle";
     private final Exception exception;
 
     public RepositoryErrorBundle(Exception exception) {

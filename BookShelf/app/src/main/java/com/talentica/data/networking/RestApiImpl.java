@@ -18,7 +18,7 @@ import rx.functions.Func1;
 
 @Singleton
 public class RestApiImpl extends BaseClassForMethods implements RestApi, BaseURL {
-
+    private final String Tag = "RestApiImpl";
     @Inject
     public RestApiImpl() {
     }
@@ -40,7 +40,7 @@ public class RestApiImpl extends BaseClassForMethods implements RestApi, BaseURL
 
     @Override
     public Observable<String> callSignInApi(String userName, String passWord) {
-        Log.d("RestApiImpl ", "callSignInApi called ");
+        Log.d(Tag, "callSignInApi called ");
 
         Observable<JSONObject> objectObservable;
         Observable<String> observable;
@@ -50,13 +50,13 @@ public class RestApiImpl extends BaseClassForMethods implements RestApi, BaseURL
             return objectObservable.map(new Func1<JSONObject, String>() {
                 @Override
                 public String call(JSONObject jsonObject) {
-                    Log.e("SignInRepository", "call " + jsonObject);
+                    Log.e(Tag, "call " + jsonObject);
                     //yaha receiver ka transform hota h
                     return "True";
                 }
             });
         } catch (Exception m) {
-            Log.e("SignInRepository", m + "");
+            Log.e(Tag, m + "");
             return observable = Observable.just("False");
         }
     }

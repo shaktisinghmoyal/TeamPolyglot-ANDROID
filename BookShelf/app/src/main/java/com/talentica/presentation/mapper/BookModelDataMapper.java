@@ -19,6 +19,8 @@ import javax.inject.Inject;
 @PerActivity
 public class BookModelDataMapper {
 
+
+    private final String Tag = "BookModelDataMapper";
     @Inject
     public BookModelDataMapper() {
     }

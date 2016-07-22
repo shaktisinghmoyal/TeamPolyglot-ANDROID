@@ -6,15 +6,16 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#2A2D35</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@style/RobotoTextViewStyle</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textSize">15dp</item>
+
     </style>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="RobotoTextViewStyleMediumn" parent="android:Widget.TextView">
+    <style name="RobotoTextViewStyleMedium" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
@@ -41,19 +42,23 @@
 
     </style>
 
-    <style name="Opaque">
+    <style name="Opaque" parent="android:Widget.TextView">
         <item name="android:textColor">#999999</item>
     </style>
 
-    <style name="SemiOpaque">
+    <style name="SemiOpaque" parent="android:Widget.TextView">
         <item name="android:textColor">#666666</item>
     </style>
 
-    <style name="Clear">
+    <style name="Clear" parent="android:Widget.TextView">
         <item name="android:textColor">#444444</item>
     </style>
 
-    <style name="loginText">
+    <style name="ClearMedium" parent="RobotoTextViewStyleMedium">
+        <item name="android:textColor">#444444</item>
+    </style>
+
+    <style name="loginText" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">#2a2d35</item>
         <item name="android:textSize">40dp</item>
@@ -72,7 +77,7 @@
     </style>
 
     <style name="OpaqueMedium12" parent="Opaque">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMedium</item>
         <item name="android:textSize">12dp</item>
     </style>
 
@@ -93,7 +98,7 @@
     </style>
 
     <style name="SemiOpaqueMedium15" parent="SemiOpaque">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">15dp</item>
 
     </style>
@@ -120,21 +125,18 @@
     </style>
 
 
-    <style name="ClearMedium18" parent="Clear">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+    <style name="ClearMedium18" parent="ClearMedium">
         <item name="android:textSize">18dp</item>
 
     </style>
 
 
-    <style name="ClearMedium14" parent="Clear">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+    <style name="ClearMedium14" parent="ClearMedium">
         <item name="android:textSize">14dp</item>
 
     </style>
 
-    <style name="ClearMedium16" parent="Clear">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+    <style name="ClearMedium16" parent="ClearMedium">
         <item name="android:textSize">16dp</item>
 
     </style>
@@ -146,7 +148,7 @@
     </style>
 
     <style name="category">
-        <item name="android:fontFamily">@style/RobotoTextViewStyleMediumn</item>
+        <item name="android:fontFamily">@style/RobotoTextViewStyleMedium</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">#888888</item>
 

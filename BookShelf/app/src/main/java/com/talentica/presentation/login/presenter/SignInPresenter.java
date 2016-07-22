@@ -16,12 +16,13 @@ import javax.inject.Named;
 
 @PerActivity
 public class SignInPresenter implements Presenter {
+    private final String Tag = "SignInPresenter";
     private final BaseUseCase getSignInStatus;
     private SignInView signInView;
 
     @Inject
     public SignInPresenter(@Named("signInStatusUseCase") BaseUseCase getSignInStatus) {
-        Log.e("SignInPresenter", "signInStatusUseCase");
+        Log.e(Tag, "SignInPresenter" + "signInStatusUseCase");
         this.getSignInStatus = getSignInStatus;
 
     }
@@ -51,7 +52,7 @@ public class SignInPresenter implements Presenter {
     }
 
     public void getSignInStatus(String username, String password) {
-        Log.e("getSignInStatus", "username " + username + " password " + password);
+        Log.e(Tag, "getSignInStatus" + "username " + username + " password " + password);
 
         if (username.length() == 0 || password.length() == 0) {
             signInView.showError("");
@@ -60,6 +61,7 @@ public class SignInPresenter implements Presenter {
         }
 
     }
+
 
 
     private void actAsPerResult(String status) {
@@ -77,6 +79,20 @@ public class SignInPresenter implements Presenter {
     private void hideViewLoading() {
         signInView.hideLoading();
     }
+
+    public void signUpTextClicked() {
+        signInView.moveToSignUp();
+    }
+
+    public void forgetPassTextClicked() {
+        signInView.moveToForgotPassword();
+    }
+
+    public void signInButtonClicked(String username, String password) {
+        signInView.disableError();
+        getSignInStatus(username, password);
+    }
+
 
     @Override
     public void resume() {
@@ -104,7 +120,7 @@ public class SignInPresenter implements Presenter {
 
         @Override
         public void onError(Throwable e) {
-            Log.e("onError", "onError");
+            Log.e(Tag, " " + "onError");
             hideViewLoading();
             //  showErrorMessage(new DefaultErrorBundle(new Exception(e)));
             showViewRetry();
@@ -112,7 +128,7 @@ public class SignInPresenter implements Presenter {
 
         @Override
         public void onNext(String status) {
-            Log.e("SignInPresenter", "" + status);
+            Log.e(Tag, "SignInPresenter" + " " + status);
             actAsPerResult(status);
         }
     }

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class CredentialToJsonMapper {
     static JSONObject finalObject;
-
+    private final String Tag = "CredentialToJsonMapper";
 
     public static JSONObject createSignInCredentialJson(String username, String password) throws JSONException, IllegalAccessException {
         finalObject = new JSONObject();

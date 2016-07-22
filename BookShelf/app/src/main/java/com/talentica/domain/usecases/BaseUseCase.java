@@ -34,12 +34,13 @@ import rx.subscriptions.Subscriptions;
  * that will execute its job in a background thread and will post the result in the UI thread.
  */
 public abstract class BaseUseCase {
-
     final ThreadExecutor threadExecutor;
     final PostExecutionThread postExecutionThread;
+    private final String Tag = "BaseUseCase";
     String username;
     String password;
     String fullName;
+    String recentSearchString;
     Subscription subscription = Subscriptions.empty();
     private Subscriber useCaseSubscriber;
 
@@ -68,9 +69,10 @@ public abstract class BaseUseCase {
     }
 
     @SuppressWarnings("unchecked")
-    public void execute(String email, Subscriber UseCaseSubscriber) {
+    public void execute(String string, Subscriber UseCaseSubscriber) {
         useCaseSubscriber = UseCaseSubscriber;
-        this.username = email;
+        this.username = string;
+        this.recentSearchString = string;
         execute();
     }
 

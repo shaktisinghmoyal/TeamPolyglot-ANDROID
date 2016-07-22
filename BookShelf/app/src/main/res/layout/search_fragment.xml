@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+
     android:orientation="vertical">
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#E8E8E8"></View>
+
+
+            <TextView
+                style="@style/SemiOpaqueMedium15"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="COMING SOON" />
-</LinearLayout>
+                android:layout_height="35dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/recent_searches" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E8E8"></View>
+
+            <ListView
+                android:id="@+id/recent_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:divider="@null"></ListView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E8E8"></View>
+
+            <TextView
+                style="@style/SemiOpaqueMedium15"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/top_searches" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E8E8"></View>
+
+
+            <ListView
+                android:id="@+id/top_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:divider="@null">
+
+            </ListView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</layout>

@@ -15,9 +15,9 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class SignInRepository implements ISignInRepository {
+    private final String Tag = "SignInRepository";
     @Inject
     RestApiImpl restApi;
-
     private DummyRestApi dri;
 
 
@@ -34,12 +34,12 @@ public class SignInRepository implements ISignInRepository {
         return dri.dummyLoginModule(username, password).map(new Func1<JSONObject, String>() {
             @Override
             public String call(JSONObject jsonObject) {
-                Log.e("SignInRepository", "call");
+                Log.e(Tag, "dummyLoginModule map call");
                 //yaha receiver ka transform hota h
                 String result = "false";
                 try {
                     result = jsonObject.getString("result");
-                    Log.e("result jsonObject ", result);
+                    Log.e(Tag, "result = " + result);
                 } catch (JSONException j) {
 
                 }

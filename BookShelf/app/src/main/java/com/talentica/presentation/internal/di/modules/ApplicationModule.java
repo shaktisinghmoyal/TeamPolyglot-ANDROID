@@ -5,13 +5,17 @@ import android.content.Context;
 
 import com.talentica.data.executor.JobExecutor;
 import com.talentica.data.repository.HomeRepository;
+import com.talentica.data.repository.LeadCapturePageRepository;
 import com.talentica.data.repository.ResetPassRepository;
+import com.talentica.data.repository.SearchSuggestionRepository;
 import com.talentica.data.repository.SignInRepository;
 import com.talentica.data.repository.SignUpRepository;
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.IHomeRepository;
+import com.talentica.domain.repository.ILeadCapturePageRepository;
 import com.talentica.domain.repository.IResetPassRepository;
+import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
 import com.talentica.domain.repository.ISignUpRepository;
 import com.talentica.presentation.BookShelfApplication;
@@ -76,6 +80,16 @@ public class ApplicationModule {
         return resetPassRepository;
     }
 
+    @Provides
+    @Singleton
+    ISearchSuggestionRepository provideISearchSuggestionRepository(SearchSuggestionRepository searchSuggestionRepository) {
+        return searchSuggestionRepository;
+    }
 
+    @Provides
+    @Singleton
+    ILeadCapturePageRepository provideILeadCapturePageRepository(LeadCapturePageRepository leadCapturePageRepository) {
+        return leadCapturePageRepository;
+    }
 }
 

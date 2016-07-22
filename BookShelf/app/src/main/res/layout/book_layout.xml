@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.talentica.presentation.leadCapturePage.home.model.BookModel" />
+
+        <variable
+            name="bookModel"
+            type="BookModel" />
+    </data>
+
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#E8E8E8"></View>
+
+            <ImageView
+                android:layout_width="185dp"
+                android:layout_height="254dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/book" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@{bookModel.bookName}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@{bookModel.authersName}" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E8E8E8"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@{bookModel.lender}" />
+
+            <include layout="@layout/spacebar_design_book_detail" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF">
+
+                    <ImageView
+                        android:id="@+id/binding_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:background="@drawable/binding" />
+
+                    <TextView
+                        android:id="@+id/binding_static_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/binding_image"
+                        android:text="Binding" />
+
+                    <TextView
+                        android:id="@+id/binding_colum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/binding_static_text"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/binding_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/binding_colum"
+                        android:text="PaperBack" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#E6E6E6" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF">
+
+                    <ImageView
+                        android:id="@+id/condition_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:background="@drawable/condition" />
+
+                    <TextView
+                        android:id="@+id/condition_static_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/condition_image"
+                        android:text="Condition" />
+
+                    <TextView
+                        android:id="@+id/condition_colum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/condition_static_text"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/condition_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/condition_colum"
+                        android:text="New" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E6E6E6"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF">
+
+                    <ImageView
+                        android:id="@+id/genre_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:background="@drawable/genre" />
+
+                    <TextView
+                        android:id="@+id/genre_static_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/genre_image"
+                        android:text="Genre" />
+
+                    <TextView
+                        android:id="@+id/genre_colum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/genre_static_text"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/genre_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/genre_colum"
+                        android:text="Drama" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#E6E6E6" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF">
+
+                    <ImageView
+                        android:id="@+id/published_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:background="@drawable/published" />
+
+                    <TextView
+                        android:id="@+id/published_static_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/published_image"
+                        android:text="Published" />
+
+                    <TextView
+                        android:id="@+id/published_colum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/published_static_text"
+                        android:text=":" />
+
+                    <TextView
+                        android:id="@+id/published_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/published_colum"
+                        android:text="Feb 2016" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <include layout="@layout/spacebar_design_book_detail" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

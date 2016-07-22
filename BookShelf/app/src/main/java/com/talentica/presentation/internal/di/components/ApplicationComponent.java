@@ -20,7 +20,9 @@ import android.content.Context;
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.IHomeRepository;
+import com.talentica.domain.repository.ILeadCapturePageRepository;
 import com.talentica.domain.repository.IResetPassRepository;
+import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
 import com.talentica.domain.repository.ISignUpRepository;
 import com.talentica.presentation.internal.di.modules.ApplicationModule;
@@ -52,4 +54,10 @@ public interface ApplicationComponent {
     ISignUpRepository signUpRepository();
 
     IResetPassRepository resetPassRepository();
+
+    ISearchSuggestionRepository searchSuggestionRepository();
+
+    ILeadCapturePageRepository leadCapturePageRepository();
+
+
 }

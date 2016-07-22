@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class DummyRestApi extends BaseClassForMethods {
-
+    private final String Tag = "DummyRestApi";
     @Inject
     public DummyRestApi() {
 
@@ -46,8 +46,23 @@ public class DummyRestApi extends BaseClassForMethods {
     }
 
     public Observable<List<BookEntity>> mostReadBookList() {
-        Log.e("DummyRestApi", "recentlyAddedBookList");
+        Log.e(Tag, "recentlyAddedBookList");
         return Observable.just(makeBookList());
+//        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
+//
+    }
+
+    public Observable<List<BookEntity>> predictiveSearch() {
+        Log.e(Tag, "predictiveSearch");
+        return Observable.just(makeBookList());
+//        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
+//
+    }
+
+
+    public Observable<JSONObject> dummyTopSearches() {
+        Log.e(Tag, "recentlyAddedBookList");
+        return Observable.just(new JSONObject());
 //        return Observable.create(new Observable.OnSubscribe<List<BookEntity>>(){
 //
     }
@@ -76,7 +91,7 @@ public class DummyRestApi extends BaseClassForMethods {
     public List<BookEntity> makeBookList() {
         List<BookEntity> bookEntityList = new ArrayList<BookEntity>();
         BookEntity bookEntity;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             bookEntity = new BookEntity();
             bookEntity.setBookName("BookName" + i);
             bookEntity.setLenderName("LenderName" + i);

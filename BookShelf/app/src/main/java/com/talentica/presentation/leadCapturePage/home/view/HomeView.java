@@ -12,6 +12,8 @@ public interface HomeView extends LoadDataView {
 
     void displayMostReadBooks(Collection<BookModel> books);
 
+    void moveToBooksGridView(int fragmentTitleId);
+
     void viewBook(BookModel bookModel);
 
 

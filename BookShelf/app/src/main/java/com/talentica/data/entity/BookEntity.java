@@ -2,6 +2,7 @@ package com.talentica.data.entity;
 
 public class BookEntity {
 
+    private final String Tag = "BookEntity";
     private String bookName;
     private String authersName;
     private String lenderName;

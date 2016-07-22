@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import rx.Observable;
 
 public class GetSignInStatus extends BaseUseCase {
-
+    private final String Tag = "GetSignInStatus";
     private final ISignInRepository iSignInRepository;
 
     @Inject

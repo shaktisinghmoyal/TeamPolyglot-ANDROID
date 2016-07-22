@@ -34,8 +34,12 @@ public interface LoadDataView {
      */
     void showError(String message);
 
+    void disableError();
+
     /**
      * Get a {@link android.content.Context}.
      */
     Context context();
+
+    void setActionSearchBar();
 }

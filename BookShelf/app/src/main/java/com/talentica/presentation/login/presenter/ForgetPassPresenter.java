@@ -18,6 +18,7 @@ import javax.inject.Named;
 @PerActivity
 public class ForgetPassPresenter implements Presenter {
 
+    private final String Tag = "ForgetPassPresenter";
     private final BaseUseCase forgetPassStatus;
     private ForgetPassView forgetPassView;
 
@@ -52,7 +53,7 @@ public class ForgetPassPresenter implements Presenter {
     }
 
     public void getForgetPassStatus(String email) {
-        Log.e("getSignInStatus", "email " + email + "  ");
+        Log.e(Tag, "getSignInStatus" + "email " + email + "  ");
 
         if (email.length() == 0) {
             forgetPassView.showError("");

@@ -10,6 +10,7 @@ import com.talentica.presentation.navigation.Navigator;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private final String Tag = "BaseActivity";
     // @Inject
     public Navigator navigator;
 
@@ -45,4 +46,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected ActivityModule getActivityModule() {
         return new ActivityModule(this);
     }
+
+
 }

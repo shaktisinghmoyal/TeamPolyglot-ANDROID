@@ -15,7 +15,7 @@ import rx.functions.Func1;
 
 public class ResetPassRepository implements IResetPassRepository {
 
-
+    private final String Tag = "ResetPassRepository";
     private DummyRestApi dri;
 
     @Inject
@@ -36,7 +36,7 @@ public class ResetPassRepository implements IResetPassRepository {
         return dri.dummyLoginModule(string1, string2).map(new Func1<JSONObject, String>() {
             @Override
             public String call(JSONObject jsonObject) {
-                Log.e("HomeRepository", "call");
+                Log.e(Tag, "call");
                 String result = "false";
                 try {
                     result = jsonObject.getString("result");

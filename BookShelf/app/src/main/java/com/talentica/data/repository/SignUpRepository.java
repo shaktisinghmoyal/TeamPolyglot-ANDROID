@@ -14,8 +14,8 @@ import rx.Observable;
 import rx.functions.Func1;
 
 public class SignUpRepository implements ISignUpRepository {
+    private final String Tag = "SignUpRepository";
     private DummyRestApi dri;
-
     @Inject
     public SignUpRepository(DummyRestApi dri) {
         this.dri = dri;
@@ -27,11 +27,11 @@ public class SignUpRepository implements ISignUpRepository {
         return dri.dummyLoginModule(username, password).map(new Func1<JSONObject, String>() {
             @Override
             public String call(JSONObject jsonObject) {
-                Log.e("SignUpRepository", "call");
+                Log.e(Tag, "tryForSignUp dummyLogup Module call");
                 String result = "false";
                 try {
                     result = jsonObject.getString("result");
-                    Log.e("result jsonObject ", result);
+                    Log.e(Tag, "result = " + result);
                 } catch (JSONException j) {
 
                 }

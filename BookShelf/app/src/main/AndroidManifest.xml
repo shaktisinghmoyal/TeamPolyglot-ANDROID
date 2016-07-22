@@ -14,18 +14,6 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".presentation.login.view.activity.LoginActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:noHistory="true">
-            <intent-filter>
-
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".presentation.leadCapturePage.base.view.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop">
@@ -33,13 +21,26 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
 
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+        </activity>
+
+
+        <activity
+            android:name=".presentation.login.view.activity.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:noHistory="true">
+            <!--<intent-filter>-->
+
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+
+            <!--</intent-filter>-->
         </activity>
 
 

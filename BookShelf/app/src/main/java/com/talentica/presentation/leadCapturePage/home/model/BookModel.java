@@ -1,9 +1,23 @@
 package com.talentica.presentation.leadCapturePage.home.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 
-public class BookModel {
+public class BookModel implements Parcelable {
+    public static final Parcelable.Creator<BookModel> CREATOR = new Parcelable.Creator<BookModel>() {
 
+        @Override
+        public BookModel createFromParcel(Parcel source) {
+            return new BookModel(source);
+        }
+
+        @Override
+        public BookModel[] newArray(int size) {
+            return new BookModel[size];
+        }
+    };
+    private final String Tag = "BookModel";
     private String bookName;
     private String bookURL;
     private ImageView bookImage;
@@ -25,6 +39,24 @@ public class BookModel {
         this.bookName = name;
         this.authersName = author;
         this.lender = lender;
+    }
+
+    public BookModel(Parcel in) {
+        this.bookName = in.readString();
+        this.authersName = in.readString();
+        this.lender = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(bookName);
+        dest.writeString(authersName);
+        dest.writeString(lender);
     }
 
     public String getBookName() {
@@ -196,6 +228,7 @@ public class BookModel {
 
         this.commentByOwner = commentByOwner;
     }
+
 
     public class Auther {
         private String name;

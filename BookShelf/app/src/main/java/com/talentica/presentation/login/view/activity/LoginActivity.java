@@ -14,9 +14,12 @@ import com.talentica.presentation.internal.di.components.AuthenticationComponent
 import com.talentica.presentation.internal.di.components.DaggerAuthenticationComponent;
 import com.talentica.presentation.leadCapturePage.base.view.BaseActivity;
 import com.talentica.presentation.login.view.fragment.SignInFragment;
+import com.talentica.presentation.utils.Enums;
 
 public class LoginActivity extends BaseActivity implements HasComponent<AuthenticationComponent> {
+
     public static Activity activity;
+    private final String Tag = "LoginActivity";
     private AuthenticationComponent authenticationComponent;
     private LoginActivityBinding loginActivityBinding;
 
@@ -29,8 +32,8 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
         loginActivityBinding.loginToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("onClick backButton", "");
-                setFragment(actionBarTypeEnum.SIGNIN);
+                Log.e(Tag, "onClick backButton" + "");
+                setFragment(Enums.actionBarTypeEnum.SIGNIN);
 
 
             }
@@ -38,7 +41,7 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
         initializeInjector();
         activity = authenticationComponent.activity();
         if (savedInstanceState == null) {
-            setFragment(actionBarTypeEnum.SIGNIN);
+            setFragment(Enums.actionBarTypeEnum.SIGNIN);
 
         }
 
@@ -47,7 +50,7 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
 
     ;
 
-    private void setFragment(actionBarTypeEnum enumType) {
+    private void setFragment(Enums.actionBarTypeEnum enumType) {
         navigator.addFragment(this, R.id.login_page_fragment_container, new SignInFragment(), "login_fragment");
         setActionViewBar(enumType);
     }
@@ -60,8 +63,8 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
 
     }
 
-    public void setActionViewBar(actionBarTypeEnum actionBarType) {
-        Log.e("setActionViewBar", "actionBarType");
+    public void setActionViewBar(Enums.actionBarTypeEnum actionBarType) {
+        Log.e(Tag, "setActionViewBar" + "actionBarType");
         switch (actionBarType) {
             case SIGNIN:
                 getSupportActionBar().hide();
@@ -71,14 +74,14 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
                 Log.e("setActionViewBar", "Singh");
                 getSupportActionBar().show();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle("Sign Up");
+                getSupportActionBar().setTitle(getResources().getString(R.string.sign_up_title));
 
                 break;
 
             case FORGOTPASS:
                 getSupportActionBar().show();
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle("Forgot Password");
+                getSupportActionBar().setTitle(getResources().getString(R.string.forgot_pass_title));
 
                 break;
 
@@ -95,5 +98,4 @@ public class LoginActivity extends BaseActivity implements HasComponent<Authenti
     }
 
 
-    public static enum actionBarTypeEnum {SIGNIN, SIGNUP, FORGOTPASS}
 }

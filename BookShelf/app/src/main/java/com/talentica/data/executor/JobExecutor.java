@@ -16,16 +16,14 @@ import javax.inject.Inject;
  * Decorated {@link java.util.concurrent.ThreadPoolExecutor}
  */
 public class JobExecutor implements ThreadExecutor {
-
     private static final int INITIAL_POOL_SIZE = 3;
     private static final int MAX_POOL_SIZE = 5;
-
     // Sets the amount of time an idle thread waits before terminating
     private static final int KEEP_ALIVE_TIME = 10;
-
     // Sets the Time Unit to seconds
     private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
     private static volatile JobExecutor sThreadExecutor;
+    private final String Tag = "JobExecutor";
     private final BlockingQueue<Runnable> workQueue;
     private final ThreadPoolExecutor threadPoolExecutor;
     private final ThreadFactory threadFactory;
