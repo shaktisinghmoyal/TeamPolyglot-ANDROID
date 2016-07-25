@@ -15,7 +15,9 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,6 +38,7 @@
                 android:background="@drawable/book" />
 
             <TextView
+                style="@style/ClearMedium18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -45,6 +48,7 @@
                 android:text="@{bookModel.bookName}" />
 
             <TextView
+                style="@style/SemiOpaqueRegular14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -54,12 +58,10 @@
                 android:text="@{bookModel.authersName}" />
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E8E8E8"></View>
+            <include layout="@layout/grey_line" />
 
             <TextView
+                style="@style/OpaqueRegular14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -73,8 +75,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -82,8 +83,7 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginRight="1dp"
                     android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF">
+                    android:layout_weight="1">
 
                     <ImageView
                         android:id="@+id/binding_image"
@@ -94,6 +94,7 @@
 
                     <TextView
                         android:id="@+id/binding_static_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
@@ -102,6 +103,7 @@
 
                     <TextView
                         android:id="@+id/binding_colum"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -110,6 +112,7 @@
 
                     <TextView
                         android:id="@+id/binding_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -128,8 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF">
+                    android:layout_weight="1">
 
                     <ImageView
                         android:id="@+id/condition_image"
@@ -140,6 +142,7 @@
 
                     <TextView
                         android:id="@+id/condition_static_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
@@ -148,6 +151,7 @@
 
                     <TextView
                         android:id="@+id/condition_colum"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -156,6 +160,7 @@
 
                     <TextView
                         android:id="@+id/condition_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -166,15 +171,12 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E6E6E6"></View>
+            <include layout="@layout/grey_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <RelativeLayout
@@ -183,8 +185,7 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginRight="1dp"
                     android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF">
+                    android:layout_weight="1">
 
                     <ImageView
                         android:id="@+id/genre_image"
@@ -195,6 +196,7 @@
 
                     <TextView
                         android:id="@+id/genre_static_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
@@ -203,6 +205,7 @@
 
                     <TextView
                         android:id="@+id/genre_colum"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -211,6 +214,7 @@
 
                     <TextView
                         android:id="@+id/genre_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -229,8 +233,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF">
+                    android:layout_weight="1">
 
                     <ImageView
                         android:id="@+id/published_image"
@@ -241,6 +244,7 @@
 
                     <TextView
                         android:id="@+id/published_static_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
@@ -249,6 +253,7 @@
 
                     <TextView
                         android:id="@+id/published_colum"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -257,6 +262,7 @@
 
                     <TextView
                         android:id="@+id/published_text"
+                        style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -268,7 +274,208 @@
 
             <include layout="@layout/spacebar_design_book_detail" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Publisher  :" />
+
+                <TextView
+                    android:id="@+id/publisher_name"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ISBN13  :" />
+
+                <TextView
+                    android:id="@+id/isbn13"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ISBN10  :" />
+
+                <TextView
+                    android:id="@+id/isbn10"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editor  :" />
+
+                <TextView
+                    android:id="@+id/no_of_editor"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List Price  : Rs. " />
+
+                <TextView
+                    android:id="@+id/list_price"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+
+            <TextView
+                style="@style/ClearRegular14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="Tags" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tag1"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adventure" />
+
+                <TextView
+                    android:id="@+id/tag2"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Action" />
+
+                <TextView
+                    android:id="@+id/tag3"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Struggle" />
+
+                <TextView
+                    android:id="@+id/tag4"
+                    style="@style/OpaqueRegular14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Emotional" />
+
+            </LinearLayout>
+            <include layout="@layout/spacebar_design_book_detail" />
+
+            <TextView
+                style="@style/ClearRegular14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="15dp"
+                android:text="Book Owner Comment" />
+
+            <include layout="@layout/grey_line" />
+
+            <TextView
+                android:id="@+id/book_owner_comment"
+                style="@style/OpaqueRegular14"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="15dp"
+                android:text="Bollywood actor Salman Khan was on Monday acquitted by the Rajasthan High Court in two cases related to poaching of Chinkaras in Jodhpur in 1998." />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="#E6E6E6" />
+
+
         </LinearLayout>
+
 
     </ScrollView>
 </layout>
