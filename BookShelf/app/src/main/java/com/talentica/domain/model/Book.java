@@ -16,18 +16,26 @@ public class Book {
     private String[] publisherURLs;
     private String binding;
     private String bookPrice;
+    private String edition;
     private String bookCondition;
     private String[] tags;
     private String genre;
     private String commentByOwner;
 
-    public Book(String name, String author, String lender) {
+    public Book(String name, String author, String lender, String binding, String publishDate, String publisher, String isbn13, String isbn10, String edition, String price) {
         this.bookName = name;
 //        this.authersName=new ArrayList<Auther>();
 //        Auther a=new Auther();
 //        a.setAutherName(author);
         authersName = author;
         this.lender = lender;
+        this.publishDate = publishDate;
+        this.publisherName = publisher;
+        this.isbn13 = isbn13;
+        this.isbn10 = isbn10;
+        this.binding = binding;
+        this.bookPrice = price;
+        this.edition = edition;
     }
 
     public String getBookName() {
@@ -58,6 +66,16 @@ public class Book {
     public void setBookURL(String bookURL) {
 
         this.bookURL = bookURL;
+    }
+
+    public String getEdition() {
+
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+
+        this.edition = edition;
     }
 
     public String getLender() {

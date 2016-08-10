@@ -7,4 +7,10 @@ public interface BookView {
     void showBookWithDetail(BookModel bookModel);
 
     void setActionSearchBar();
+
+    void setCustomViewOpaque();
+
+    void removeCustomViewOpacity();
+
+    void displaySnackBar();
 }

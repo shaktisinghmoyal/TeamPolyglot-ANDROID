@@ -4,6 +4,7 @@ package com.talentica.presentation.internal.di.modules;
 import android.content.Context;
 
 import com.talentica.data.executor.JobExecutor;
+import com.talentica.data.repository.AddBookRepository;
 import com.talentica.data.repository.HomeRepository;
 import com.talentica.data.repository.LeadCapturePageRepository;
 import com.talentica.data.repository.ResetPassRepository;
@@ -12,6 +13,7 @@ import com.talentica.data.repository.SignInRepository;
 import com.talentica.data.repository.SignUpRepository;
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
+import com.talentica.domain.repository.IAddBookRepository;
 import com.talentica.domain.repository.IHomeRepository;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
 import com.talentica.domain.repository.IResetPassRepository;
@@ -90,6 +92,12 @@ public class ApplicationModule {
     @Singleton
     ILeadCapturePageRepository provideILeadCapturePageRepository(LeadCapturePageRepository leadCapturePageRepository) {
         return leadCapturePageRepository;
+    }
+
+    @Provides
+    @Singleton
+    IAddBookRepository provideIAddBookRepository(AddBookRepository addBookRepository) {
+        return addBookRepository;
     }
 }
 

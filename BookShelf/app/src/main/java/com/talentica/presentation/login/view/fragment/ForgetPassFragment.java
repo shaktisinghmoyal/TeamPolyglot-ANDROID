@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.talentica.R;
 import com.talentica.databinding.ForgetPasswordBinding;
 import com.talentica.presentation.internal.di.components.AuthenticationComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.login.presenter.ForgetPassPresenter;
 import com.talentica.presentation.login.view.ForgetPassView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
@@ -118,10 +118,7 @@ private final String Tag = "ForgetPassFragment";
         return null;
     }
 
-    @Override
-    public void setActionSearchBar() {
 
-    }
 
     @Override
     public void onClick(View v) {

@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.talentica.R;
 import com.talentica.databinding.SignInBinding;
 import com.talentica.presentation.internal.di.components.AuthenticationComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.login.presenter.SignInPresenter;
 import com.talentica.presentation.login.view.SignInView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
@@ -93,10 +93,7 @@ private final String Tag = "SignInFragment";
         ((LoginActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.FORGOTPASS);// inject karna chahiye
     }
 
-    @Override
-    public void setActionSearchBar() {
 
-    }
 
     @Override
     public void onClick(final View v) {

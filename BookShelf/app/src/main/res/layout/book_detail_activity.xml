@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/book_detail_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/request_button"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:text="@string/borrow_text" />
+
+        <LinearLayout
+            android:id="@+id/hidden_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/Regular20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/confirmation"
+                android:textColor="#2BB432" />
+
+            <TextView
+                style="@style/ClearRegular15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/request_text_in_dialog" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="35dp"
+                android:background="#00BE7D" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/no"
+                    style="@style/InactiveTextStyle"
+                    android:text="@string/no"></TextView>
+
+                <TextView
+                    android:id="@+id/yes"
+                    style="@style/ActiveTextStyle"
+                    android:text="@string/yes"></TextView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</layout>

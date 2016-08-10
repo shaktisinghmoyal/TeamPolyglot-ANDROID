@@ -20,7 +20,6 @@ public class BaseClassForMethods {
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
-
         return isConnected;
     }
 

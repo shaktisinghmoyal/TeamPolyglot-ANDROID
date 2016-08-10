@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.talentica.R;
 import com.talentica.databinding.SignUpBinding;
 import com.talentica.presentation.internal.di.components.AuthenticationComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.login.presenter.SignUpPresenter;
 import com.talentica.presentation.login.view.SignUpView;
 import com.talentica.presentation.login.view.activity.LoginActivity;
@@ -114,10 +114,7 @@ private final String Tag = "SignUpFragment";
         return null;
     }
 
-    @Override
-    public void setActionSearchBar() {
 
-    }
 
     @Override
     public void onResume() {

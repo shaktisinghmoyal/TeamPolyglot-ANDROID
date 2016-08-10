@@ -6,10 +6,16 @@
 
 
     <string name="search_hint">Search Book Name,Auther, ISBN Number</string>
-    <string name="search_option">Search Books</string>
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
 
+    <string name="borrow_text">I Want to Borrow</string>
+    <string name="already_have_book_text">You Have This Book</string>
+    <string name="not_available_text_book">Not Available to Borrow</string>
+    <string name="yes">Yes</string>
+    <string name="confirmation">Confirmation!</string>
+    <string name="request_text_in_dialog">Are you sure you want to request for this book?</string>
+    <string name="no">No</string>
 
     <string name="sign_up_title">Sign Up</string>
     <string name="forgot_pass_title">Forgot Password</string>
@@ -30,6 +36,9 @@
     <string name="login_error_message">invalid user credentials</string>
 
 
+    <string name="try_again">Try Again</string>
+    <string name="not_connected"> Please Connect To Internet! </string>
+
     <string name="signup_name_text">Name</string>
     <string name="signup_name_hint_text">Full Name </string>
     <string name="signup_mail_text">Email ID</string>
@@ -43,23 +52,62 @@
     <string name="forget_pass_text">We will send a link on your registered email to reset your password </string>
 
 
-    <string name="science_fiction">Science Fiction</string>
-    <string name="satire">Satire </string>
-    <string name="drama">Drama</string>
-    <string name="action">Action and Adventure</string>
-    <string name="romance">Romance</string>
-    <string name="mystery">Mystery</string>
-    <string name="horror">Horror</string>
-    <string name="self_help">Self Help </string>
-    <string name="health">Health</string>
-    <string name="guide">Guide</string>
-    <string name="travel">Travel</string>
-    <string name="children">Children\'s</string>
-    <string name="religious">Religion Spirituality New Age </string>
-    <string name="science">Science</string>
-    <string name="history">History</string>
+    <string name="enter_detail_manually_button_text">Enter Details Manually</string>
+    <string name="or">OR</string>
+    <string name="select_book_text">Select Book to Continue</string>
+    <string name="search_result_count_text">Search Result (0)</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="book_image_text">Book Image</string>
+    <string name="book_name_text">Book Name* </string>
+    <string name="book_name_hint">Enter title</string>
+    <string name="author_text">Author*</string>
+    <string name="author_name_hint">Author Name</string>
+    <string name="isbn_text">ISBN Number* </string>
+    <string name="isbn13_hint">Enter 13 Digit Number</string>
+    <string name="isbn10_hint">Enter 10 Digit Number</string>
+    <string name="publisher_text">Publisher</string>
+    <string name="publisher_name_hint">Enter Publisher name </string>
+    <string name="binding_text">Binding*</string>
+    <string name="spinner_hint">Select</string>
+    <string name="book_price_text">Book Price(INR)</string>
+    <string name="book_price_hint">Price in Rupees </string>
+    <string name="book_condition_text">Book Condition*</string>
+    <string name="book_condition1">New</string>
+    <string name="book_condition2">Good</string>
+    <string name="book_condition3">Poor</string>
+    <string name="tags_text">Tags*</string>
+    <string name="tags_hint">Add tags seperated with comma</string>
+    <string name="genre_text">Genre*</string>
+    <string name="comments_text">Comments</string>
+    <string name="comments_hint">Add brief view about book</string>
 
-    <string-array name="nav_drawer_items">
+    <string name="add_book_text">Add My Book</string>
+    <string name="action_bar_color_string">#2A2D35</string>
+    <string name="step1">Step 1/2</string>
+    <string name="search_option">Search Book</string>
+
+    <string name="step2">Step 2/2</string>
+    <string name="add_by_search">Add Detail</string>
+    <string name="add_manually">Add Detail manually</string>
+    <string name="image_disc_text1">Dimension 110px*150px</string>
+    <string name="image_disc_text2">(Max size 50mb)</string>
+
+    <string name="take_photo">Take Photo</string>
+    <string name="load_from_library">Choose from Library</string>
+
+    <string name="field_empty">Kindly fill all the marked field</string>
+    <string name="submitted">Book Submitted Successfuly</string>
+    <string name="book_submition_failed">Some error occured</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_not_granted">Permission not granted</string>
+    <string name="permission_gallery_rationale">Without read permission this feature will not function</string>
+    <string name="permission_camera_rationale">Without camera permission this feature will not function</string>
+    <string name="decide">Decide</string>
+
+    <string-array name="genre_types">
         <item>Science Fiction</item>
         <item>Satire </item>
         <item>Drama</item>
@@ -77,6 +125,17 @@
         <item>History</item>
 
     </string-array>
+
+    <string-array name="binding_types">
+        <item>paperback</item>
+        <item>Spiral Bound</item>
+        <item>Comb Bound</item>
+        <item>Perfect Bound</item>
+        <item>Card Bound</item>
+        <item>Screw bound</item>
+
+    </string-array>
+
 
     //Exception messages
     <string name="exception_message_generic">There was an application error</string>

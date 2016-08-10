@@ -9,4 +9,6 @@ public interface SearchSuggestionsView extends LoadDataView {
     void showTopSearches(String[] topSearches);
 
     void showSuggestedBooks(String suggestedString);
+
+    void setActionSearchBar();
 }

@@ -1,8 +1,9 @@
-package com.talentica.presentation.leadCapturePage.base.view;
+package com.talentica.presentation.leadCapturePage.base.view.activity;
 
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.talentica.R;
@@ -30,26 +32,28 @@ import com.talentica.databinding.MainActivityBinding;
 import com.talentica.presentation.internal.di.HasComponent;
 import com.talentica.presentation.internal.di.components.DaggerLeadCaptureComponent;
 import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
+import com.talentica.presentation.leadCapturePage.addmybook.view.activity.AddMyBookActivity;
 import com.talentica.presentation.leadCapturePage.base.presenter.LeadCapturePagePresenter;
+import com.talentica.presentation.leadCapturePage.base.view.LeadCapturePageView;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.leadCapturePage.home.view.fragment.BookDetailFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.BooksGridViewFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.HomeFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.SearchFragment;
 import com.talentica.presentation.utils.ClickListenerInterface;
 import com.talentica.presentation.utils.Enums;
+import com.talentica.presentation.utils.GridViewItemClickListnerInterface;
+import com.talentica.presentation.utils.Util;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity implements LeadCapturePageView, HasComponent<LeadCaptureComponent>, ClickListenerInterface {
+public class MainActivity extends BaseActivity implements LeadCapturePageView, HasComponent<LeadCaptureComponent>, ClickListenerInterface, GridViewItemClickListnerInterface {
 
-    public static final String fragmentTitle = "Fragment_Title";
-    public static final String bookDetail = "book_detail";
+
     public static Activity activity;
     private final String Tag = "MainActivity";
-    SearchView.SearchAutoComplete searchAutoComplete;
     @Inject
-    LeadCapturePagePresenter leadCapturePagePresenter;
+    public LeadCapturePagePresenter leadCapturePagePresenter;
+    SearchView.SearchAutoComplete searchAutoComplete;
     private LeadCaptureComponent leadCaptureComponent;
     private String[] drawerStrings;
     private DrawerLayout mDrawerLayout;
@@ -58,12 +62,10 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     private Toolbar toolbar;
     private ImageView previousBottomItemPressed;
     private MainActivityBinding mainActivityBinding;
-    private boolean isSearchBarExpanded;
-    private boolean bookDetailActionBar;
-    private boolean navigationBackFromBookDetail;
     private int searchBarTextLength = 0;
     private String searchBarText = "";
     private String searchBarTextToSave = "";
+    private MenuItem menuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,25 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         initializeInjector();
         activity = leadCaptureComponent.activity();
         leadCaptureComponent.inject(this);
-        if (savedInstanceState == null) {
-            navigator.addFragment(this, R.id.main_fragment_container, new HomeFragment(), "first");
-        }
         initializeVariables();
         initializeActivityComponents();
         leadCapturePagePresenter.setView(this);
-        leadCapturePagePresenter.initialize();
+        leadCapturePagePresenter.initialize(savedInstanceState);
 
+    }
+
+    @Override
+    public void setFirstFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            navigator.addFragment(this, R.id.main_fragment_container, new HomeFragment(), "first");
+        }
+    }
+
+    @Override
+    public void setActionBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mainActivityBinding.toolbar.setPadding(0, 0, 10, 0);
     }
 
 
@@ -89,6 +102,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         mDrawerList = mainActivityBinding.leftDrawer;
         toolbar = mainActivityBinding.toolbar;
     }
+
     private void initializeInjector() {
         this.leadCaptureComponent = DaggerLeadCaptureComponent.builder()
                 .applicationComponent(getApplicationComponent())
@@ -107,22 +121,20 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
     }
 
-    public void setActionViewSearchBar() {
-//        mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
-        // mainActivityBinding.toolbar.setNavigationIcon(null);
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_category);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mainActivityBinding.toolbar.setPadding(0, 0, 10, 0);
-        getSupportActionBar().setTitle("Home");
-
+    @Override
+    public void showBottomMenu() {
+        mainActivityBinding.bottomBar.setVisibility(LinearLayout.VISIBLE);
     }
+
+    @Override
+    public void hideBottomMenu() {
+        mainActivityBinding.bottomBar.setVisibility(LinearLayout.GONE);
+    }
+
 
     public void setNavigationDrawer() {
         setSupportActionBar(mainActivityBinding.toolbar);
-        drawerStrings = getResources().getStringArray(R.array.nav_drawer_items);
+        drawerStrings = getResources().getStringArray(R.array.genre_types);
 
         mDrawerList.setAdapter(new ArrayAdapter<>(this,
                 R.layout.drawer_listview_item, R.id.rowListTextView, drawerStrings));
@@ -130,72 +142,50 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
-                if (getSupportFragmentManager().getBackStackEntryCount() == 2) {
-                    getSupportFragmentManager().popBackStack();
-                    Log.e(Tag, "" + "onItemClick getBackStackEntryCount == 2 ");
-            }
                 searchBarTextToSave = searchBarText = mDrawerList.getItemAtPosition(position).toString();
-                searchBarTextLength = searchBarTextToSave.length();
-                invalidateOptionsMenu();
-
-//                Bundle fragmentTitleBundle = new Bundle();
-//                fragmentTitleBundle.putInt(MainActivity.fragmentTitle, R.string.results_string);
-//                BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
-//                booksGridViewFragment.setArguments(fragmentTitleBundle);
-//                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
-
+                leadCapturePagePresenter.onDrawerItemClicked();
 
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,
                 R.string.open_drawer, R.string.close_drawer) {
 
-            /** Called when a drawer has settled in a completely closed state. */
             @Override
             public void onDrawerClosed(View view) {
                 Log.e(Tag, "onDrawerClosed");
 
                 super.onDrawerClosed(view);
-                // getActionBar().setTitle(mTitle);
-
-                //  invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             @Override
             public void onDrawerOpened(View drawerView) {
                 Log.e(Tag, "onDrawerOpened");
 
 
                 super.onDrawerOpened(drawerView);
-                //  getSupportActionBar().setTitle("Shakti");
-
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-
 
             }
         };
-
-        // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         mDrawerToggle.setDrawerIndicatorEnabled(false); //disable "hamburger to arrow" drawable
-        //  mDrawerToggle.setHomeAsUpIndicator(R.drawable.icon_category);
-        mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e(Tag, "navigation onClick");
-                if (bookDetailActionBar == true) {
-                    navigationBackFromBookDetail = true;
-                    onBackPressed();
-                } else {
-                    mainActivityBinding.drawerLayout.openDrawer(Gravity.LEFT);
-                }
-
-
+                mainActivityBinding.drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+
+    }
+
+    @Override
+    public void displaySearchResultForDrawerItem() {
+
+        menuItem.expandActionView();
+        Log.e(Tag, "displaySearchResultForDrawerItem " + searchBarTextToSave);
+        searchAutoComplete.setText(searchBarTextToSave);
+        searchBarTextLength = searchBarTextToSave.length();
 
     }
 
@@ -213,13 +203,10 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-
     @Override
     public void displayNotificationCount() {
 
     }
-
-
 
 
     @Override
@@ -249,38 +236,9 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         Log.e(Tag, "" + "onPrepareOptionsMenu");
-//
-//        if(bookDetailActionBar){
-//
-//           // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//          //  getSupportActionBar().setHomeButtonEnabled(true);
-//            mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_back);
-//            menu.removeItem(R.id.search);
-//            getSupportActionBar().setTitle(getResources().getString(R.string.book_detail_title));
-//
-//        }
-//      else {
 
         mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
         getSupportActionBar().setTitle(getResources().getString(R.string.home_title));
-
-        if (searchBarTextToSave.length() != 0) {
-            Log.e(Tag, "" + "inside searchBarText length ");
-            SearchView searchView =
-                    (SearchView) menu.findItem(R.id.search).getActionView();
-            MenuItem searchMenuItem = menu.findItem(R.id.search); // get my MenuItem with placeholder submenu
-
-            searchMenuItem.expandActionView();
-            searchView.setQuery(searchBarTextToSave, false);
-//                searchAutoComplete = (SearchView.SearchAutoComplete) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-//                searchAutoComplete.setText(searchBarTextToSave);
-
-
-        } else {
-            Log.e(Tag, "" + " searchBarText length =0 ");
-            bookDetailActionBar = false;
-        }
-
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -291,49 +249,24 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         Log.e(Tag, "" + "onCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_option_menu, menu);
+        menuItem = menu.findItem(R.id.search);
 
         MenuItemCompat.setOnActionExpandListener(menu.findItem(R.id.search), new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                isSearchBarExpanded = true;
-
-                Log.e(Tag, "" + "onMenuItemActionExpand bookDetailActionBar " + bookDetailActionBar);
-                if (!bookDetailActionBar) {
-
-                    navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), "home");
-
-                }
-
-
-                if (navigationBackFromBookDetail) {
-                    Log.e(Tag, "" + "navigationBackFromBookDetail == true   ");
-                    bookDetailActionBar = false;
-                    navigationBackFromBookDetail = false;
-                }
-
+                Log.e(Tag, "" + "onMenuItemActionExpand  ");
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), "home");
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 Log.e(Tag, "" + "onMenuItemActionCollapse   ");
 
-                if (bookDetailActionBar) {
-                    Log.e(Tag, "" + "bookDetailActionBar == true   ");
-                    //getSupportFragmentManager().popBackStack();
-                    isSearchBarExpanded = true;
-                    bookDetailActionBar = false;
-                    return false;
-                } else {
-
-                    getSupportFragmentManager().popBackStack();
-
-                    Log.e(Tag, "" + "bookDetailActionBar == false   ");
-                    isSearchBarExpanded = false;
-                    return true;
-                }
-
+                getSupportFragmentManager().popBackStack();
+                return true;
 
             }
 
@@ -346,10 +279,8 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                         (SearchManager) getSystemService(Context.SEARCH_SERVICE);
                 SearchView searchView =
                         (SearchView) menu.findItem(R.id.search).getActionView();
-//                searchView.setBackgroundColor(Color.WHITE);
                 searchView.setSearchableInfo(
                         searchManager.getSearchableInfo(getComponentName()));
-
 
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -372,14 +303,8 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                             if (searchBarTextLength != 0) {
 
                                 Log.e(Tag, "" + "searchBarTextLength!=0");
-                                if (!bookDetailActionBar) {
-                                    Log.e(Tag, "" + "bookDetailActionBar =false ");
-                                    searchBarTextLength = queryLength;
-
-                                    getSupportFragmentManager().popBackStack();
-
-                                }
-
+                                getSupportFragmentManager().popBackStack();
+                                searchBarTextLength = queryLength;
 
                             }
 
@@ -389,7 +314,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                                 Log.e(Tag, "" + "searchBarTextLength==0");
 
                                 Bundle fragmentTitleBundle = new Bundle();
-                                fragmentTitleBundle.putInt(MainActivity.fragmentTitle, R.string.results_string);
+                                fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
                                 BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
                                 booksGridViewFragment.setArguments(fragmentTitleBundle);
                                 navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
@@ -398,41 +323,15 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                                 getSupportFragmentManager().popBackStack();
                                 Log.e(Tag, "" + "else searchBarTextLength!=0");
                                 Bundle fragmentTitleBundle = new Bundle();
-                                fragmentTitleBundle.putInt(MainActivity.fragmentTitle, R.string.results_string);
+                                fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
                                 BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
                                 booksGridViewFragment.setArguments(fragmentTitleBundle);
                                 navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
 
                             }
-                            searchBarTextLength = queryLength;
+
                         }
-
-//                        if(query.length()!=0) {
-//
-//
-//
-//                                Bundle fragmentTitleBundle = new Bundle();
-//                                fragmentTitleBundle.putInt(MainActivity.fragmentTitle, R.string.results_string);
-//                                BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
-//                                booksGridViewFragment.setArguments(fragmentTitleBundle);
-//                                int count = getSupportFragmentManager().getBackStackEntryCount();
-//                                Log.e(Tag, "" + "onQueryTextChange getBackStackEntryCount " + count);
-//                                if (count == 1) {
-//                                    Log.e(Tag, "" + "onQueryTextChange  getBackStackEntryCount count = " + count);
-//
-//                                    navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
-//                                } else if (count == 2) {
-//                                    Log.e(Tag, "" + "onQueryTextChange getBackStackEntryCount count =" + count);
-//                                    getSupportFragmentManager().popBackStack();
-//                                    //  onBackPressed();
-//                                    navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
-//                                } else {
-//                                    Log.e(Tag, "" + "onQueryTextChange inside if " + count);
-//                                    Log.e(Tag, "" + "there is bug in the backstack implementation ");
-//
-//                            }
-//                        }
-
+                        searchBarTextLength = queryLength;
 
                         return true;
 
@@ -443,7 +342,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                 searchView.setOnSearchClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.e(Tag, "" + "searchView onClick");
+                        Log.e(Tag, "" + "searchView onClick ");
                     }
 
 
@@ -480,9 +379,8 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         Log.e(Tag, "onKeyDown" + " " + event);
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (!isSearchBarExpanded) {
-                onBackPressed();
-            }
+
+            onBackPressed();
 
         }
 
@@ -510,33 +408,8 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
         }
 
-        if (bookDetailActionBar == true) {
-            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            // bookDetailActionBar=false;
-            invalidateOptionsMenu();
-        }
-
-
-
 
     }
-
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//
-//        handleIntent(intent);
-//    }
-
-//    private void handleIntent(Intent intent) {
-//
-//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//            String query = intent.getStringExtra(SearchManager.QUERY);
-//            Log.e("onBackPressed", "" + "handleIntent  SearchManager "+query);
-//            //use The query to search your data somehow
-//        }
-//    }
-
-
 
 
     public void bottomBarItemClick(View bottomBarItem) {
@@ -557,6 +430,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                 previousBottomItemPressed.setVisibility(View.INVISIBLE);
                 mainActivityBinding.addBookSelected.setVisibility(View.VISIBLE);
                 previousBottomItemPressed = mainActivityBinding.addBookSelected;
+                navigator.startAnotherActivity(this, new Intent(this, AddMyBookActivity.class));
                 break;
 
             case R.id.notification_item:
@@ -589,37 +463,29 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     public void onSuggestionItemClicked(String suggestionString) {
         Log.e(Tag, "onSuggestionItemClicked " + "" + suggestionString);
         Bundle fragmentTitleBundle = new Bundle();
-        fragmentTitleBundle.putInt(MainActivity.fragmentTitle, R.string.results_string);
+        fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
         BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
         booksGridViewFragment.setArguments(fragmentTitleBundle);
+
         searchAutoComplete.setText(suggestionString);
-        //navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
+
 
     }
 
     private void onBookClicked(BookModel bookModel) {
-        Bundle bookDetailBundle = new Bundle();
-        bookDetailBundle.putParcelable(MainActivity.bookDetail, bookModel);
-        BookDetailFragment bookDetailFragment = new BookDetailFragment();
-        bookDetailFragment.setArguments(bookDetailBundle);
-        bookDetailActionBar = true;
+
         searchBarTextToSave = searchBarText;
-        navigator.addFragment(MainActivity.this, R.id.main_fragment_container, bookDetailFragment, "home");
-        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+        Bundle bookDetailBundle = new Bundle();
+        bookDetailBundle.putParcelable(Util.bookDetailBundle, bookModel);
+        navigator.startBookDetailActivity(this, bookDetailBundle);
+
         if (searchBarTextToSave.length() != 0) {
             leadCapturePagePresenter.saveForRecentSearches(searchBarTextToSave);
         }
-//        invalidateOptionsMenu();
-        // setActionViewBar(Enums.actionBarTypeEnum.BOOK_DETAIL);
 
     }
 
-    private void bookDetailActionBar() {
-        mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_back);
-        mainActivityBinding.toolbar.getMenu().removeItem(R.id.search);
-        isSearchBarExpanded = false;
-        getSupportActionBar().setTitle(getResources().getString(R.string.book_detail_title));
-    }
 
     private void setSearchSuggestionActionBar() {
 
@@ -630,18 +496,10 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         Log.e(Tag, "setActionViewBar" + " actionBarType");
         switch (actionBarType) {
 
-            case BOOK_DETAIL:
-                Log.e(Tag, "BOOK_DETAIL");
-                bookDetailActionBar();
-                //  mainActivityBinding.toolbar.getMenu().removeItem(R.id.search);
-                //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                //  getSupportActionBar().setTitle(getResources().getString(R.string.book_detail_title));
-
-                break;
 
             case HOME:
                 Log.e(Tag, "HOME");
-                setActionViewSearchBar();
+                setActionBar();
 
                 break;
 
@@ -675,78 +533,4 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         leadCapturePagePresenter.destroy();
     }
 
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showRetry() {
-
-    }
-
-    @Override
-    public void hideRetry() {
-
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
-
-    @Override
-    public void disableError() {
-
-    }
-
-    @Override
-    public Context context() {
-        return null;
-    }
-
-    @Override
-    public void setActionSearchBar() {
-
-    }
 }
-
-//                View searchplate = (View)searchView.findViewById(android.support.v7.appcompat.R.id.search_plate);
-//                searchplate.setBackgroundColor(Color.WHITE);//poori patti white karta
-
-//                View searchbar = (View)searchView.findViewById(android.support.v7.appcompat.R.id.search_bar);
-//                searchbar.setBackgroundColor(Color.WHITE);//poori ki poori patti white karta
-
-//               View searchutton = (View)searchView.findViewById(android.support.v7.appcompat.R.id.search_button);
-//               searchutton.setBackgroundColor(Color.BLACK);//  kuch na hora
-
-
-//                View goButton= (View) searchView.findViewById(android.support.v7.appcompat.R.id.search_go_btn);
-//                goButton.setBackgroundColor(Color.WHITE);// koi kam k ana h
-
-//                View icon = (View)searchView.findViewById(android.support.v7.appcompat.R.id.search_badge);
-//                icon.setBackgroundColor(Color.WHITE);// koi kam k ana h
-
-
-//                searchView.setOnQueryTextFocusChangeListener(new SearchView.OnFocusChangeListener(){
-//                    @Override
-//                    public void onFocusChange(View v, boolean hasFocus) {
-//                        Log.e(Tag, "" + "hasFocus "+hasFocus);
-//                        if(!hasFocus){
-//                            getSupportFragmentManager().popBackStack();
-//                           // navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new HomeFragment(), "home");
-//
-//                        }
-//                        else{
-//                            navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), "home");
-//
-//                        }
-//
-//                    }
-//                });

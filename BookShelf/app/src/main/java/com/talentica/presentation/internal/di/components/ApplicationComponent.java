@@ -19,6 +19,7 @@ import android.content.Context;
 
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
+import com.talentica.domain.repository.IAddBookRepository;
 import com.talentica.domain.repository.IHomeRepository;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
 import com.talentica.domain.repository.IResetPassRepository;
@@ -26,7 +27,7 @@ import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
 import com.talentica.domain.repository.ISignUpRepository;
 import com.talentica.presentation.internal.di.modules.ApplicationModule;
-import com.talentica.presentation.leadCapturePage.base.view.BaseActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.BaseActivity;
 
 import javax.inject.Singleton;
 
@@ -58,6 +59,8 @@ public interface ApplicationComponent {
     ISearchSuggestionRepository searchSuggestionRepository();
 
     ILeadCapturePageRepository leadCapturePageRepository();
+
+    IAddBookRepository addBookRepository();
 
 
 }

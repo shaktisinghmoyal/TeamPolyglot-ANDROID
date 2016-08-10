@@ -54,11 +54,49 @@
 
         </View>
 
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_recently_added_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
+
+            <ProgressBar
+                android:id="@+id/recycler_view1_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true" />
+
+            <LinearLayout
+                android:id="@+id/view_retry_recycler1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/error_text_view_recycler1"
+                    style="@style/OpaqueRegular11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/empty_view_text_recycler1"
+                    style="@style/ClearMedium18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -113,11 +151,50 @@
 
         </View>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_most_read_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_most_read_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <ProgressBar
+                android:id="@+id/recycler_view2_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true" />
+
+            <LinearLayout
+                android:id="@+id/view_retry_recycler2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/error_text_view_recycler2"
+                    style="@style/OpaqueRegular11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/empty_view_text_recycler2"
+                    style="@style/ClearMedium18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

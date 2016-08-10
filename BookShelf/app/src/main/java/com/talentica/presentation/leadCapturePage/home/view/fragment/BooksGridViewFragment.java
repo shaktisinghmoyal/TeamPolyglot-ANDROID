@@ -2,6 +2,8 @@ package com.talentica.presentation.leadCapturePage.home.view.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,27 +11,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.talentica.R;
 import com.talentica.databinding.BooksGridViewLayoutBinding;
 import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.BooksGridViewPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.BooksGridView;
+import com.talentica.presentation.leadCapturePage.home.view.acitivity.ListAllActivity;
 import com.talentica.presentation.leadCapturePage.home.view.adapter.BookResultGridViewAdapter;
-import com.talentica.presentation.utils.ClickListenerInterface;
+import com.talentica.presentation.utils.Enums;
+import com.talentica.presentation.utils.GridViewItemClickListnerInterface;
+import com.talentica.presentation.utils.Util;
 
 import java.util.Collection;
 
 import javax.inject.Inject;
 
-public class BooksGridViewFragment extends BaseFragment implements BooksGridView {
+public class BooksGridViewFragment extends BaseFragment implements BooksGridView, View.OnClickListener {
     private final String Tag = "BooksGridViewFragment";
     @Inject
     BooksGridViewPresenter booksGridViewPresenter;
-    private ClickListenerInterface bookGridViewListener;
+    private GridViewItemClickListnerInterface gridViewItemClickListnerInterface;
     private BooksGridViewLayoutBinding booksGridViewLayoutBinding;
     private BookResultGridViewAdapter gridViewAdapter;
     private GridView gridView;
@@ -37,12 +42,13 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
     private boolean loading = true; // True if we are still waiting for the last set of data to load.
     private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
     private int fragmentTitleId;
+    private Enums.gridViewType gridViewType;
 
     private GridView.OnScrollListener onGridViewScrollListener = getGridViewScrollListener();
     private BookResultGridViewAdapter.OnItemClickListener onItemClickListener =
             new BookResultGridViewAdapter.OnItemClickListener() {
                 @Override
-                public void onBookItemClicked(BookModel bookModel) {
+                public void onBookItemClicked(ImageView bookImage, ImageView selectImage, int position, BookModel bookModel) {
                     if (booksGridViewPresenter != null && bookModel != null) {
                         booksGridViewPresenter.onGridViewBookClick(bookModel);
                     }
@@ -69,7 +75,7 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
                     // End has been reached
 
                     // Do something
-                    booksGridViewPresenter.loadBookSearchResults();
+                    booksGridViewPresenter.loadBookSearchResults(gridViewType);
                     //  homePagePresenter.loadNextBooksList(MOST_READ_BOOKS);
 
 
@@ -101,10 +107,18 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
         super.onViewCreated(view, savedInstanceState);
         setupGridView();
         booksGridViewPresenter.setView(this);
-
+        booksGridViewLayoutBinding.viewRetry.setOnClickListener(this);
         if (getArguments() != null) {
-            fragmentTitleId = getArguments().getInt(MainActivity.fragmentTitle);
+            fragmentTitleId = getArguments().getInt(Util.fragmentTitle);
             Log.e(Tag, "GridViewFragment bundle" + " " + savedInstanceState);
+
+            if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.results_string))) {
+                gridViewType = Enums.gridViewType.DIRECT_SEARCH;
+            } else if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.recently_added_text))) {
+                gridViewType = Enums.gridViewType.RECENTLY_ADDED;
+            } else {
+                gridViewType = Enums.gridViewType.MOST_READ;
+            }
         }
         initializeBookGridViewResult();
     }
@@ -112,32 +126,52 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ClickListenerInterface) {
-            this.bookGridViewListener = (ClickListenerInterface) context;
+        if (context instanceof GridViewItemClickListnerInterface) {
+
+            this.gridViewItemClickListnerInterface = (GridViewItemClickListnerInterface) context;
         }
     }
 
     private void initializeBookGridViewResult() {
-        booksGridViewPresenter.initialize();
+        booksGridViewPresenter.initialize(gridViewType);
     }
 
     @Override
     public void showSearchBookResults(Collection<BookModel> books) {
         Log.e(Tag, "showSearchBookResults " + "books " + books);
-
+        booksGridViewLayoutBinding.mainGridView.setVisibility(View.VISIBLE);
         gridViewAdapter.addBookSearchResult(books);
     }
 
     @Override
     public void viewBook(BookModel bookModel) {
-        if (this.bookGridViewListener != null) {
-            this.bookGridViewListener.onGridViewBookClicked(bookModel);
+        if (this.gridViewItemClickListnerInterface != null) {
+            Log.e(Tag, "viewBook onGridViewBookClicked " + " ");
+            this.gridViewItemClickListnerInterface.onGridViewBookClicked(bookModel);
         }
     }
 
     @Override
     public void setFragmentTitle() {
         booksGridViewLayoutBinding.fragmentTitle.setText(getResources().getString(fragmentTitleId));
+    }
+
+
+    @Override
+    public void setActionBar() {
+        if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.results_string))) {
+            Log.e(Tag, "setActionBar  " + " No action bar required");
+        } else if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.recently_added_text))) {
+            ((ListAllActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2A2D35")));
+            ((ListAllActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((ListAllActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.recently_added_text));
+        } else {
+            ((ListAllActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2A2D35")));
+            ((ListAllActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((ListAllActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.most_read_text));
+        }
+
+
     }
 
     @Override
@@ -169,32 +203,35 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
     public void onDetach() {
         super.onDetach();
         booksGridViewPresenter = null;
-        bookGridViewListener = null;
+        gridViewItemClickListnerInterface = null;
     }
 
     @Override
     public void showLoading() {
         // getActivity().setProgressBarIndeterminateVisibility(true);
+        booksGridViewLayoutBinding.gridViewProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         //  this.getActivity().setProgressBarIndeterminateVisibility(false);
+        booksGridViewLayoutBinding.gridViewProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showRetry() {
-
+        booksGridViewLayoutBinding.viewRetry.setVisibility(View.VISIBLE);
+        booksGridViewLayoutBinding.emptyViewText.setText(R.string.try_again);
     }
 
     @Override
     public void hideRetry() {
-
+        booksGridViewLayoutBinding.viewRetry.setVisibility(View.GONE);
     }
 
     @Override
     public void showError(String message) {
-
+        booksGridViewLayoutBinding.errorTextView.setText(R.string.not_connected);
     }
 
     @Override
@@ -207,10 +244,7 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
         return getActivity().getApplicationContext();
     }
 
-    @Override
-    public void setActionSearchBar() {
 
-    }
 
     private void setupGridView() {
 
@@ -220,5 +254,20 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
         gridViewAdapter.setOnItemClickListener(onItemClickListener);
         gridView.setAdapter(gridViewAdapter);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.e(Tag, "onClick  " + v);
+        switch (v.getId()) {
+
+
+            case R.id.view_retry:
+                booksGridViewPresenter.retry(gridViewType);
+
+                break;
+
+
+        }
     }
 }

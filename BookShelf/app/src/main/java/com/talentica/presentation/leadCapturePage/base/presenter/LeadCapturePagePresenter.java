@@ -1,5 +1,6 @@
 package com.talentica.presentation.leadCapturePage.base.presenter;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -28,8 +29,8 @@ public class LeadCapturePagePresenter implements ILeadCapturePagePresenter, Pres
     }
 
 
-    public void initialize() {
-
+    public void initialize(Bundle savedInstanceState) {
+        leadCapturePageView.setFirstFragment(savedInstanceState);
     }
 
 
@@ -49,6 +50,16 @@ public class LeadCapturePagePresenter implements ILeadCapturePagePresenter, Pres
     }
 
     @Override
+    public void enableBottomMenu() {
+        leadCapturePageView.showBottomMenu();
+    }
+
+    @Override
+    public void disableBottomMenu() {
+        leadCapturePageView.hideBottomMenu();
+    }
+
+    @Override
     public void saveForRecentSearches(String recentSearch) {
         saveRecentSearches.execute(recentSearch, new SubscriberToSaveData());
     }
@@ -61,6 +72,11 @@ public class LeadCapturePagePresenter implements ILeadCapturePagePresenter, Pres
     @Override
     public void pause() {
 
+    }
+
+    @Override
+    public void onDrawerItemClicked() {
+        leadCapturePageView.displaySearchResultForDrawerItem();
     }
 
     @Override

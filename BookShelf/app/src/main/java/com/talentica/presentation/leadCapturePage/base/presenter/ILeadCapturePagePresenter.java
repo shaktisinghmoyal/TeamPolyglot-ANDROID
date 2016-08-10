@@ -7,7 +7,13 @@ public interface ILeadCapturePagePresenter {
 
     void getCurrentPage();
 
+    void onDrawerItemClicked();
+
     void onBottomMenuItemClick();
+
+    void enableBottomMenu();
+
+    void disableBottomMenu();
 
     void saveForRecentSearches(String recentSearches);
 }

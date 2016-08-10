@@ -30,21 +30,36 @@ public class BookModel implements Parcelable {
     private String[] publisherURLs;
     private String binding;
     private String bookPrice;
+    private String edition;
     private String bookCondition;
     private String[] tags;
     private String genre;
     private String commentByOwner;
 
-    public BookModel(String name, String author, String lender) {
+    public BookModel(String name, String author, String lender, String binding, String publishDate, String publisher, String isbn13, String isbn10, String edition, String price) {
         this.bookName = name;
         this.authersName = author;
         this.lender = lender;
+        this.publishDate = publishDate;
+        this.publisherName = publisher;
+        this.isbn13 = isbn13;
+        this.isbn10 = isbn10;
+        this.binding = binding;
+        this.bookPrice = price;
+        this.edition = edition;
     }
 
     public BookModel(Parcel in) {
         this.bookName = in.readString();
         this.authersName = in.readString();
         this.lender = in.readString();
+        this.publishDate = in.readString();
+        this.publisherName = in.readString();
+        this.isbn13 = in.readString();
+        this.isbn10 = in.readString();
+        this.binding = in.readString();
+        this.bookPrice = in.readString();
+        this.edition = in.readString();
     }
 
     @Override
@@ -54,9 +69,17 @@ public class BookModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(bookName);
         dest.writeString(authersName);
         dest.writeString(lender);
+        dest.writeString(publishDate);
+        dest.writeString(publisherName);
+        dest.writeString(isbn13);
+        dest.writeString(isbn10);
+        dest.writeString(binding);
+        dest.writeString(bookPrice);
+        dest.writeString(edition);
     }
 
     public String getBookName() {
@@ -175,6 +198,16 @@ public class BookModel implements Parcelable {
     public void setBinding(String binding) {
 
         this.binding = binding;
+    }
+
+    public String getEdition() {
+
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+
+        this.edition = edition;
     }
 
     public String getBookPrice() {

@@ -42,6 +42,21 @@ public class BookPresenter implements IBookPresenter, Presenter {
         bookView.showBookWithDetail(bookModel);
     }
 
+    @Override
+    public void enableOpacity() {
+        bookView.setCustomViewOpaque();
+    }
+
+    @Override
+    public void renderSnackBar() {
+        bookView.displaySnackBar();
+    }
+
+    @Override
+    public void disableOpacity() {
+        bookView.removeCustomViewOpacity();
+    }
+
 
     @Override
     public void resume() {

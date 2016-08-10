@@ -30,7 +30,7 @@ public class HomeFragmentRecyclerViewAdapter extends RecyclerView.Adapter<BookVi
 
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        Log.e(Tag, "onCreateViewHolder ");
+        Log.e(Tag, "onCreateViewHolder " + i);
         return BookViewHolder.create(LayoutInflater.from(viewGroup.getContext()), viewGroup);
 
     }

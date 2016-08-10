@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import com.talentica.R;
 import com.talentica.databinding.HomeFragmentBinding;
 import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.HomePagePresenter;
 import com.talentica.presentation.leadCapturePage.home.view.HomeView;
@@ -22,6 +22,7 @@ import com.talentica.presentation.leadCapturePage.home.view.adapter.HomeFragment
 import com.talentica.presentation.utils.ClickListenerInterface;
 import com.talentica.presentation.utils.DividerItemDecoration;
 import com.talentica.presentation.utils.Enums;
+import com.talentica.presentation.utils.Util;
 
 import java.util.Collection;
 
@@ -38,7 +39,7 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     @Inject
     HomeFragmentRecyclerViewAdapter recentlyAddedBooksRecylerAdapter;
     @Inject
-    HomeFragmentRecyclerViewAdapter mostReadBooksReyclerAdapter;
+    HomeFragmentRecyclerViewAdapter mostReadBooksRecylerAdapter;
     RecyclerView recentlyAddedBooksRecylerView;
     RecyclerView mostReadBooksReyclerView;
     private HomeFragmentBinding homeFragmentBinding;
@@ -70,6 +71,7 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Log.e(Tag, "onScrolled ");
                 super.onScrolled(recyclerView, dx, dy);
                 mLinearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 visibleItemCount = recyclerView.getChildCount();
@@ -88,8 +90,11 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
 
                     // Do something
                     if (recyclerView.getId() == R.id.recycler_view_recently_added_list) {
+                        Log.e(Tag, "loadNextBooksList for recently added " + "called");
                         homePagePresenter.loadNextBooksList(RECENTLY_ADDED_BOOKS);
+
                     } else {
+                        Log.e(Tag, "loadNextBooksList for most read " + "called");
                         homePagePresenter.loadNextBooksList(MOST_READ_BOOKS);
                     }
 
@@ -149,7 +154,7 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
 
     @Override
     public void displayRecentlyAddedBooks(Collection<BookModel> books) {
-        Log.e(Tag, "displaybooks" + "called");
+        Log.e(Tag, "displayRecentlyAddedBooks " + "called");
         if (books != null) {
             recentlyAddedBooksRecylerAdapter.setUsersCollection(books);
 
@@ -158,8 +163,9 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
 
     @Override
     public void displayMostReadBooks(Collection<BookModel> books) {
+        Log.e(Tag, "displayMostReadBooks " + "called");
         if (books != null) {
-            mostReadBooksReyclerAdapter.setUsersCollection(books);
+            mostReadBooksRecylerAdapter.setUsersCollection(books);
         }
     }
 
@@ -167,10 +173,8 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     public void moveToBooksGridView(int fragmentTitleId) {
 
         Bundle fragmentTitleBundle = new Bundle();
-        fragmentTitleBundle.putInt(((MainActivity) getActivity()).fragmentTitle, fragmentTitleId);
-        BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
-        booksGridViewFragment.setArguments(fragmentTitleBundle);
-        ((MainActivity) getActivity()).navigator.addFragment((MainActivity) getActivity(), R.id.main_fragment_container, booksGridViewFragment, "books_grid_view_fragment");
+        fragmentTitleBundle.putInt(Util.fragmentTitle, fragmentTitleId);
+        ((MainActivity) getActivity()).navigator.startListAllActivity((MainActivity) getActivity(), fragmentTitleBundle);
     }
 
     @Override
@@ -178,6 +182,68 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
         if (this.bookListListener != null) {
             this.bookListListener.onRecyclerViewBookClicked(bookModel);
         }
+    }
+
+    @Override
+    public void showLoadingRecycler1() {
+        homeFragmentBinding.recyclerView1ProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingRecycler1() {
+        homeFragmentBinding.recyclerView1ProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRetryRecycler1() {
+        homeFragmentBinding.viewRetryRecycler1.setVisibility(View.VISIBLE);
+        homeFragmentBinding.emptyViewTextRecycler1.setText(R.string.try_again);
+    }
+
+    @Override
+    public void hideRetryRecycler1() {
+        homeFragmentBinding.viewRetryRecycler1.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorRecycler1(String message) {
+        homeFragmentBinding.errorTextViewRecycler1.setText(R.string.not_connected);
+    }
+
+    @Override
+    public void disableErrorRecycler1() {
+
+    }
+
+    @Override
+    public void showLoadingRecycler2() {
+        homeFragmentBinding.recyclerView2ProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingRecycler2() {
+        homeFragmentBinding.recyclerView2ProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRetryRecycler2() {
+        homeFragmentBinding.viewRetryRecycler2.setVisibility(View.VISIBLE);
+        homeFragmentBinding.emptyViewTextRecycler2.setText(R.string.try_again);
+    }
+
+    @Override
+    public void hideRetryRecycler2() {
+        homeFragmentBinding.viewRetryRecycler2.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorRecycler2(String message) {
+        homeFragmentBinding.errorTextViewRecycler2.setText(R.string.not_connected);
+    }
+
+    @Override
+    public void disableErrorRecycler2() {
+
     }
 
     @Override
@@ -213,35 +279,6 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
         bookListListener = null;
     }
 
-    @Override
-    public void showLoading() {
-        // getActivity().setProgressBarIndeterminateVisibility(true);
-    }
-
-    @Override
-    public void hideLoading() {
-        // this.getActivity().setProgressBarIndeterminateVisibility(false);
-    }
-
-    @Override
-    public void showRetry() {
-
-    }
-
-    @Override
-    public void hideRetry() {
-
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
-
-    @Override
-    public void disableError() {
-
-    }
 
     @Override
     public Context context() {
@@ -251,7 +288,7 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     private void setupRecyclerViews() {
 
         recentlyAddedBooksRecylerAdapter.setOnItemClickListener(onItemClickListener);
-        mostReadBooksReyclerAdapter.setOnItemClickListener(onItemClickListener);
+        mostReadBooksRecylerAdapter.setOnItemClickListener(onItemClickListener);
         homeFragmentBinding.mostReadViewAllText.setOnClickListener(this);
         homeFragmentBinding.recentlyAddedViewAllText.setOnClickListener(this);
         recentlyAddedBooksRecylerView = homeFragmentBinding.recyclerViewRecentlyAddedList;
@@ -266,12 +303,16 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
         mostReadBooksReyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider));
 
         recentlyAddedBooksRecylerView.setAdapter(recentlyAddedBooksRecylerAdapter);
-        mostReadBooksReyclerView.setAdapter(mostReadBooksReyclerAdapter);
+        mostReadBooksReyclerView.setAdapter(mostReadBooksRecylerAdapter);
+
+        homeFragmentBinding.viewRetryRecycler1.setOnClickListener(this);
+        homeFragmentBinding.viewRetryRecycler2.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+        Log.e(Tag, "onClick");
         switch (v.getId()) {
 
 
@@ -283,6 +324,13 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
                 homePagePresenter.mostReadViewAllClicked();
                 break;
 
+            case R.id.view_retry_recycler1:
+                homePagePresenter.tryAgain(RECENTLY_ADDED_BOOKS);
+                break;
+
+            case R.id.view_retry_recycler2:
+                homePagePresenter.tryAgain(MOST_READ_BOOKS);
+                break;
 
         }
     }

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/search_box"
+                style="@style/CustomEditText"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/icon_search"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/icon_search"
+                android:ems="10"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:singleLine="true" />
+
+            <LinearLayout
+                android:id="@+id/manual_search_button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_box"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="@string/or" />
+
+                <Button
+                    android:id="@+id/enter_detail_button"
+                    style="@style/ButtonStyle"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/enter_detail_manually_button_text" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/search_result_to_add_book"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/search_box"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/search_result_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="@string/search_result_count_text" />
+
+                <GridView
+                    android:id="@+id/books_result_to_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/search_result_count"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp" />
+
+                <ProgressBar
+                    android:id="@+id/grid_view_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="true" />
+
+                <LinearLayout
+                    android:id="@+id/view_retry_to_add_book"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/error_text_view"
+                        style="@style/OpaqueRegular11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/empty_view_text"
+                        style="@style/ClearMedium18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="24dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/select_book_text"
+            style="@style/Regular18"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:background="#B3B3B3"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/select_book_text"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/next_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/green_border_line"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/cancel"
+                style="@style/InactiveTextStyle"
+                android:clickable="true"
+                android:text="@string/cancel" />
+
+            <TextView
+                android:id="@+id/next"
+                style="@style/ActiveTextStyle"
+                android:clickable="true"
+                android:text="@string/next" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

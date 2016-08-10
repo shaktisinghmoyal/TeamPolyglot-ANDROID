@@ -41,5 +41,5 @@ public interface LoadDataView {
      */
     Context context();
 
-    void setActionSearchBar();
+
 }

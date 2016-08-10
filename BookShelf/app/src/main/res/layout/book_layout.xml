@@ -19,15 +19,28 @@
 
         >
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/borrow_request_snack_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00BE7D">
+
+
+            </android.support.design.widget.CoordinatorLayout>
+
             <View
+                android:id="@+id/custom_view2"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="#E8E8E8"></View>
+                android:background="#E8E8E8">
+
+            </View>
 
             <ImageView
                 android:layout_width="185dp"
@@ -35,7 +48,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/book" />
+                android:background="@drawable/book1" />
 
             <TextView
                 style="@style/ClearMedium18"
@@ -58,7 +71,11 @@
                 android:text="@{bookModel.authersName}" />
 
 
-            <include layout="@layout/grey_line" />
+            <View
+                android:id="@+id/custom_view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E6E6E6" />
 
             <TextView
                 style="@style/OpaqueRegular14"
@@ -71,17 +88,27 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@{bookModel.lender}" />
 
-            <include layout="@layout/spacebar_design_book_detail" />
+            <View
+                android:id="@+id/custom_view4"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="#E8E8E8"></View>
+
+            <View
+                android:id="@+id/custom_view5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#424242"></View>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:weightSum="2">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginRight="1dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1">
 
@@ -97,7 +124,7 @@
                         style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/binding_image"
                         android:text="Binding" />
 
@@ -119,19 +146,24 @@
                         android:layout_toRightOf="@+id/binding_colum"
                         android:text="PaperBack" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
+
+                    android:id="@+id/mid1"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
                     android:background="#E6E6E6" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/mid1"
                     android:layout_weight="1">
+
 
                     <ImageView
                         android:id="@+id/condition_image"
@@ -145,7 +177,7 @@
                         style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/condition_image"
                         android:text="Condition" />
 
@@ -167,23 +199,27 @@
                         android:layout_toRightOf="@+id/condition_colum"
                         android:text="New" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
-            <include layout="@layout/grey_line" />
+            <View
+                android:id="@+id/custom_view6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E6E6E6" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginRight="1dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1">
 
@@ -199,7 +235,7 @@
                         style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/genre_image"
                         android:text="Genre" />
 
@@ -221,15 +257,18 @@
                         android:layout_toRightOf="@+id/genre_colum"
                         android:text="Drama" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
+
+                    android:id="@+id/mid2"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
                     android:background="#E6E6E6" />
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
@@ -247,7 +286,7 @@
                         style="@style/OpaqueRegular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/published_image"
                         android:text="Published" />
 
@@ -269,10 +308,20 @@
                         android:layout_toRightOf="@+id/published_colum"
                         android:text="Feb 2016" />
 
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
-            <include layout="@layout/spacebar_design_book_detail" />
+            <View
+                android:id="@+id/custom_view7"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="#E8E8E8"></View>
+
+            <View
+                android:id="@+id/custom_view8"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#424242"></View>
 
 
             <LinearLayout
@@ -443,7 +492,18 @@
                     android:text="Emotional" />
 
             </LinearLayout>
-            <include layout="@layout/spacebar_design_book_detail" />
+
+            <View
+                android:id="@+id/custom_view9"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="#E8E8E8"></View>
+
+            <View
+                android:id="@+id/custom_view10"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#424242"></View>
 
             <TextView
                 style="@style/ClearRegular14"
@@ -454,7 +514,11 @@
                 android:layout_marginTop="15dp"
                 android:text="Book Owner Comment" />
 
-            <include layout="@layout/grey_line" />
+            <View
+                android:id="@+id/custom_view11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E6E6E6" />
 
             <TextView
                 android:id="@+id/book_owner_comment"
@@ -469,6 +533,7 @@
                 android:text="Bollywood actor Salman Khan was on Monday acquitted by the Rajasthan High Court in two cases related to poaching of Chinkaras in Jodhpur in 1998." />
 
             <View
+                android:id="@+id/custom_view12"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="#E6E6E6" />
@@ -478,4 +543,5 @@
 
 
     </ScrollView>
+
 </layout>

@@ -15,8 +15,9 @@ import android.widget.ListView;
 import com.talentica.R;
 import com.talentica.databinding.SearchFragmentBinding;
 import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseFragment;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.presenter.LeadCapturePagePresenter;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.home.presenter.SearchSuggestionPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.SearchSuggestionsView;
 import com.talentica.presentation.utils.ClickListenerInterface;
@@ -29,6 +30,7 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
     private final String Tag = "SearchFragment";
     @Inject
     SearchSuggestionPresenter searchSuggestionPresenter;
+    LeadCapturePagePresenter leadCapturePagePresenter;
     ListView recentSearches;
     ListView topSearches;
     private ClickListenerInterface suggestionItemListener;
@@ -49,6 +51,7 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.e(Tag, "onCreate " + "onCreate ");
         super.onCreate(savedInstanceState);
         getComponent(LeadCaptureComponent.class).inject(this);
     }
@@ -56,8 +59,9 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
+        leadCapturePagePresenter = ((MainActivity) getActivity()).leadCapturePagePresenter;
+        leadCapturePagePresenter.disableBottomMenu();
+        Log.e(Tag, "onCreateView " + "onCreateView ");
         searchFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.search_fragment, container, false);
 
         return searchFragmentBinding.getRoot();
@@ -145,13 +149,16 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
 
     @Override
     public void onPause() {
+        Log.e(Tag, "onPause " + " ");
         super.onPause();
         searchSuggestionPresenter.pause();
     }
 
     @Override
     public void onDestroyView() {
+        Log.e(Tag, "onDestroyView " + " ");
         super.onDestroyView();
+        leadCapturePagePresenter.enableBottomMenu();
         recentSearches.setAdapter(null);
         topSearches.setAdapter(null);
 
@@ -159,12 +166,14 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
 
     @Override
     public void onDestroy() {
+        Log.e(Tag, "onDestroy " + " ");
         super.onDestroy();
         searchSuggestionPresenter.destroy();
     }
 
     @Override
     public void onDetach() {
+        Log.e(Tag, "onDetach " + " ");
         super.onDetach();
         searchSuggestionPresenter = null;
         suggestionItemListener = null;
@@ -209,5 +218,6 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
     public void setActionSearchBar() {
         ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.SEARCH_SUGGESTION);
     }
+
 
 }

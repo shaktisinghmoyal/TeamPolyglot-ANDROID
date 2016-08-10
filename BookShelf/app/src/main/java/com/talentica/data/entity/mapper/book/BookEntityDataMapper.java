@@ -20,12 +20,23 @@ public class BookEntityDataMapper {
     public Book transform(BookEntity bookEntity) {
         Book book = null;
         if (bookEntity != null) {
-            book = new Book(bookEntity.getBookName(), bookEntity.getAuthersName(), bookEntity.getLenderName());
+            book = new Book(bookEntity.getBookName(), bookEntity.getAuthersName(), bookEntity.getLenderName(), bookEntity.getBinding(), bookEntity.getPublishDate(), bookEntity.getPublisher(), bookEntity.getIsbn13Numbers(), bookEntity.getIsbn10Numbers(), bookEntity.getEdition(), bookEntity.getBookPrice());
 
 
         }
 
         return book;
+    }
+
+    public BookEntity transform(Book book) {
+        BookEntity book1 = null;
+        if (book != null) {
+            book1 = new BookEntity(book.getBookName(), book.getAuthersName(), book.getLender(), book.getBinding(), book.getPublishDate(), book.getPublisher(), book.getIsbn13Numbers(), book.getIsbn10Numbers(), book.getEdition(), book.getBookPrice());
+
+
+        }
+
+        return book1;
     }
 
 

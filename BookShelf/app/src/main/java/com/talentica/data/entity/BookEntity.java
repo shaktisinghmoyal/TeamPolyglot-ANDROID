@@ -16,7 +16,27 @@ public class BookEntity {
     private String bookCondition;
     private String[] tags;
     private String genre;
+    private String edition;
     private String commentByOwner;
+
+    public BookEntity() {
+    }
+
+    public BookEntity(String name, String author, String lender, String binding, String publishDate, String publisher, String isbn13, String isbn10, String edition, String price) {
+        this.bookName = name;
+//        this.authersName=new ArrayList<Auther>();
+//        Auther a=new Auther();
+//        a.setAutherName(author);
+        authersName = author;
+        this.lenderName = lender;
+        this.publishDate = publishDate;
+        this.publisherName = publisher;
+        this.isbn13 = isbn13;
+        this.isbn10 = isbn10;
+        this.binding = binding;
+        this.bookPrice = price;
+        this.edition = edition;
+    }
 
     public String getBookName() {
 
@@ -48,6 +68,15 @@ public class BookEntity {
         this.authersName = authersName;
     }
 
+    public String getEdition() {
+
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+
+        this.edition = edition;
+    }
 
     public String getIsbn13Numbers() {
 

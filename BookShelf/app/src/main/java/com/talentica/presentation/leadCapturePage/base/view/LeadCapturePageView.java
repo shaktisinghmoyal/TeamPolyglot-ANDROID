@@ -1,13 +1,24 @@
 package com.talentica.presentation.leadCapturePage.base.view;
 
-public interface LeadCapturePageView extends LoadDataView {
+import android.os.Bundle;
+
+public interface LeadCapturePageView {
 
     // to set the title for each fragment/Activity
-    void setActionViewSearchBar();
+
+    void displaySearchResultForDrawerItem();
 
     void initializeBottomMenuItemIds();
 
+    void showBottomMenu();
+
+    void hideBottomMenu();
+
     void displayNotificationCount();
+
+    void setActionBar();
+
+    void setFirstFragment(Bundle savedInstanceState);
 
 
 }

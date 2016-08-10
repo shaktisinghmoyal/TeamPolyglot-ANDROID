@@ -18,6 +18,7 @@ package com.talentica.domain.usecases;
 
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
+import com.talentica.domain.model.Book;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -37,10 +38,12 @@ public abstract class BaseUseCase {
     final ThreadExecutor threadExecutor;
     final PostExecutionThread postExecutionThread;
     private final String Tag = "BaseUseCase";
+    int id;
     String username;
     String password;
     String fullName;
     String recentSearchString;
+    Book book;
     Subscription subscription = Subscriptions.empty();
     private Subscriber useCaseSubscriber;
 
@@ -67,6 +70,21 @@ public abstract class BaseUseCase {
         useCaseSubscriber = UseCaseSubscriber;
         execute();
     }
+
+    @SuppressWarnings("unchecked")
+    public void execute(int id, Subscriber UseCaseSubscriber) {
+        useCaseSubscriber = UseCaseSubscriber;
+        this.id = id;
+        execute();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void execute(Book book, Subscriber UseCaseSubscriber) {
+        useCaseSubscriber = UseCaseSubscriber;
+        this.book = book;
+        execute();
+    }
+
 
     @SuppressWarnings("unchecked")
     public void execute(String string, Subscriber UseCaseSubscriber) {

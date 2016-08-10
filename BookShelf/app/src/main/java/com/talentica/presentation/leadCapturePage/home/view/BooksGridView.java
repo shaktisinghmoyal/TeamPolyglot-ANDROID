@@ -11,4 +11,6 @@ public interface BooksGridView extends LoadDataView {
     void viewBook(BookModel bookModel);
 
     void setFragmentTitle();
+
+    void setActionBar();
 }

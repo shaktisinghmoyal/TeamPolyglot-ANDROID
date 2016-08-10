@@ -12,7 +12,7 @@ import com.talentica.databinding.LoginActivityBinding;
 import com.talentica.presentation.internal.di.HasComponent;
 import com.talentica.presentation.internal.di.components.AuthenticationComponent;
 import com.talentica.presentation.internal.di.components.DaggerAuthenticationComponent;
-import com.talentica.presentation.leadCapturePage.base.view.BaseActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.BaseActivity;
 import com.talentica.presentation.login.view.fragment.SignInFragment;
 import com.talentica.presentation.utils.Enums;
 

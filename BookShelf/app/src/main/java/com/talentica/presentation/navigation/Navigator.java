@@ -2,10 +2,16 @@ package com.talentica.presentation.navigation;
 //import javax.inject.Inject;
 //import javax.inject.Singleton;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.talentica.presentation.leadCapturePage.home.view.acitivity.BookDetailActivity;
+import com.talentica.presentation.leadCapturePage.home.view.acitivity.ListAllActivity;
+import com.talentica.presentation.utils.Util;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,6 +24,34 @@ public class Navigator {
     @Inject
     public Navigator() {
         //empty
+    }
+
+    public void startBookDetailActivity(AppCompatActivity from, Bundle bundle) {
+        Intent intent = new Intent(from, BookDetailActivity.class);
+        intent.putExtra(Util.bookDetailBundle, bundle);
+        from.startActivity(intent);
+
+    }
+
+    public void startAnotherActivity(AppCompatActivity from, Intent intent) {
+        from.startActivity(intent);
+
+    }
+
+    public void startListAllActivity(AppCompatActivity from, Bundle bundle) {
+        Intent intent = new Intent(from, ListAllActivity.class);
+        intent.putExtra(Util.fragmentTitle, bundle);
+        from.startActivity(intent);
+
+    }
+
+    public void addFragment(AppCompatActivity activity, int containerViewId, Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+        Log.e(Tag, "" + " simply addFragment");
+        fragmentTransaction.replace(containerViewId, fragment);
+        fragmentTransaction.commit();
+        activity.getSupportFragmentManager().executePendingTransactions();
     }
 
     public void addFragment(AppCompatActivity activity, int containerViewId, Fragment fragment, String tag) {

@@ -47,8 +47,6 @@
         <Button
         android:id="@+id/signin_button"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
         android:layout_below="@+id/login_password"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"

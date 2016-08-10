@@ -35,13 +35,24 @@ public class BookModelDataMapper {
         if (book == null) {
             throw new IllegalArgumentException("Cannot transform a null value");
         }
-        BookModel bookModel = new BookModel(book.getBookName(), book.getAuthersName(), book.getLender());
+        BookModel bookModel = new BookModel(book.getBookName(), book.getAuthersName(), book.getLender(), book.getBinding(), book.getPublishDate(), book.getPublisher(), book.getIsbn13Numbers(), book.getIsbn10Numbers(), book.getEdition(), book.getBookPrice());
 //    userModel.setAuthersName(book.getAuthersName());
 //    bookModel.setBookName(book.getBookName());
 //    bookModel.setLender(book.getLender());
 
 
         return bookModel;
+    }
+
+    public Book transform(BookModel bookModel) {
+        Book book = null;
+        if (bookModel != null) {
+            book = new Book(bookModel.getBookName(), bookModel.getAuthersName(), bookModel.getLender(), bookModel.getBinding(), bookModel.getPublishDate(), bookModel.getPublisher(), bookModel.getIsbn13Numbers(), bookModel.getIsbn10Numbers(), bookModel.getEdition(), bookModel.getBookPrice());
+
+
+        }
+
+        return book;
     }
 
     /**

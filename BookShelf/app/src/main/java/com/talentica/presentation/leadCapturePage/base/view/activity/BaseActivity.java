@@ -1,4 +1,4 @@
-package com.talentica.presentation.leadCapturePage.base.view;
+package com.talentica.presentation.leadCapturePage.base.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         navigator = new Navigator();
     }
 
+//     protected  void setActionBar(){};
 //    protected void addFragment(int containerViewId, Fragment fragment, String tag) {
 //
 //        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -41,7 +42,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * Get an Activity module for dependency injection.
-     *
      */
     protected ActivityModule getActivityModule() {
         return new ActivityModule(this);

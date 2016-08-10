@@ -22,12 +22,13 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
     public static BookViewHolder create(LayoutInflater inflater, ViewGroup parent) {
         Log.e(Tag, "BookViewHolder create ");
         BookThumbnailCardviewItemBinding binding = BookThumbnailCardviewItemBinding.inflate(inflater, parent, false);
-
         return new BookViewHolder(binding);
     }
 
 
     public void bindTo(BookModel user) {
+
+
         itemBinding.setBookModel(user);
         itemBinding.executePendingBindings();
     }

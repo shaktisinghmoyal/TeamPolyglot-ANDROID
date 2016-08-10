@@ -1,4 +1,4 @@
-package com.talentica.presentation.leadCapturePage.base.view;
+package com.talentica.presentation.leadCapturePage.base.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,7 @@ public class SplashActivity extends Activity {
      **/
     private final int SPLASH_DISPLAY_LENGTH = 500;
     private final String Tag = "SplashActivity";
+
     /**
      * Called when the activity is first created.
      */
