@@ -16,7 +16,7 @@ public interface AddBookDetailView {
     public void setActionBarItems();
 
 
-    public void setDiscriptionBarText();
+    public void setDiscriptionBarText(int typeOfPage);
 
     void displayAddImageDialog();
 

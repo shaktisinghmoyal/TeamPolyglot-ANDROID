@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -250,7 +251,7 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
 
         gridView = booksGridViewLayoutBinding.bookGridView;
         gridView.setOnScrollListener(onGridViewScrollListener);
-        gridViewAdapter = new BookResultGridViewAdapter();
+        gridViewAdapter = new BookResultGridViewAdapter((AppCompatActivity) getActivity());
         gridViewAdapter.setOnItemClickListener(onItemClickListener);
         gridView.setAdapter(gridViewAdapter);
 

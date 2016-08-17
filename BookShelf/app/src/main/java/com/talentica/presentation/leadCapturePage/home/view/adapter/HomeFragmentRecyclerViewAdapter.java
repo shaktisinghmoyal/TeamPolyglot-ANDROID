@@ -1,6 +1,7 @@
 package com.talentica.presentation.leadCapturePage.home.view.adapter;
 
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,16 +23,17 @@ public class HomeFragmentRecyclerViewAdapter extends RecyclerView.Adapter<BookVi
     private final String Tag = "HomeRecyclerViewAdapter";
     private List<BookModel> bookModelList;
     private OnItemClickListener onItemClickListener;
+    private AppCompatActivity appCompatActivity;
     @Inject
-    public HomeFragmentRecyclerViewAdapter() {
+    public HomeFragmentRecyclerViewAdapter(AppCompatActivity activity) {
         this.bookModelList = new ArrayList<BookModel>();
-
+        appCompatActivity = activity;
     }
 
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         Log.e(Tag, "onCreateViewHolder " + i);
-        return BookViewHolder.create(LayoutInflater.from(viewGroup.getContext()), viewGroup);
+        return BookViewHolder.create(LayoutInflater.from(viewGroup.getContext()), viewGroup, appCompatActivity);
 
     }
 

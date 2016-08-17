@@ -34,7 +34,7 @@ public class GetMostReadBookTest {
     }
 
     @Test
-    public void testGetUserListUseCaseObservableHappyCase() {
+    public void testGetMostReadBookUseCaseObservableHappyCase() {
         getMostReadBookTest.buildUseCaseObservable();
 
         verify(iHomeRepository).askForMostReadBooks();

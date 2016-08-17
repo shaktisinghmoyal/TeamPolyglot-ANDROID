@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.talentica.domain.usecases.GetMostReadBookList;
 import com.talentica.domain.usecases.GetRecentlyAddedBookList;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.leadCapturePage.home.presenter.HomePagePresenter;
 import com.talentica.presentation.leadCapturePage.home.view.HomeView;
 import com.talentica.presentation.mapper.BookModelDataMapper;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.verify;
 public class HomePagePresenterTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
     private HomePagePresenter homePagePresenter;
     private Context mockContext;
@@ -61,8 +61,10 @@ public class HomePagePresenterTest {
 
         homePagePresenter.initialize();
 
-        verify(homeViewMock).hideRetry();
-        verify(homeViewMock).showLoading();
+        verify(homeViewMock).hideRetryRecycler1();
+        verify(homeViewMock).hideRetryRecycler2();
+        verify(homeViewMock).showLoadingRecycler1();
+        verify(homeViewMock).showLoadingRecycler2();
         verify(getRecentlyAddedBookListMock).execute(any(Subscriber.class));
         verify(getMostReadBookListMock).execute(any(Subscriber.class));
     }

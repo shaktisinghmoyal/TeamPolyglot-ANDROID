@@ -68,7 +68,6 @@ public class BookDetailActivity extends BaseActivity implements BookActivityView
         initializeItems();
         colorDrawableOpaque = new ColorDrawable(Color.parseColor("#000000"));
         colorDrawable = new ColorDrawable(Color.parseColor("#FFFFFF"));
-        ;
         colorDrawableOpaque.setAlpha(75);
 
 

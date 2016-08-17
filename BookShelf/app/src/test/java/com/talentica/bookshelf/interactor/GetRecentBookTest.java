@@ -34,7 +34,7 @@ public class GetRecentBookTest {
     }
 
     @Test
-    public void testGetUserListUseCaseObservableHappyCase() {
+    public void testGetRecentBookUseCaseObservableHappyCase() {
         getRecentlyAddedBookList.buildUseCaseObservable();
 
         verify(iHomeRepository).askForRecentlyAddedBooks();

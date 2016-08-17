@@ -90,7 +90,7 @@
     <string name="search_option">Search Book</string>
 
     <string name="step2">Step 2/2</string>
-    <string name="add_by_search">Add Detail</string>
+    <string name="add_detail">Add Detail</string>
     <string name="add_manually">Add Detail manually</string>
     <string name="image_disc_text1">Dimension 110px*150px</string>
     <string name="image_disc_text2">(Max size 50mb)</string>

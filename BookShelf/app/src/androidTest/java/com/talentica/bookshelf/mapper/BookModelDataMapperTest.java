@@ -72,7 +72,7 @@ public class BookModelDataMapperTest extends TestCase {
     }
 
     private Book createFakeBook() {
-        Book book = new Book("MoyalSahab", "Ashutosh", "Akash");
+        Book book = new Book("MoyalSahab", "Ashutosh", "Akash", "MoyalSahab", "Ashutosh", "Akash", "MoyalSahab", "Ashutosh", "Akash", "shakti");
 
 
         return book;

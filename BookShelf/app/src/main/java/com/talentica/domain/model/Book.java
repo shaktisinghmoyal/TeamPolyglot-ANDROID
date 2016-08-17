@@ -22,6 +22,10 @@ public class Book {
     private String genre;
     private String commentByOwner;
 
+    public Book() {
+
+    }
+
     public Book(String name, String author, String lender, String binding, String publishDate, String publisher, String isbn13, String isbn10, String edition, String price) {
         this.bookName = name;
 //        this.authersName=new ArrayList<Auther>();

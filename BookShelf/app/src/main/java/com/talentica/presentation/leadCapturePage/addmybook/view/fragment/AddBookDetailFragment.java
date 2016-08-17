@@ -182,8 +182,12 @@ public class AddBookDetailFragment extends BaseFragment implements AddBookDetail
     }
 
     @Override
-    public void setDiscriptionBarText() {
+    public void setDiscriptionBarText(int TypeOfPage) {
+        if (typeOfFillPage == Util.MANUALLY_FILL_DETAIL)
         addBookActivityPresenter.setDiscriptionBar(R.string.add_manually, R.string.step2);
+        else if (typeOfFillPage == Util.AUTO_FILL_DETAIL) {
+            addBookActivityPresenter.setDiscriptionBar(R.string.add_detail, R.string.step2);
+        }
     }
 
     private Boolean checkImportantFields() {

@@ -1,7 +1,5 @@
 package com.talentica.data.repository;
 
-import android.util.Log;
-
 import com.talentica.data.entity.BookEntity;
 import com.talentica.data.entity.mapper.book.BookEntityDataMapper;
 import com.talentica.data.networking.DummyRestApi;
@@ -32,7 +30,6 @@ public class AddBookRepository implements IAddBookRepository {
         return dri.predictiveSearch().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
-                Log.e(Tag, "searchBooks map call");
                 return bookEntityDataMapper.transform(bookEntities);
             }
         });
@@ -42,11 +39,9 @@ public class AddBookRepository implements IAddBookRepository {
     public Observable<Boolean> submitBook(Book book) {
 
         BookEntity bookEntity = bookEntityDataMapper.transform(book);
-
         return dri.submitBook(bookEntity).map(new Func1<Boolean, Boolean>() {
             @Override
             public Boolean call(Boolean submitted) {
-                Log.e(Tag, "submitted");
                 return submitted;
             }
         });

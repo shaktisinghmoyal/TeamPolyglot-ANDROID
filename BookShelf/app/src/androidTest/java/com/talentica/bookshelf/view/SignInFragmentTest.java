@@ -7,7 +7,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.talentica.R;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.login.view.activity.LoginActivity;
 
 import org.hamcrest.Matcher;

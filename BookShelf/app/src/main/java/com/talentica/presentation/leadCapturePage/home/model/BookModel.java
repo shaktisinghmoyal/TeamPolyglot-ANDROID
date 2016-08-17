@@ -36,6 +36,10 @@ public class BookModel implements Parcelable {
     private String genre;
     private String commentByOwner;
 
+    public BookModel() {
+
+    }
+
     public BookModel(String name, String author, String lender, String binding, String publishDate, String publisher, String isbn13, String isbn10, String edition, String price) {
         this.bookName = name;
         this.authersName = author;

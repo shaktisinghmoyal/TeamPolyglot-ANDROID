@@ -1,7 +1,5 @@
 package com.talentica.domain.usecases;
 
-import android.util.Log;
-
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
@@ -24,8 +22,6 @@ public class RequestToBorrowBook extends BaseUseCase {
 
     @Override
     public Observable buildUseCaseObservable() {
-
-        Log.e(Tag, "SaveRecentSearches buildUseCaseObservable");
         return iLeadCapturePageRepository.requestToBorrowBook(id);
 
     }

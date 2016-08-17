@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.app.Fragment;
 
 import com.talentica.R;
-import com.talentica.presentation.leadCapturePage.base.view.MainActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -3,6 +3,7 @@ package com.talentica.presentation.leadCapturePage.addmybook.view.fragment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -163,6 +164,7 @@ public class AddBookMainFragment extends BaseFragment implements AddBookMainView
             isMovingToAutoFillPage = false;
             enableBottomTextBar();
             enableSearchBokResults();
+            setDiscriptionBarText();
             addBookMainPresenter.searchBooksForQueryString(binding.searchBox.getText().toString());
 
         } else {
@@ -226,7 +228,7 @@ public class AddBookMainFragment extends BaseFragment implements AddBookMainView
         Log.e(Tag, "setupGridView  ");
         gridView = binding.booksResultToAdd;
         gridView.setOnScrollListener(onGridViewScrollListener);
-        gridViewAdapter = new AddBookGridViewAdapter();
+        gridViewAdapter = new AddBookGridViewAdapter((AppCompatActivity) getActivity());
         gridViewAdapter.setOnItemClickListener(onItemClickListener);
         gridViewAdapter.setOnLongItemClickListener(onLongItemClickListener);
         gridView.setAdapter(gridViewAdapter);

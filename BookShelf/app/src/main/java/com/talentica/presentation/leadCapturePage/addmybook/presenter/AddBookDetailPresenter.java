@@ -47,13 +47,13 @@ public class AddBookDetailPresenter implements IAddBookDetailPresenter {
         addBookDetailView.setActionBarItems();
     }
 
-    private void setFragmentPageDiscriptions() {
-        addBookDetailView.setDiscriptionBarText();
+    private void setFragmentPageDiscriptions(int typeOfFillPage) {
+        addBookDetailView.setDiscriptionBarText(typeOfFillPage);
     }
 
     public void initialize(int typeOfFillPage) {
         setActionBar();
-        setFragmentPageDiscriptions();
+        setFragmentPageDiscriptions(typeOfFillPage);
         renderDetailFillPage(typeOfFillPage);
 
 

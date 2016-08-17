@@ -1,6 +1,7 @@
 package com.talentica.presentation.leadCapturePage.base.view.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,11 @@ public abstract class BooksGridViewAdapter extends BaseAdapter {
     private List<BookModel> bookSearchResult = new ArrayList<BookModel>();
     private OnItemClickListener onItemClickListener;
     private OnLongItemClickListener onLongItemClickListener;
+    private AppCompatActivity appCompatActivity;
+
+    public BooksGridViewAdapter(AppCompatActivity activity) {
+        appCompatActivity = activity;
+    }
 
     @Override
     public int getCount() {
@@ -47,7 +53,7 @@ public abstract class BooksGridViewAdapter extends BaseAdapter {
             binding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.getContext()), R.layout.book_thumbnail_cardview_item, parent, false);
             convertView = binding.getRoot();
-            convertView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (Util.getDeviceHeight()) / 3));
+            convertView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (Util.getDeviceHeight(appCompatActivity)) / 3));
             convertView.setTag(binding);
 
         } else {

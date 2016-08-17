@@ -36,7 +36,7 @@ public class GetSignUpTest {
     }
 
     @Test
-    public void testGetUserListUseCaseObservableHappyCase() {
+    public void testGetSignUpUseCaseObservableHappyCase() {
         getSignUpStatus.buildUseCaseObservable();
 
         verify(iSignUpRepository).tryForSignUp(anyString(), anyString(), anyString());

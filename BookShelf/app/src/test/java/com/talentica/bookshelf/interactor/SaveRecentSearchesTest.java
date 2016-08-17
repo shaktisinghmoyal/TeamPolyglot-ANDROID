@@ -2,44 +2,41 @@ package com.talentica.bookshelf.interactor;
 
 import com.talentica.domain.executor.PostExecutionThread;
 import com.talentica.domain.executor.ThreadExecutor;
-import com.talentica.domain.repository.IResetPassRepository;
-import com.talentica.domain.usecases.GetForgetPassStatus;
+import com.talentica.domain.repository.ILeadCapturePageRepository;
+import com.talentica.domain.usecases.SaveRecentSearches;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-public class GetForgotPassTest {
-
-
-    private GetForgetPassStatus getForgetPassStatus;
+public class SaveRecentSearchesTest {
+    private SaveRecentSearches saveRecentSearches;
 
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
     private PostExecutionThread mockPostExecutionThread;
     @Mock
-    private IResetPassRepository iResetPassRepository;
+    private ILeadCapturePageRepository iLeadCapturePageRepository;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        getForgetPassStatus = new GetForgetPassStatus(iResetPassRepository, mockThreadExecutor,
+        saveRecentSearches = new SaveRecentSearches(iLeadCapturePageRepository, mockThreadExecutor,
                 mockPostExecutionThread);
     }
 
     @Test
-    public void testGetForgetPassUseCaseObservableHappyCase() {
-        getForgetPassStatus.buildUseCaseObservable();
+    public void testSaveRecentSearchObservableHappyCase() {
+        saveRecentSearches.buildUseCaseObservable();
 
-        verify(iResetPassRepository).tryForResetPass(anyString());
-        verifyNoMoreInteractions(iResetPassRepository);
+        verify(iLeadCapturePageRepository).saveRecentSearch(null);
+        verifyNoMoreInteractions(iLeadCapturePageRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);
     }

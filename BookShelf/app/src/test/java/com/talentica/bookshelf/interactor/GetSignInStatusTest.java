@@ -37,7 +37,7 @@ public class GetSignInStatusTest {
     }
 
     @Test
-    public void testGetUserDetailsUseCaseObservableHappyCase() {
+    public void testGetSignInStatusUseCaseObservableHappyCase() {
         getSignInStatus.buildUseCaseObservable();
 
         verify(iSignInRepository).tryForSignIn(anyString(), anyString());
