@@ -14,7 +14,7 @@ import com.talentica.presentation.internal.di.PerActivity;
 import com.talentica.presentation.leadCapturePage.base.presenter.Presenter;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.view.HomeView;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +28,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
     private final String Tag = "HomePagePresenter";
     private final BaseUseCase getRecentlyAddedBookListUseCase;
     private final BaseUseCase getMostReadBookListUseCase;
-    private final BookModelDataMapper bookModelDataMapper;
+    private final DataMapper bookModelDataMapper;
     private final int RECENT_ADDED_ON_SWIPE = 3;
     private final int MOST_READ_ON_SWIPE = 4;
     private final int RECENT_ADDED_BOOKS_QUERY = 1;
@@ -37,7 +37,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
     private HomeView homeView;
 
     @Inject
-    public HomePagePresenter(@Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedBookListUseCase, @Named("mostReadBookList") BaseUseCase getMostReadBookListUseCase, BookModelDataMapper bookModelDataMapper) {
+    public HomePagePresenter(@Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedBookListUseCase, @Named("mostReadBookList") BaseUseCase getMostReadBookListUseCase, DataMapper bookModelDataMapper) {
         Log.e(Tag, "getRecentlyAddedBookListUseCase");
         this.getRecentlyAddedBookListUseCase = getRecentlyAddedBookListUseCase;
         this.getMostReadBookListUseCase = getMostReadBookListUseCase;

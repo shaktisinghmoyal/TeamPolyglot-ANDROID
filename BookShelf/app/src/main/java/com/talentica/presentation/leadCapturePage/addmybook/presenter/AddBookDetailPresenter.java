@@ -13,7 +13,7 @@ import com.talentica.domain.usecases.BaseUseCase;
 import com.talentica.domain.usecases.DefaultSubscriber;
 import com.talentica.presentation.leadCapturePage.addmybook.view.AddBookDetailView;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 import com.talentica.presentation.utils.Util;
 
 import java.io.ByteArrayOutputStream;
@@ -28,11 +28,11 @@ import javax.inject.Named;
 public class AddBookDetailPresenter implements IAddBookDetailPresenter {
     private final String Tag = "BookManuallyPresenter";
     private final BaseUseCase submitBookUseCase;
-    private final BookModelDataMapper bookModelDataMapper;
+    private final DataMapper bookModelDataMapper;
     private AddBookDetailView addBookDetailView;
 
     @Inject
-    public AddBookDetailPresenter(@Named("submitBookUseCase") BaseUseCase submitBookUseCase, BookModelDataMapper bookModelDataMapper) {
+    public AddBookDetailPresenter(@Named("submitBookUseCase") BaseUseCase submitBookUseCase, DataMapper bookModelDataMapper) {
         this.submitBookUseCase = submitBookUseCase;
         this.bookModelDataMapper = bookModelDataMapper;
     }

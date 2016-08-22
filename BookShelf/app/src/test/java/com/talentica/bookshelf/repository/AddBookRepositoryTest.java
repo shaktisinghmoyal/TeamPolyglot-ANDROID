@@ -1,7 +1,7 @@
 package com.talentica.bookshelf.repository;
 
 import com.talentica.data.entity.BookEntity;
-import com.talentica.data.entity.mapper.book.BookEntityDataMapper;
+import com.talentica.data.entity.mapper.book.EntityDataMapper;
 import com.talentica.data.networking.DummyRestApi;
 import com.talentica.data.repository.AddBookRepository;
 import com.talentica.domain.model.Book;
@@ -24,7 +24,7 @@ public class AddBookRepositoryTest {
     private AddBookRepository addBookRepository;
 
     @Mock
-    private BookEntityDataMapper bookEntityDataMapper;
+    private EntityDataMapper bookEntityDataMapper;
     @Mock
     private DummyRestApi dummyRestApi;
     @Mock

@@ -22,6 +22,7 @@ import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.IAddBookRepository;
 import com.talentica.domain.repository.IHomeRepository;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
+import com.talentica.domain.repository.IMyTaskRepository;
 import com.talentica.domain.repository.IResetPassRepository;
 import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
@@ -61,6 +62,8 @@ public interface ApplicationComponent {
     ILeadCapturePageRepository leadCapturePageRepository();
 
     IAddBookRepository addBookRepository();
+
+    IMyTaskRepository myTaskRepository();
 
 
 }

@@ -13,7 +13,7 @@ import com.talentica.presentation.internal.di.PerActivity;
 import com.talentica.presentation.leadCapturePage.base.presenter.Presenter;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.view.BooksGridView;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 import com.talentica.presentation.utils.Enums;
 
 import java.util.Collection;
@@ -28,11 +28,11 @@ public class BooksGridViewPresenter implements IBooksGridViewPresenter, Presente
     private final BaseUseCase getBooksGridResultUseCase;
     private final BaseUseCase getRecentlyAddedUseCase;
     private final BaseUseCase getMostReadUseCase;
-    private final BookModelDataMapper bookModelDataMapper;
+    private final DataMapper bookModelDataMapper;
     private BooksGridView booksGridView;
 
     @Inject
-    public BooksGridViewPresenter(@Named("getBookGridResultsUseCase") BaseUseCase getBooksGridResultUseCase, @Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedUseCase, @Named("mostReadBookList") BaseUseCase getMostReadUseCase, BookModelDataMapper bookModelDataMapper) {
+    public BooksGridViewPresenter(@Named("getBookGridResultsUseCase") BaseUseCase getBooksGridResultUseCase, @Named("recentlyAddedBookList") BaseUseCase getRecentlyAddedUseCase, @Named("mostReadBookList") BaseUseCase getMostReadUseCase, DataMapper bookModelDataMapper) {
         this.getBooksGridResultUseCase = getBooksGridResultUseCase;
         this.getRecentlyAddedUseCase = getRecentlyAddedUseCase;
         this.getMostReadUseCase = getMostReadUseCase;

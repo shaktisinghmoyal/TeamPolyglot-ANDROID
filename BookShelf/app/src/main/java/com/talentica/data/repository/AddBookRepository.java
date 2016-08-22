@@ -1,7 +1,7 @@
 package com.talentica.data.repository;
 
 import com.talentica.data.entity.BookEntity;
-import com.talentica.data.entity.mapper.book.BookEntityDataMapper;
+import com.talentica.data.entity.mapper.book.EntityDataMapper;
 import com.talentica.data.networking.DummyRestApi;
 import com.talentica.domain.model.Book;
 import com.talentica.domain.repository.IAddBookRepository;
@@ -15,12 +15,12 @@ import rx.functions.Func1;
 
 public class AddBookRepository implements IAddBookRepository {
     private final String Tag = "AddBookRepository";
-    private final BookEntityDataMapper bookEntityDataMapper;
+    private final EntityDataMapper entityDataMapper;
     private DummyRestApi dri;
 
     @Inject
-    public AddBookRepository(BookEntityDataMapper bookEntityDataMapper, DummyRestApi dri) {
-        this.bookEntityDataMapper = bookEntityDataMapper;
+    public AddBookRepository(EntityDataMapper bookEntityDataMapper, DummyRestApi dri) {
+        this.entityDataMapper = bookEntityDataMapper;
         this.dri = dri;
 
     }
@@ -30,7 +30,7 @@ public class AddBookRepository implements IAddBookRepository {
         return dri.predictiveSearch().map(new Func1<List<BookEntity>, List<Book>>() {
             @Override
             public List<Book> call(List<BookEntity> bookEntities) {
-                return bookEntityDataMapper.transform(bookEntities);
+                return entityDataMapper.transform(bookEntities);
             }
         });
     }
@@ -38,7 +38,7 @@ public class AddBookRepository implements IAddBookRepository {
     @Override
     public Observable<Boolean> submitBook(Book book) {
 
-        BookEntity bookEntity = bookEntityDataMapper.transform(book);
+        BookEntity bookEntity = entityDataMapper.transform(book);
         return dri.submitBook(bookEntity).map(new Func1<Boolean, Boolean>() {
             @Override
             public Boolean call(Boolean submitted) {

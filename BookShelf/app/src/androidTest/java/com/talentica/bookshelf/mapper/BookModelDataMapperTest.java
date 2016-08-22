@@ -17,8 +17,10 @@ package com.talentica.bookshelf.mapper;
 
 
 import com.talentica.domain.model.Book;
+import com.talentica.domain.model.BooksRequestedToUser;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.leadCapturePage.tasks.model.BooksRequestedToUserModel;
+import com.talentica.presentation.mapper.DataMapper;
 
 import junit.framework.TestCase;
 
@@ -34,19 +36,20 @@ import static org.mockito.Mockito.mock;
 public class BookModelDataMapperTest extends TestCase {
 
 
-    private static final String BOOK_NAME = "MoyalSahab";
+    private static final String BOOK_NAME = "Life";
     private static final String BOOK_AUTHER = "Ashutosh";
     private static final String BOOK_LENDER = "Akash";
+    private static final String BOOK_REQUESTED_BY = "Akash";
 
-    private BookModelDataMapper bookModelDataMapper;
+    private DataMapper bookModelDataMapper;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        bookModelDataMapper = new BookModelDataMapper();
+        bookModelDataMapper = new DataMapper();
     }
 
-    public void testTransformUser() {
+    public void testTransformBook() {
         Book book = createFakeBook();
         BookModel bookModel = bookModelDataMapper.transform(book);
 
@@ -56,7 +59,18 @@ public class BookModelDataMapperTest extends TestCase {
         assertThat(bookModel.getLender(), is(BOOK_LENDER));
     }
 
-    public void testTransformUserCollection() {
+    public void testTransformRequestedBook() {
+        BooksRequestedToUser booksRequested = createFakeRequestedBook();
+        BooksRequestedToUserModel bookRequestedModel = bookModelDataMapper.transform(booksRequested);
+
+        assertThat(bookRequestedModel, is(instanceOf(BooksRequestedToUserModel.class)));
+        assertThat(bookRequestedModel.getBookName(), is(BOOK_NAME));
+        assertThat(bookRequestedModel.getBookAuther(), is(BOOK_AUTHER));
+        assertThat(bookRequestedModel.getRequestedBy(), is(BOOK_REQUESTED_BY));
+    }
+
+
+    public void testTransformBookCollection() {
         Book mockBookOne = mock(Book.class);
         Book mockBookTwo = mock(Book.class);
 
@@ -71,8 +85,32 @@ public class BookModelDataMapperTest extends TestCase {
         assertThat(userModelList.size(), is(2));
     }
 
+    public void testTransformRequestedBookCollection() {
+        BooksRequestedToUser mockBookRequestedOne = mock(BooksRequestedToUser.class);
+        BooksRequestedToUser mockBookRequestedTwo = mock(BooksRequestedToUser.class);
+
+        List<BooksRequestedToUser> bookRequestedList = new ArrayList<BooksRequestedToUser>(5);
+        bookRequestedList.add(mockBookRequestedOne);
+        bookRequestedList.add(mockBookRequestedTwo);
+
+        Collection<BooksRequestedToUserModel> bookrequestedModelList = bookModelDataMapper.transformRequestedBooks(bookRequestedList);
+
+        assertThat(bookrequestedModelList.toArray()[0], is(instanceOf(BooksRequestedToUserModel.class)));
+        assertThat(bookrequestedModelList.toArray()[1], is(instanceOf(BooksRequestedToUserModel.class)));
+        assertThat(bookrequestedModelList.size(), is(2));
+    }
+
+
+
     private Book createFakeBook() {
-        Book book = new Book("MoyalSahab", "Ashutosh", "Akash", "MoyalSahab", "Ashutosh", "Akash", "MoyalSahab", "Ashutosh", "Akash", "shakti");
+        Book book = new Book(BOOK_NAME, BOOK_AUTHER, BOOK_REQUESTED_BY, "MoyalSahab", "Ashutosh", "Akash", "MoyalSahab", "Ashutosh", "Akash", "shakti");
+
+
+        return book;
+    }
+
+    private BooksRequestedToUser createFakeRequestedBook() {
+        BooksRequestedToUser book = new BooksRequestedToUser(BOOK_NAME, BOOK_AUTHER, BOOK_REQUESTED_BY, "09 Nov");
 
 
         return book;

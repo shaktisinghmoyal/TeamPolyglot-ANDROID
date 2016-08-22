@@ -7,6 +7,7 @@ import com.talentica.data.executor.JobExecutor;
 import com.talentica.data.repository.AddBookRepository;
 import com.talentica.data.repository.HomeRepository;
 import com.talentica.data.repository.LeadCapturePageRepository;
+import com.talentica.data.repository.MyTaskRepository;
 import com.talentica.data.repository.ResetPassRepository;
 import com.talentica.data.repository.SearchSuggestionRepository;
 import com.talentica.data.repository.SignInRepository;
@@ -16,6 +17,7 @@ import com.talentica.domain.executor.ThreadExecutor;
 import com.talentica.domain.repository.IAddBookRepository;
 import com.talentica.domain.repository.IHomeRepository;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
+import com.talentica.domain.repository.IMyTaskRepository;
 import com.talentica.domain.repository.IResetPassRepository;
 import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
@@ -98,6 +100,12 @@ public class ApplicationModule {
     @Singleton
     IAddBookRepository provideIAddBookRepository(AddBookRepository addBookRepository) {
         return addBookRepository;
+    }
+
+    @Provides
+    @Singleton
+    IMyTaskRepository provideIMyTaskRepository(MyTaskRepository myTaskRepository) {
+        return myTaskRepository;
     }
 }
 

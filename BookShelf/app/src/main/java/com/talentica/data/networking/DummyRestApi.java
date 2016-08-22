@@ -3,6 +3,7 @@ package com.talentica.data.networking;
 import android.util.Log;
 
 import com.talentica.data.entity.BookEntity;
+import com.talentica.data.entity.BooksRequestedToUserEntity;
 import com.talentica.data.exception.NetworkConnectionException;
 
 import org.json.JSONException;
@@ -71,6 +72,31 @@ public class DummyRestApi extends BaseClassForMethods {
 
     }
 
+    public Observable<List<BooksRequestedToUserEntity>> bookRequestedToUser() {
+        Log.e(Tag, "bookRequestedToUser");
+        return Observable.create(new Observable.OnSubscribe<List<BooksRequestedToUserEntity>>() {
+
+            @Override
+            public void call(Subscriber<? super List<BooksRequestedToUserEntity>> subscriber) {
+                if (isThereInternetConnection()) {
+                    try {
+                        Log.e("DummyRestApi", "makeBookList");
+                        subscriber.onNext(makeRequestedBookList());
+                        subscriber.onCompleted();
+
+                    } catch (Exception e) {
+                        subscriber.onError(new NetworkConnectionException(e.getCause()));
+                    }
+                } else {
+                    Log.e("DummyRestApi", "error");
+                    subscriber.onError(new NetworkConnectionException());
+                }
+            }
+        });
+
+    }
+
+
 
     public Observable<List<BookEntity>> predictiveSearch() {
         Log.e(Tag, "predictiveSearch");
@@ -99,6 +125,18 @@ public class DummyRestApi extends BaseClassForMethods {
 
     public Observable<Boolean> borrowRequest() {
         Log.e(Tag, "borrowRequest");
+        return Observable.just(true);
+
+    }
+
+    public Observable<Boolean> bookRequestedAccepted(int bookId, String requesteeName) {
+        Log.e(Tag, "bookRequestedAccepted");
+        return Observable.just(true);
+
+    }
+
+    public Observable<Boolean> bookRequestedRejected(int bookId, String requesteeName) {
+        Log.e(Tag, "bookRequestedRejected");
         return Observable.just(true);
 
     }
@@ -154,6 +192,60 @@ public class DummyRestApi extends BaseClassForMethods {
 //
     }
 
+    public List<BooksRequestedToUserEntity> makeRequestedBookList() {
+        List<BooksRequestedToUserEntity> requestedBookList = new ArrayList<BooksRequestedToUserEntity>();
+
+        BooksRequestedToUserEntity book1 = new BooksRequestedToUserEntity();
+        book1.setBookName("The Lal Killa");
+        book1.setBookAuther("Shakti  Moyal");
+        book1.setRequestedBy("Akash trivedi");
+        book1.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book2 = new BooksRequestedToUserEntity();
+        book2.setBookName("The Lal Killa");
+        book2.setBookAuther(" Singh Moyal");
+        book2.setRequestedBy("Akash trivedi");
+        book2.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book3 = new BooksRequestedToUserEntity();
+        book3.setBookName("The Lal Killa");
+        book3.setBookAuther("Shakti Singh Moyal");
+        book3.setRequestedBy("Akash trivedi");
+        book3.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book4 = new BooksRequestedToUserEntity();
+        book4.setBookName("The Lal Killa");
+        book4.setBookAuther("Shakti Singh ");
+        book4.setRequestedBy("Akash trivedi");
+        book4.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book5 = new BooksRequestedToUserEntity();
+        book5.setBookName("The Lal Killa");
+        book5.setBookAuther("Bhakti Singh Moyal");
+        book5.setRequestedBy("Akash trivedi");
+        book5.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book6 = new BooksRequestedToUserEntity();
+        book6.setBookName("The Lal Killa");
+        book6.setBookAuther("Bhakti Singh ");
+        book6.setRequestedBy("Akash trivedi");
+        book6.setRequestedDate("09 mar");
+
+        BooksRequestedToUserEntity book7 = new BooksRequestedToUserEntity();
+        book7.setBookName("The Lal Killa");
+        book7.setBookAuther("Bhakti  Moyal");
+        book7.setRequestedBy("Akash trivedi");
+        book7.setRequestedDate("09 mar");
+        requestedBookList.add(book1);
+        requestedBookList.add(book2);
+        requestedBookList.add(book3);
+        requestedBookList.add(book4);
+        requestedBookList.add(book5);
+        requestedBookList.add(book6);
+        requestedBookList.add(book7);
+
+        return requestedBookList;
+    }
 
     public List<BookEntity> makeBookList() {
         List<BookEntity> bookEntityList = new ArrayList<BookEntity>();

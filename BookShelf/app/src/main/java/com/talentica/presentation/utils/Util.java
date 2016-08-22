@@ -15,6 +15,7 @@ public class Util {
     public static int SELECT_FILE = 4;
     public static int AUTO_FILL_DETAIL = 1;
     public static int MANUALLY_FILL_DETAIL = 2;
+    public static boolean RecyclerViewOrientationHor = true;
     private final String Tag = "Util";
 
     public static int getDeviceWidth(AppCompatActivity activity) {

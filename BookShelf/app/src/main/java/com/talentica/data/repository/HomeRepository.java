@@ -4,7 +4,7 @@ package com.talentica.data.repository;
 import android.util.Log;
 
 import com.talentica.data.entity.BookEntity;
-import com.talentica.data.entity.mapper.book.BookEntityDataMapper;
+import com.talentica.data.entity.mapper.book.EntityDataMapper;
 import com.talentica.data.networking.DummyRestApi;
 import com.talentica.domain.model.Book;
 import com.talentica.domain.repository.IHomeRepository;
@@ -19,11 +19,11 @@ import rx.functions.Func1;
 public class HomeRepository implements IHomeRepository {
 
     private final String Tag = "HomeRepository";
-    private final BookEntityDataMapper bookEntityDataMapper;
+    private final EntityDataMapper bookEntityDataMapper;
     private DummyRestApi dri;
 
     @Inject
-    public HomeRepository(BookEntityDataMapper bookEntityDataMapper, DummyRestApi dri) {
+    public HomeRepository(EntityDataMapper bookEntityDataMapper, DummyRestApi dri) {
         this.bookEntityDataMapper = bookEntityDataMapper;
         this.dri = dri;
 

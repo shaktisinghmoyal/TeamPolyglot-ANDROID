@@ -107,6 +107,11 @@
     <string name="permission_camera_rationale">Without camera permission this feature will not function</string>
     <string name="decide">Decide</string>
 
+    <string name="my_tasks">My Tasks</string>
+    <string name="task_updated_successfully">Task updated successfully</string>
+    <string name="task_not_updated">Task not updated</string>
+
+
     <string-array name="genre_types">
         <item>Science Fiction</item>
         <item>Satire </item>

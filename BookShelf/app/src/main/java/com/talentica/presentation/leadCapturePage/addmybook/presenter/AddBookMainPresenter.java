@@ -12,7 +12,7 @@ import com.talentica.presentation.exception.ErrorMessageFactory;
 import com.talentica.presentation.leadCapturePage.addmybook.view.AddBookMainView;
 import com.talentica.presentation.leadCapturePage.base.presenter.Presenter;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,14 +23,14 @@ import javax.inject.Named;
 public class AddBookMainPresenter implements IAddBookMainPresenter, Presenter {
     private final String Tag = "AddBookMainPresenter";
     private final BaseUseCase getElasticBookSearchUseCase;
-    private final BookModelDataMapper bookModelDataMapper;
+    private final DataMapper dataMapper;
     private AddBookMainView addBookMainView;
     private String recentQuery;
 
     @Inject
-    public AddBookMainPresenter(@Named("getElasticBookSearchUseCase") BaseUseCase getElasticBookSearchUseCase, BookModelDataMapper bookModelDataMapper) {
+    public AddBookMainPresenter(@Named("getElasticBookSearchUseCase") BaseUseCase getElasticBookSearchUseCase, DataMapper bookModelDataMapper) {
         this.getElasticBookSearchUseCase = getElasticBookSearchUseCase;
-        this.bookModelDataMapper = bookModelDataMapper;
+        this.dataMapper = bookModelDataMapper;
     }
 
     public void setView(@NonNull AddBookMainView view) {
@@ -145,7 +145,7 @@ public class AddBookMainPresenter implements IAddBookMainPresenter, Presenter {
 
     private void showSearchBookResults(List<Book> books) {
 
-        final Collection<BookModel> bookModelsCollection = this.bookModelDataMapper.transform(books);
+        final Collection<BookModel> bookModelsCollection = this.dataMapper.transform(books);
         addBookMainView.showSearchBookResults(bookModelsCollection);
         updateSearchCount();
         showSelectBookBottomText();

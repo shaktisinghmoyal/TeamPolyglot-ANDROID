@@ -63,10 +63,10 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
 
     private RecyclerView.OnScrollListener getScrollListener() {
         return new RecyclerView.OnScrollListener() {
-            int firstVisibleItem, visibleItemCount, totalItemCount;
+            int lastVisibleItem, visibleItemCount, totalItemCount;
             private int previousTotal = 0; // The total number of items in the dataset after the last load
             private boolean loading = true; // True if we are still waiting for the last set of data to load.
-            private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
+            private int visibleThreshold = 0; // The minimum amount of items to have below your current scroll position before loading more.
             private LinearLayoutManager mLinearLayoutManager;
 
             @Override
@@ -74,9 +74,9 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
                 Log.e(Tag, "onScrolled ");
                 super.onScrolled(recyclerView, dx, dy);
                 mLinearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                visibleItemCount = recyclerView.getChildCount();
+                //   visibleItemCount = recyclerView.getChildCount();
                 totalItemCount = mLinearLayoutManager.getItemCount();
-                firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+                lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
 
                 if (loading) {
                     if (totalItemCount > previousTotal) {
@@ -84,10 +84,9 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
                         previousTotal = totalItemCount;
                     }
                 }
-                if (!loading && (totalItemCount - visibleItemCount)
-                        <= (firstVisibleItem + visibleThreshold)) {
-                    // End has been reached
 
+                if (!loading && (totalItemCount <= (lastVisibleItem + 1 + visibleThreshold))) {
+                    // End has been reached
                     // Do something
                     if (recyclerView.getId() == R.id.recycler_view_recently_added_list) {
                         Log.e(Tag, "loadNextBooksList for recently added " + "called");
@@ -299,8 +298,8 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
         recentlyAddedBooksRecylerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         mostReadBooksReyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        recentlyAddedBooksRecylerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider));
-        mostReadBooksReyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider));
+        recentlyAddedBooksRecylerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider, Util.RecyclerViewOrientationHor));
+        mostReadBooksReyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), R.drawable.recycler_item_divider, Util.RecyclerViewOrientationHor));
 
         recentlyAddedBooksRecylerView.setAdapter(recentlyAddedBooksRecylerAdapter);
         mostReadBooksReyclerView.setAdapter(mostReadBooksRecylerAdapter);

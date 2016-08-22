@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.talentica.presentation.leadCapturePage.tasks.model.BooksRequestedToUserModel" />
+
+        <variable
+            name="bookRequestModel"
+            type="BooksRequestedToUserModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:id="@+id/requested_book_image"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:background="@drawable/book1" />
+
+            <TextView
+                android:id="@+id/requested_book_name"
+                style="@style/ClearMedium14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/requested_book_image"
+                android:text="@{bookRequestModel.bookName}" />
+
+            <TextView
+                android:id="@+id/requested_book_auther_name"
+                style="@style/ClearRegular12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/requested_book_name"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/requested_book_image"
+                android:text="@{bookRequestModel.bookAuther}" />
+
+            <TextView
+                android:id="@+id/requested_by"
+                style="@style/SemiOpaqueRegular14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/requested_book_image"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/requested_book_image"
+                android:text="@{bookRequestModel.requestedBy}" />
+
+            <ImageView
+                android:id="@+id/cancel_requested_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/accept_requested_task"
+                android:background="@drawable/circle_reject" />
+
+            <ImageView
+                android:id="@+id/accept_requested_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle_accept" />
+
+
+            <TextView
+                android:id="@+id/date"
+                style="@style/OpaqueRegular11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/requested_book_image"
+                android:layout_alignParentRight="true"
+                android:text="@{bookRequestModel.requestedDate}" />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</layout>

@@ -10,7 +10,7 @@ import com.talentica.domain.usecases.GetRecentlyAddedBookList;
 import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.leadCapturePage.home.presenter.HomePagePresenter;
 import com.talentica.presentation.leadCapturePage.home.view.HomeView;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,7 +36,7 @@ public class HomePagePresenterTest {
     private HomeView homeViewMock;
     private GetMostReadBookList getMostReadBookListMock;
     private GetRecentlyAddedBookList getRecentlyAddedBookListMock;
-    private BookModelDataMapper bookModelDataMapperMock;
+    private DataMapper bookModelDataMapperMock;
 
     @Before
     public void setView() {
@@ -44,7 +44,7 @@ public class HomePagePresenterTest {
         homeViewMock = Mockito.mock(HomeView.class);
         getMostReadBookListMock = Mockito.mock(GetMostReadBookList.class);
         getRecentlyAddedBookListMock = Mockito.mock(GetRecentlyAddedBookList.class);
-        bookModelDataMapperMock = Mockito.mock(BookModelDataMapper.class);
+        bookModelDataMapperMock = Mockito.mock(DataMapper.class);
         mockContext = Mockito.mock(Context.class);
         //  System.setProperty("dexmaker.dexcache", InstrumentationRegistry.getTargetContext().getCacheDir().getPath());
         homePagePresenter = new HomePagePresenter(getRecentlyAddedBookListMock, getMostReadBookListMock, bookModelDataMapperMock);

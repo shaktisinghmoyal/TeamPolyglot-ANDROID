@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.talentica.domain.usecases.GetBooksToAdd;
 import com.talentica.presentation.leadCapturePage.addmybook.presenter.AddBookMainPresenter;
 import com.talentica.presentation.leadCapturePage.addmybook.view.AddBookMainView;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,14 +26,14 @@ public class AddBookMainPresenterTest {
 
     private AddBookMainPresenter presenter;
     private AddBookMainView view;
-    private BookModelDataMapper bookModelDataMapperMock;
+    private DataMapper bookModelDataMapperMock;
     private GetBooksToAdd useCase1;
 
 
     @Before
     public void setView() {
         view = Mockito.mock(AddBookMainView.class);
-        bookModelDataMapperMock = Mockito.mock(BookModelDataMapper.class);
+        bookModelDataMapperMock = Mockito.mock(DataMapper.class);
         useCase1 = Mockito.mock(GetBooksToAdd.class);
         presenter = new AddBookMainPresenter(useCase1, bookModelDataMapperMock);
         presenter.setView(view);

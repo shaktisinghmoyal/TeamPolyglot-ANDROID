@@ -8,7 +8,7 @@ import com.talentica.domain.usecases.GetMostReadBookList;
 import com.talentica.domain.usecases.GetRecentlyAddedBookList;
 import com.talentica.presentation.leadCapturePage.home.presenter.BooksGridViewPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.BooksGridView;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 import com.talentica.presentation.utils.Enums;
 
 import org.junit.Before;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 public class BooksGridViewPresenterTest {
 
     private BooksGridViewPresenter presenter;
-    private BookModelDataMapper mapper;
+    private DataMapper mapper;
     private BooksGridView view;
     private GetRecentlyAddedBookList useCase1;
     private GetMostReadBookList useCase2;
@@ -39,7 +39,7 @@ public class BooksGridViewPresenterTest {
         useCase1 = Mockito.mock(GetRecentlyAddedBookList.class);
         useCase2 = Mockito.mock(GetMostReadBookList.class);
         useCase3 = Mockito.mock(GetBooksGridResults.class);
-        mapper = Mockito.mock(BookModelDataMapper.class);
+        mapper = Mockito.mock(DataMapper.class);
 
         presenter = new BooksGridViewPresenter(useCase3, useCase1, useCase2, mapper);
         presenter.setView(view);

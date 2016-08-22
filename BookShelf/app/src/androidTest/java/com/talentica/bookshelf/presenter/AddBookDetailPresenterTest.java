@@ -8,7 +8,7 @@ import com.talentica.domain.usecases.SubmitMyBook;
 import com.talentica.presentation.leadCapturePage.addmybook.presenter.AddBookDetailPresenter;
 import com.talentica.presentation.leadCapturePage.addmybook.view.AddBookDetailView;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
-import com.talentica.presentation.mapper.BookModelDataMapper;
+import com.talentica.presentation.mapper.DataMapper;
 import com.talentica.presentation.utils.Util;
 
 import org.junit.Before;
@@ -28,14 +28,14 @@ public class AddBookDetailPresenterTest {
 
     private AddBookDetailPresenter presenter;
     private AddBookDetailView view;
-    private BookModelDataMapper bookModelDataMapper;
+    private DataMapper bookModelDataMapper;
     private SubmitMyBook submitMyBookUseCase;
 
     @Before
     public void setView() {
         view = Mockito.mock(AddBookDetailView.class);
         submitMyBookUseCase = Mockito.mock(SubmitMyBook.class);
-        bookModelDataMapper = Mockito.mock(BookModelDataMapper.class);
+        bookModelDataMapper = Mockito.mock(DataMapper.class);
 
         presenter = new AddBookDetailPresenter(submitMyBookUseCase, bookModelDataMapper);
         presenter.setView(view);
