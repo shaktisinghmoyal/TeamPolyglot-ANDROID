@@ -4,8 +4,10 @@ package com.talentica.presentation.mapper;
 
 import com.talentica.domain.model.Book;
 import com.talentica.domain.model.BooksRequestedToUser;
+import com.talentica.domain.model.Notification;
 import com.talentica.presentation.internal.di.PerActivity;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
+import com.talentica.presentation.leadCapturePage.notifications.model.NotificationModel;
 import com.talentica.presentation.leadCapturePage.tasks.model.BooksRequestedToUserModel;
 
 import java.util.ArrayList;
@@ -54,6 +56,13 @@ public class DataMapper {
         return bookModel;
     }
 
+    public NotificationModel transform(Notification notification) {
+        if (notification == null) {
+            throw new IllegalArgumentException("Cannot transform a null value");
+        }
+        NotificationModel notificationModel = new NotificationModel(notification.getBookName(), notification.getReturnDueToOrFrom(), notification.getDueToOrFrom(), notification.getReturnDate());
+        return notificationModel;
+    }
 
     public BooksRequestedToUser transform(BooksRequestedToUserModel bookModel) {
         BooksRequestedToUser book = null;
@@ -78,6 +87,21 @@ public class DataMapper {
         }
 
         return bookModelsCollection;
+    }
+
+    public Collection<NotificationModel> transformNotifications(Collection<Notification> notifications) {
+        Collection<NotificationModel> notificationModels;
+
+        if (notifications != null && !notifications.isEmpty()) {
+            notificationModels = new ArrayList<NotificationModel>();
+            for (Notification book : notifications) {
+                notificationModels.add(transform(book));
+            }
+        } else {
+            notificationModels = Collections.emptyList();
+        }
+
+        return notificationModels;
     }
 
 

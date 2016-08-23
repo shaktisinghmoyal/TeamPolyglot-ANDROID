@@ -23,6 +23,7 @@ import com.talentica.domain.repository.IAddBookRepository;
 import com.talentica.domain.repository.IHomeRepository;
 import com.talentica.domain.repository.ILeadCapturePageRepository;
 import com.talentica.domain.repository.IMyTaskRepository;
+import com.talentica.domain.repository.INotificationRepository;
 import com.talentica.domain.repository.IResetPassRepository;
 import com.talentica.domain.repository.ISearchSuggestionRepository;
 import com.talentica.domain.repository.ISignInRepository;
@@ -64,6 +65,8 @@ public interface ApplicationComponent {
     IAddBookRepository addBookRepository();
 
     IMyTaskRepository myTaskRepository();
+
+    INotificationRepository notificationRepository();
 
 
 }

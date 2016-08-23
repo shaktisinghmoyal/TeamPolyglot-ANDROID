@@ -111,6 +111,8 @@
     <string name="task_updated_successfully">Task updated successfully</string>
     <string name="task_not_updated">Task not updated</string>
 
+    <string name="notifications">Notifications</string>
+
 
     <string-array name="genre_types">
         <item>Science Fiction</item>

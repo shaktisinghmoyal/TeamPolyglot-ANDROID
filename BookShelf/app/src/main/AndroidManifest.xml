@@ -76,7 +76,12 @@
 
         </activity>
 
+        <activity
+            android:name=".presentation.leadCapturePage.notifications.view.activity.NotificationActivity"
+            android:theme="@style/AppThemeWithActionBar">
 
+
+        </activity>
 
 
     </application>

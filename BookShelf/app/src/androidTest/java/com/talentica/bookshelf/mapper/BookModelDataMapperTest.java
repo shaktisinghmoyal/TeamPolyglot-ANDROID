@@ -18,7 +18,9 @@ package com.talentica.bookshelf.mapper;
 
 import com.talentica.domain.model.Book;
 import com.talentica.domain.model.BooksRequestedToUser;
+import com.talentica.domain.model.Notification;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
+import com.talentica.presentation.leadCapturePage.notifications.model.NotificationModel;
 import com.talentica.presentation.leadCapturePage.tasks.model.BooksRequestedToUserModel;
 import com.talentica.presentation.mapper.DataMapper;
 
@@ -39,6 +41,8 @@ public class BookModelDataMapperTest extends TestCase {
     private static final String BOOK_NAME = "Life";
     private static final String BOOK_AUTHER = "Ashutosh";
     private static final String BOOK_LENDER = "Akash";
+    private static final boolean DUE = true;
+    private static final String BOOK_DUE_TO_FROM = "Akash";
     private static final String BOOK_REQUESTED_BY = "Akash";
 
     private DataMapper bookModelDataMapper;
@@ -69,6 +73,30 @@ public class BookModelDataMapperTest extends TestCase {
         assertThat(bookRequestedModel.getRequestedBy(), is(BOOK_REQUESTED_BY));
     }
 
+    public void testTransformNotification() {
+        Notification notification = createFakeNotification();
+        NotificationModel notificationModel = bookModelDataMapper.transform(notification);
+
+        assertThat(notificationModel, is(instanceOf(NotificationModel.class)));
+        assertThat(notificationModel.getBookName(), is(BOOK_NAME));
+        assertThat(notificationModel.getReturnDueToOrFrom(), is(BOOK_DUE_TO_FROM));
+        assertThat(notificationModel.getDueToOrFrom(), is(DUE));
+    }
+
+    public void testTransformNotificationCollection() {
+        Notification notification1 = mock(Notification.class);
+        Notification notification2 = mock(Notification.class);
+
+        List<Notification> notificationList = new ArrayList<Notification>(5);
+        notificationList.add(notification1);
+        notificationList.add(notification2);
+
+        Collection<NotificationModel> notificationModels = bookModelDataMapper.transformNotifications(notificationList);
+
+        assertThat(notificationModels.toArray()[0], is(instanceOf(NotificationModel.class)));
+        assertThat(notificationModels.toArray()[1], is(instanceOf(NotificationModel.class)));
+        assertThat(notificationModels.size(), is(2));
+    }
 
     public void testTransformBookCollection() {
         Book mockBookOne = mock(Book.class);
@@ -114,5 +142,11 @@ public class BookModelDataMapperTest extends TestCase {
 
 
         return book;
+    }
+
+    private Notification createFakeNotification() {
+        Notification notification = new Notification(BOOK_NAME, BOOK_DUE_TO_FROM, DUE, "09 May");
+
+        return notification;
     }
 }

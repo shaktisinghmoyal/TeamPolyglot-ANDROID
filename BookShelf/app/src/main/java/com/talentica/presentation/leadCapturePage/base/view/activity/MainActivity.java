@@ -39,6 +39,7 @@ import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.BooksGridViewFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.HomeFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.SearchFragment;
+import com.talentica.presentation.leadCapturePage.notifications.view.activity.NotificationActivity;
 import com.talentica.presentation.leadCapturePage.tasks.view.activity.MyTaskActivity;
 import com.talentica.presentation.utils.ClickListenerInterface;
 import com.talentica.presentation.utils.Enums;
@@ -439,6 +440,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                 previousBottomItemPressed.setVisibility(View.INVISIBLE);
                 mainActivityBinding.notificationSelected.setVisibility(View.VISIBLE);
                 previousBottomItemPressed = mainActivityBinding.notificationSelected;
+                navigator.startAnotherActivity(this, new Intent(this, NotificationActivity.class));
                 break;
 
             case R.id.profile_item:

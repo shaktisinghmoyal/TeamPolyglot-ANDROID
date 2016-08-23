@@ -71,7 +71,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        bookName.set(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString());
+                        bookName.set(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString());
                         writer.set(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString());
                     }
                 }));
@@ -100,7 +100,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString()));
+                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString()));
                         Assert.assertThat(writer.toString(), is(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString()));
 
                     }
@@ -132,7 +132,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        bookName.set(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString());
+                        bookName.set(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString());
                         writer.set(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString());
                     }
                 }));
@@ -161,7 +161,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString()));
+                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString()));
                         Assert.assertThat(writer.toString(), is(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString()));
 
                     }
@@ -193,7 +193,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        bookName.set(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString());
+                        bookName.set(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString());
                         writer.set(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString());
                     }
                 }));
@@ -220,7 +220,7 @@ public class MyTaskFragmentTest {
 
                     @Override
                     public void perform(UiController uiController, View view) {
-                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.requested_book_name)).getText().toString()));
+                        Assert.assertThat(bookName.toString(), is(((TextView) view.findViewById(R.id.notification_book_name)).getText().toString()));
                         Assert.assertThat(writer.toString(), is(((TextView) view.findViewById(R.id.requested_book_auther_name)).getText().toString()));
 
                     }
