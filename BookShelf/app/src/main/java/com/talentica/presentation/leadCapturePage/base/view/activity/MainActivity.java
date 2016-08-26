@@ -39,8 +39,9 @@ import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.BooksGridViewFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.HomeFragment;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.SearchFragment;
-import com.talentica.presentation.leadCapturePage.notifications.view.activity.NotificationActivity;
-import com.talentica.presentation.leadCapturePage.tasks.view.activity.MyTaskActivity;
+import com.talentica.presentation.leadCapturePage.myaccount.view.fragment.MyAccountFragment;
+import com.talentica.presentation.leadCapturePage.notifications.view.fragment.NotificationFragment;
+import com.talentica.presentation.leadCapturePage.tasks.view.fragment.MyTaskFragment;
 import com.talentica.presentation.utils.ClickListenerInterface;
 import com.talentica.presentation.utils.Enums;
 import com.talentica.presentation.utils.GridViewItemClickListnerInterface;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     private String searchBarText = "";
     private String searchBarTextToSave = "";
     private MenuItem menuItem;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,16 +89,11 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     @Override
     public void setFirstFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            navigator.addFragment(this, R.id.main_fragment_container, new HomeFragment(), "first");
+            navigator.addFragment(this, R.id.main_fragment_container, new HomeFragment(), Util.ENTRY);
         }
     }
 
-    @Override
-    public void setActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mainActivityBinding.toolbar.setPadding(0, 0, 10, 0);
-    }
+
 
 
     private void initializeVariables() {
@@ -240,7 +237,6 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         Log.e(Tag, "" + "onPrepareOptionsMenu");
 
         mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
-        getSupportActionBar().setTitle(getResources().getString(R.string.home_title));
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -252,13 +248,17 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_option_menu, menu);
         menuItem = menu.findItem(R.id.search);
+        this.menu = menu;
 
         MenuItemCompat.setOnActionExpandListener(menu.findItem(R.id.search), new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 Log.e(Tag, "" + "onMenuItemActionExpand  ");
+
+                Log.e(Tag, "" + "menu item visible  ");
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), "home");
+                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, new SearchFragment(), Util.HOME);
+
                 return true;
             }
 
@@ -266,8 +266,9 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 Log.e(Tag, "" + "onMenuItemActionCollapse   ");
-
-                getSupportFragmentManager().popBackStack();
+                if (menuItem.isVisible()) {
+                    getSupportFragmentManager().popBackStack();
+                }
                 return true;
 
             }
@@ -294,47 +295,48 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
                     @Override
                     public boolean onQueryTextChange(String query) {
-                        int queryLength = query.length();
-                        searchBarText = query;
-                        Log.e(Tag, "" + "onQueryTextChange called");
+                        if (menuItem.isVisible()) {
+                            int queryLength = query.length();
+                            searchBarText = query;
+                            Log.e(Tag, "" + "onQueryTextChange called");
 
-                        if (queryLength == 0) {
-                            Log.e(Tag, "" + "queryLength==0");
-
-
-                            if (searchBarTextLength != 0) {
-
-                                Log.e(Tag, "" + "searchBarTextLength!=0");
-                                getSupportFragmentManager().popBackStack();
-                                searchBarTextLength = queryLength;
-
-                            }
+                            if (queryLength == 0) {
+                                Log.e(Tag, "" + "queryLength==0");
 
 
-                        } else {
-                            if (searchBarTextLength == 0) {
-                                Log.e(Tag, "" + "searchBarTextLength==0");
+                                if (searchBarTextLength != 0) {
 
-                                Bundle fragmentTitleBundle = new Bundle();
-                                fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
-                                BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
-                                booksGridViewFragment.setArguments(fragmentTitleBundle);
-                                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
+                                    Log.e(Tag, "" + "searchBarTextLength!=0");
+                                    getSupportFragmentManager().popBackStack();
+                                    searchBarTextLength = queryLength;
+
+                                }
+
 
                             } else {
-                                getSupportFragmentManager().popBackStack();
-                                Log.e(Tag, "" + "else searchBarTextLength!=0");
-                                Bundle fragmentTitleBundle = new Bundle();
-                                fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
-                                BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
-                                booksGridViewFragment.setArguments(fragmentTitleBundle);
-                                navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, "home");
+                                if (searchBarTextLength == 0) {
+                                    Log.e(Tag, "" + "searchBarTextLength==0");
+
+                                    Bundle fragmentTitleBundle = new Bundle();
+                                    fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
+                                    BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
+                                    booksGridViewFragment.setArguments(fragmentTitleBundle);
+                                    navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, Util.HOME);
+
+                                } else {
+                                    getSupportFragmentManager().popBackStack();
+                                    Log.e(Tag, "" + "else searchBarTextLength!=0");
+                                    Bundle fragmentTitleBundle = new Bundle();
+                                    fragmentTitleBundle.putInt(Util.fragmentTitle, R.string.results_string);
+                                    BooksGridViewFragment booksGridViewFragment = new BooksGridViewFragment();
+                                    booksGridViewFragment.setArguments(fragmentTitleBundle);
+                                    navigator.addFragment(MainActivity.this, R.id.main_fragment_container, booksGridViewFragment, Util.HOME);
+
+                                }
 
                             }
-
+                            searchBarTextLength = queryLength;
                         }
-                        searchBarTextLength = queryLength;
-
                         return true;
 
                     }
@@ -404,7 +406,7 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                 super.onBackPressed();
                 //additional code
             } else {
-                getSupportFragmentManager().popBackStack();
+                getSupportFragmentManager().popBackStackImmediate();
 
             }
 
@@ -417,16 +419,17 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     public void bottomBarItemClick(View bottomBarItem) {
         switch (bottomBarItem.getId()) {
             case R.id.home_item:
-                previousBottomItemPressed.setVisibility(View.INVISIBLE);
-                mainActivityBinding.homeSelected.setVisibility(View.VISIBLE);
-                previousBottomItemPressed = mainActivityBinding.homeSelected;
+//                previousBottomItemPressed.setVisibility(View.INVISIBLE);
+//                mainActivityBinding.homeSelected.setVisibility(View.VISIBLE);
+//                previousBottomItemPressed = mainActivityBinding.homeSelected;
+                navigator.openAsMainRoot(MainActivity.this);
                 break;
 
             case R.id.todo_item:
-                previousBottomItemPressed.setVisibility(View.INVISIBLE);
-                mainActivityBinding.todoSelected.setVisibility(View.VISIBLE);
-                previousBottomItemPressed = mainActivityBinding.todoSelected;
-                navigator.startAnotherActivity(this, new Intent(this, MyTaskActivity.class));
+//                previousBottomItemPressed.setVisibility(View.INVISIBLE);
+//                mainActivityBinding.todoSelected.setVisibility(View.VISIBLE);
+//                previousBottomItemPressed = mainActivityBinding.todoSelected;
+                navigator.openAsRoot(MainActivity.this, R.id.main_fragment_container, new MyTaskFragment(), Util.TASKS);
                 break;
 
             case R.id.add_book_item:
@@ -437,20 +440,27 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
                 break;
 
             case R.id.notification_item:
-                previousBottomItemPressed.setVisibility(View.INVISIBLE);
-                mainActivityBinding.notificationSelected.setVisibility(View.VISIBLE);
-                previousBottomItemPressed = mainActivityBinding.notificationSelected;
-                navigator.startAnotherActivity(this, new Intent(this, NotificationActivity.class));
+//                previousBottomItemPressed.setVisibility(View.INVISIBLE);
+//                mainActivityBinding.notificationSelected.setVisibility(View.VISIBLE);
+//                previousBottomItemPressed = mainActivityBinding.notificationSelected;
+                navigator.openAsRoot(MainActivity.this, R.id.main_fragment_container, new NotificationFragment(), Util.NOTIFICATION);
                 break;
 
             case R.id.profile_item:
-                previousBottomItemPressed.setVisibility(View.INVISIBLE);
-                mainActivityBinding.profileSelected.setVisibility(View.VISIBLE);
-                previousBottomItemPressed = mainActivityBinding.profileSelected;
+//                previousBottomItemPressed.setVisibility(View.INVISIBLE);
+//                mainActivityBinding.profileSelected.setVisibility(View.VISIBLE);
+//                previousBottomItemPressed = mainActivityBinding.profileSelected;
+                navigator.openAsRoot(MainActivity.this, R.id.main_fragment_container, new MyAccountFragment(), Util.MY_ACCOUNT);
                 break;
 
         }
 
+    }
+
+    public void setBottomBarIconForHome() {
+        previousBottomItemPressed.setVisibility(View.INVISIBLE);
+        mainActivityBinding.homeSelected.setVisibility(View.VISIBLE);
+        previousBottomItemPressed = mainActivityBinding.homeSelected;
     }
 
     @Override
@@ -496,20 +506,101 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
 
     }
 
-    public void setActionViewBar(Enums.actionBarTypeEnum actionBarType) {
+    @Override
+    public void setActionBar(String title) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(title);
+
+        if (menuItem != null) {
+            menuItem.setVisible(true);
+        }
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        mainActivityBinding.toolbar.setNavigationIcon(R.drawable.icon_category);
+        mainActivityBinding.toolbar.setPadding(0, 0, 10, 0);
+    }
+
+    private void setTaskActionBar(String text) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(text);
+        menuItem.setVisible(false);
+        menuItem.collapseActionView();
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        previousBottomItemPressed.setVisibility(View.INVISIBLE);
+        mainActivityBinding.todoSelected.setVisibility(View.VISIBLE);
+        previousBottomItemPressed = mainActivityBinding.todoSelected;
+    }
+
+    private void setNotificationActionBar(String text) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(text);
+        menuItem.setVisible(false);
+        menuItem.collapseActionView();
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        previousBottomItemPressed.setVisibility(View.INVISIBLE);
+        mainActivityBinding.notificationSelected.setVisibility(View.VISIBLE);
+        previousBottomItemPressed = mainActivityBinding.notificationSelected;
+    }
+
+    private void setMyAccountActionBar(String text) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(text);
+        menuItem.setVisible(false);
+        menuItem.collapseActionView();
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        previousBottomItemPressed.setVisibility(View.INVISIBLE);
+        mainActivityBinding.profileSelected.setVisibility(View.VISIBLE);
+        previousBottomItemPressed = mainActivityBinding.profileSelected;
+    }
+
+    private void setGridViewActionBar(String text) {
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        if(menuItem!=null)
+//        {
+//            menuItem.setVisible(true);
+//        }
+//        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    public void setActionViewBar(Enums.actionBarTypeEnum actionBarType, String text) {
         Log.e(Tag, "setActionViewBar" + " actionBarType");
         switch (actionBarType) {
 
 
             case HOME:
                 Log.e(Tag, "HOME");
-                setActionBar();
+                setActionBar(text);
 
                 break;
 
             case SEARCH_SUGGESTION:
                 Log.e(Tag, "SEARCH_SUGGESTION  But not required");
                 setSearchSuggestionActionBar();
+
+                break;
+
+            case TASK:
+                Log.e(Tag, "TASK");
+                setTaskActionBar(text);
+
+                break;
+
+            case NOTIFICATION:
+                Log.e(Tag, "NOTIFICATION");
+                setNotificationActionBar(text);
+
+                break;
+
+            case GRID_VIEW:
+                Log.e(Tag, "GRID_VIEW");
+                setGridViewActionBar(text);
+
+                break;
+
+            case MY_ACCOUNT:
+                Log.e(Tag, "MY_ACCOUNT");
+                setMyAccountActionBar(text);
 
                 break;
 
@@ -535,6 +626,20 @@ public class MainActivity extends BaseActivity implements LeadCapturePageView, H
     public void onDestroy() {
         super.onDestroy();
         leadCapturePagePresenter.destroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if (requestCode == Util.REQUEST_CODE_ADD_BOOK_ACTIVITY) {
+            Log.e(Tag, "onActivityResult");
+            if (menuItem.isActionViewExpanded()) {
+                menuItem.collapseActionView();
+            }
+            navigator.popEveryFragment(MainActivity.this);
+            setBottomBarIconForHome();
+        }
     }
 
 }

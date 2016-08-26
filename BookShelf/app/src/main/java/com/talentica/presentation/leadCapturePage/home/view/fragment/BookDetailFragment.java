@@ -21,7 +21,7 @@ import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragmen
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.BookPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.BookView;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.BookDetailActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.BookDetailActivity;
 import com.talentica.presentation.utils.ConfirmationButtonsClickInterface;
 import com.talentica.presentation.utils.Util;
 
@@ -142,6 +142,8 @@ public class BookDetailFragment extends BaseFragment implements BookView, Confir
         bookLayoutBinding.customView10.setBackground(colorDrawableOpaqueBlack);
         bookLayoutBinding.customView11.setBackground(colorDrawableOpaqueGrey);
         bookLayoutBinding.customView12.setBackground(colorDrawableOpaqueGrey);
+
+
     }
 
     @Override
@@ -159,6 +161,8 @@ public class BookDetailFragment extends BaseFragment implements BookView, Confir
         bookLayoutBinding.customView10.setBackground(removeColorDrawableOpaqueBlack);
         bookLayoutBinding.customView11.setBackground(removeColorDrawableOpaqueGrey);
         bookLayoutBinding.customView12.setBackground(removeColorDrawableOpaqueGrey);
+
+
     }
 
     @Override

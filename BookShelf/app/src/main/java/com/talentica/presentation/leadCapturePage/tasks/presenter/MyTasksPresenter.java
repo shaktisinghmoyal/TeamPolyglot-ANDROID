@@ -46,7 +46,7 @@ public class MyTasksPresenter implements IMyTasksPresenter {
     public void initialize() {
         hideViewRetry();
         showViewLoading();
-        myTasksView.updateActionBar();
+        myTasksView.setActionBar();
         loadBookRequestedToUser();
     }
 
@@ -137,6 +137,7 @@ public class MyTasksPresenter implements IMyTasksPresenter {
             hideViewLoading();
             showViewRetry();
             showErrorMessage(new DefaultErrorBundle((Exception) e));
+            showSearchBookRequestedResults(null);
 
         }
 

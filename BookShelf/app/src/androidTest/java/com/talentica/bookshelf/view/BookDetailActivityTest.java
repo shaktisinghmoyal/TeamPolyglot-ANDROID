@@ -14,7 +14,7 @@ import android.support.v7.app.ActionBar;
 
 import com.talentica.R;
 import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.BookDetailActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.BookDetailActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

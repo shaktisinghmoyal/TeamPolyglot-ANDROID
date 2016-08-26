@@ -11,6 +11,15 @@ public class Util {
     public static String bookDetailBundle = "BOOK_DETAIL_BUNDLE";
     public static String fragmentDetailBundle = "FRAGMENT_DETAIL_BUNDLE";
     public static String fillDetailType = "FILL_DETAIL_TYPE";
+
+    public static String ENTRY = "ENTRY";
+    public static String HOME = "HOME";
+    public static String TASKS = "TASKS";
+    public static String ADD = "ADD";
+    public static String NOTIFICATION = "NOTIFICATION";
+    public static String MY_ACCOUNT = "MY_ACCOUNT";
+
+    public static int REQUEST_CODE_ADD_BOOK_ACTIVITY = 0;
     public static int REQUEST_CAMERA = 3;
     public static int SELECT_FILE = 4;
     public static int AUTO_FILL_DETAIL = 1;

@@ -15,4 +15,6 @@ public interface MyTasksView extends LoadDataView {
     void refreshTask();
 
     void updateActionBar();
+
+    void setActionBar();
 }

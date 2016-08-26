@@ -113,6 +113,17 @@
 
     <string name="notifications">Notifications</string>
 
+    <string name="my_account">My Account</string>
+    <string name="my_books">My Books</string>
+    <string name="books_i_borrowed">Borrowed Books</string>
+    <string name="profile">Profile</string>
+    <string name="accept_button">Accept</string>
+    <string name="reject_button">Reject</string>
+    <string name="mark_as_lent_button">Mark as Lent</string>
+    <string name="request_return_button">Request Return</string>
+    <string name="mark_as_returned_button">Mark as Returned</string>
+    <string name="book_count">Book Count</string>
+
 
     <string-array name="genre_types">
         <item>Science Fiction</item>

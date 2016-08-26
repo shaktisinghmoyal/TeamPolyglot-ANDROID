@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.talentica.R;
-import com.talentica.presentation.leadCapturePage.tasks.view.activity.MyTaskActivity;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 
 import org.hamcrest.Matcher;
 import org.junit.Assert;
@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,11 +37,11 @@ public class MyTaskFragmentTest {
     final AtomicReference<String> bookName = new AtomicReference<String>();
     final AtomicReference<String> writer = new AtomicReference<String>();
     @Rule
-    public ActivityTestRule<MyTaskActivity> myTaskActivityTestRule = new ActivityTestRule<MyTaskActivity>(MyTaskActivity.class);
+    public ActivityTestRule<MainActivity> myTaskActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Test
     public void appBarTitleTest() {
-
+        onView(withId(R.id.notification)).perform(click());
         ActionBar actionBar = myTaskActivityTestRule.getActivity().getSupportActionBar();
         assertThat(actionBar.isShowing(), is(true));
         assertThat(actionBar.getTitle().toString(), containsString(myTaskActivityTestRule.getActivity().getResources().getString(R.string.my_tasks)));
@@ -51,6 +52,7 @@ public class MyTaskFragmentTest {
     @Test
     public void requestAcceptedTest() {
 
+        onView(withId(R.id.todo_item)).perform(click());
 
         onView(withId(R.id.tasks_list))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new RecyclerViewActions.PositionableRecyclerViewAction() {
@@ -112,7 +114,7 @@ public class MyTaskFragmentTest {
     @Test
     public void requestRejectedTest() {
 
-
+        onView(withId(R.id.todo_item)).perform(click());
         onView(withId(R.id.tasks_list))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new RecyclerViewActions.PositionableRecyclerViewAction() {
                     @Override
@@ -173,7 +175,7 @@ public class MyTaskFragmentTest {
 
     @Test
     public void scrollingTest() {
-
+        onView(withId(R.id.todo_item)).perform(click());
         onView(withId(R.id.tasks_list))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(6, new RecyclerViewActions.PositionableRecyclerViewAction() {
                     @Override

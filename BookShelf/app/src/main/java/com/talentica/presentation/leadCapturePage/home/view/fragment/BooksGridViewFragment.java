@@ -17,11 +17,12 @@ import android.widget.ImageView;
 import com.talentica.R;
 import com.talentica.databinding.BooksGridViewLayoutBinding;
 import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.home.model.BookModel;
 import com.talentica.presentation.leadCapturePage.home.presenter.BooksGridViewPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.BooksGridView;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.ListAllActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.ListAllActivity;
 import com.talentica.presentation.leadCapturePage.home.view.adapter.BookResultGridViewAdapter;
 import com.talentica.presentation.utils.Enums;
 import com.talentica.presentation.utils.GridViewItemClickListnerInterface;
@@ -162,6 +163,7 @@ public class BooksGridViewFragment extends BaseFragment implements BooksGridView
     public void setActionBar() {
         if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.results_string))) {
             Log.e(Tag, "setActionBar  " + " No action bar required");
+            ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.GRID_VIEW, null);
         } else if (getResources().getString(fragmentTitleId).equals(getResources().getString(R.string.recently_added_text))) {
             ((ListAllActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2A2D35")));
             ((ListAllActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);

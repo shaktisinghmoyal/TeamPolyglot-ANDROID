@@ -4,7 +4,7 @@ package com.talentica.presentation.internal.di.components;
 import com.talentica.presentation.internal.di.PerActivity;
 import com.talentica.presentation.internal.di.modules.ActivityModule;
 import com.talentica.presentation.internal.di.modules.BookDetailModule;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.BookDetailActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.BookDetailActivity;
 import com.talentica.presentation.leadCapturePage.home.view.fragment.BookDetailFragment;
 
 import dagger.Component;

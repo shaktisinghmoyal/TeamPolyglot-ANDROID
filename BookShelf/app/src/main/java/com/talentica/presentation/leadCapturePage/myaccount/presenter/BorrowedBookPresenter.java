@@ -1,18 +1,46 @@
 package com.talentica.presentation.leadCapturePage.myaccount.presenter;
 
-public interface BorrowedBookPresenter {
+import javax.inject.Inject;
 
-    void onClickBorrowAgain();
+public class BorrowedBookPresenter implements IBorrowedBookPresenter {
 
-    void onClickReturn();
+    private final String Tag = "BorrowedBookPresenterImpl";
 
-    void onClickRequestExtend();
+    @Inject
+    public BorrowedBookPresenter() {
+    }
 
-    void onClickMarkAsReturned();
+    @Override
+    public void onClickBorrowAgain() {
 
-    void onClickRelend();
+    }
 
-    void onBookClick();
+    @Override
+    public void onClickReturn() {
+
+    }
+
+    @Override
+    public void onClickRequestExtend() {
+
+    }
+
+    @Override
+    public void onClickMarkAsReturned() {
+
+    }
+
+    @Override
+    public void onClickRelend() {
+
+    }
+
+    @Override
+    public void onBookClick() {
+
+    }
+
+
 
 
 }

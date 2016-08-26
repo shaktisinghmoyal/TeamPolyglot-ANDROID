@@ -2,10 +2,9 @@ package com.talentica.presentation.leadCapturePage.tasks.view.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,16 +14,16 @@ import android.view.ViewGroup;
 
 import com.talentica.R;
 import com.talentica.databinding.MyTasksFragmentBinding;
-import com.talentica.presentation.internal.di.components.MyTaskComponent;
+import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.tasks.TasksRecyclerViewAdapter;
 import com.talentica.presentation.leadCapturePage.tasks.model.BooksRequestedToUserModel;
-import com.talentica.presentation.leadCapturePage.tasks.presenter.MyTaskActivityPresenter;
 import com.talentica.presentation.leadCapturePage.tasks.presenter.MyTasksPresenter;
 import com.talentica.presentation.leadCapturePage.tasks.view.MyTasksView;
-import com.talentica.presentation.leadCapturePage.tasks.view.activity.MyTaskActivity;
 import com.talentica.presentation.utils.CustomSnackbar;
 import com.talentica.presentation.utils.DividerItemDecoration;
+import com.talentica.presentation.utils.Enums;
 import com.talentica.presentation.utils.Util;
 
 import java.util.Collection;
@@ -38,8 +37,7 @@ public class MyTaskFragment extends BaseFragment implements MyTasksView, TasksRe
     MyTasksPresenter presenter;
     @Inject
     TasksRecyclerViewAdapter adapter;
-    @Inject
-    MyTaskActivityPresenter activityPresenter;
+    ActionBar bar;
     MyTasksFragmentBinding binding;
     private RecyclerView recyclerView;
     private RecyclerView.OnScrollListener onScrollListener1 = getScrollListener();
@@ -93,7 +91,7 @@ public class MyTaskFragment extends BaseFragment implements MyTasksView, TasksRe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent(MyTaskComponent.class).inject(this);
+        getComponent(LeadCaptureComponent.class).inject(this);
     }
 
 
@@ -111,6 +109,7 @@ public class MyTaskFragment extends BaseFragment implements MyTasksView, TasksRe
         setupRecyclerView();
         presenter.setView(this);
         presenter.initialize();
+        bar = ((MainActivity) getActivity()).getSupportActionBar();
     }
 
     private void setupRecyclerView() {
@@ -123,10 +122,13 @@ public class MyTaskFragment extends BaseFragment implements MyTasksView, TasksRe
     }
 
     @Override
-    public void updateActionBar() {
-        ((MyTaskActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2A2D35")));
-        ((MyTaskActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.my_tasks) + " ( " + adapter.getItemCount() + " ) ");
+    public void setActionBar() {
+        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.TASK, getResources().getString(R.string.my_tasks));
+    }
 
+    @Override
+    public void updateActionBar() {
+        bar.setTitle(getResources().getString(R.string.my_tasks) + " ( " + adapter.getItemCount() + " ) ");
     }
 
     @Override

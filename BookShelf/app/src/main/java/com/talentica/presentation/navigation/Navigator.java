@@ -5,12 +5,13 @@ package com.talentica.presentation.navigation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.BookDetailActivity;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.ListAllActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.BookDetailActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.ListAllActivity;
 import com.talentica.presentation.utils.Util;
 
 import javax.inject.Inject;
@@ -34,7 +35,8 @@ public class Navigator {
     }
 
     public void startAnotherActivity(AppCompatActivity from, Intent intent) {
-        from.startActivity(intent);
+        //popEveryFragment( from);
+        from.startActivityForResult(intent, Util.REQUEST_CODE_ADD_BOOK_ACTIVITY);
 
     }
 
@@ -55,41 +57,45 @@ public class Navigator {
     }
 
     public void addFragment(AppCompatActivity activity, int containerViewId, Fragment fragment, String tag) {
+        FragmentManager manager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
-        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
-        if (tag.equals("first")) {
+        if (tag.equals(Util.ENTRY)) {
             Log.e(Tag, "" + "add first Fragment  ");
             fragmentTransaction.replace(containerViewId, fragment, tag);
         } else {
             Log.e(Tag, "" + "addFragment  ");
+
             fragmentTransaction.replace(containerViewId, fragment, tag).addToBackStack(tag);
 
         }
 
         fragmentTransaction.commit();
         activity.getSupportFragmentManager().executePendingTransactions();
+
     }
-    /**
-     * Goes to the user list screen.
-     *
-     * @param context A Context needed to open the destiny activity.
-     */
-//    public void navigateToUserList(Context context) {
-////        if (context != null) {
-////            Intent intentToLaunch = UserListActivity.getCallingIntent(context);
-////            context.startActivity(intentToLaunch);
-////        }
-//    }
-//
-//    /**
-//     * Goes to the user details screen.
-//     *
-//     * @param context A Context needed to open the destiny activity.
-//     */
-//    public void navigateToUserDetails(Context context, int userId) {
-////        if (context != null) {
-////            Intent intentToLaunch = UserDetailsActivity.getCallingIntent(context, userId);
-////            context.startActivity(intentToLaunch);
-////        }
-//    }
+
+    public void openAsRoot(AppCompatActivity activity, int containerViewId, Fragment fragment, String tag) {
+        popEveryFragment(activity);
+        addFragment(activity, containerViewId, fragment, tag);
+    }
+
+    public void openAsMainRoot(AppCompatActivity activity) {
+        popEveryFragment(activity);
+        // addFragment( activity, containerViewId,  fragment, tag);
+    }
+
+    public void popEveryFragment(AppCompatActivity activity) {
+        // Clear all back stack.
+        FragmentManager manager = activity.getSupportFragmentManager();
+        int backStackCount = manager.getBackStackEntryCount();
+        for (int i = 0; i < backStackCount; i++) {
+
+            // Get the back stack fragment id.
+            int backStackId = manager.getBackStackEntryAt(i).getId();
+
+            manager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        }
+    }
 }

@@ -21,6 +21,7 @@
 
 
         <LinearLayout
+            android:id="@+id/main_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -43,6 +44,7 @@
             </View>
 
             <ImageView
+                android:id="@+id/book_image"
                 android:layout_width="185dp"
                 android:layout_height="254dp"
                 android:layout_gravity="center_horizontal"

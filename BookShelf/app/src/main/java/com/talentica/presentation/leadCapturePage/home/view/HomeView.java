@@ -45,5 +45,7 @@ public interface HomeView {
 
     void setActionSearchBar();
 
+    void setBottomBarIconForHome();
+
 
 }

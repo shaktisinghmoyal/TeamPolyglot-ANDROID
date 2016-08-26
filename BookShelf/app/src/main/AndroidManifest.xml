@@ -46,14 +46,14 @@
         </activity>
 
         <activity
-            android:name=".presentation.leadCapturePage.home.view.acitivity.BookDetailActivity"
+            android:name=".presentation.leadCapturePage.home.view.activity.BookDetailActivity"
             android:theme="@style/AppThemeWithActionBar">
 
 
         </activity>
 
         <activity
-            android:name=".presentation.leadCapturePage.home.view.acitivity.ListAllActivity"
+            android:name=".presentation.leadCapturePage.home.view.activity.ListAllActivity"
             android:theme="@style/AppThemeWithActionBar">
 
 
@@ -65,23 +65,13 @@
 
 
         </activity>
-        <activity
-            android:name=".presentation.leadCapturePage.tasks.view.activity.MyTaskActivity"
-            android:theme="@style/AppThemeWithActionBar">
 
-
-        </activity>
         <activity android:name=".presentation.leadCapturePage.base.view.activity.SplashActivity">
 
 
         </activity>
 
-        <activity
-            android:name=".presentation.leadCapturePage.notifications.view.activity.NotificationActivity"
-            android:theme="@style/AppThemeWithActionBar">
 
-
-        </activity>
 
 
     </application>

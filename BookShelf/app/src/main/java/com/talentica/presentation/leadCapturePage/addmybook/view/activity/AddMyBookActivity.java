@@ -113,7 +113,7 @@ public class AddMyBookActivity extends BaseActivity implements AddMyBookActivity
         typeOfFillDetail.putInt(Util.fillDetailType, Util.MANUALLY_FILL_DETAIL);
         AddBookDetailFragment fragment = new AddBookDetailFragment();
         fragment.setArguments(typeOfFillDetail);
-        navigator.addFragment(this, R.id.add_book_activity_fragment_container, fragment, "add_book");
+        navigator.addFragment(this, R.id.add_book_activity_fragment_container, fragment, Util.ADD);
     }
 
 
@@ -125,7 +125,7 @@ public class AddMyBookActivity extends BaseActivity implements AddMyBookActivity
         typeOfFillDetail.putInt(Util.fillDetailType, Util.AUTO_FILL_DETAIL);
         AddBookDetailFragment fragment = new AddBookDetailFragment();
         fragment.setArguments(typeOfFillDetail);
-        navigator.addFragment(this, R.id.add_book_activity_fragment_container, fragment, "add_book");
+        navigator.addFragment(this, R.id.add_book_activity_fragment_container, fragment, Util.ADD);
     }
 
     @Override

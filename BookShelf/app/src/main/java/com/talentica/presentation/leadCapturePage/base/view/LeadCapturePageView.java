@@ -16,7 +16,7 @@ public interface LeadCapturePageView {
 
     void displayNotificationCount();
 
-    void setActionBar();
+    void setActionBar(String title);
 
     void setFirstFragment(Bundle savedInstanceState);
 

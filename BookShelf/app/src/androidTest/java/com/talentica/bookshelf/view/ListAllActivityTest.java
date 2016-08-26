@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment;
 
 import com.talentica.R;
 import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
-import com.talentica.presentation.leadCapturePage.home.view.acitivity.ListAllActivity;
+import com.talentica.presentation.leadCapturePage.home.view.activity.ListAllActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

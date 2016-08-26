@@ -1,11 +1,27 @@
 package com.talentica.presentation.leadCapturePage.myaccount.presenter;
 
-public interface ProfilePresenter {
 
-    void onClickEdit();
+import javax.inject.Inject;
 
-    void onClickChangePassword();
+public class ProfilePresenter implements IProfilePresenter {
+    private final String Tag = "CredentialToJsonMapper";
 
-    void onClickSignOut();
+    @Inject
+    public ProfilePresenter() {
+    }
 
+    @Override
+    public void onClickEdit() {
+
+    }
+
+    @Override
+    public void onClickChangePassword() {
+
+    }
+
+    @Override
+    public void onClickSignOut() {
+
+    }
 }

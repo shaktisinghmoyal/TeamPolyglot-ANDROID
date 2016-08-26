@@ -57,6 +57,7 @@ public class HomePagePresenter implements IHomePagePresenter, Presenter {
         setActionBar();
         hideViewRetry(BOTH_BOOK_QUERY);
         showViewLoading(BOTH_BOOK_QUERY);
+        homeView.setBottomBarIconForHome();
         loadRecentlyAddedBooks();
         loadMostReadBooks();
     }

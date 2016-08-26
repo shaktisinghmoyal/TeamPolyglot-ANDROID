@@ -3,8 +3,6 @@ package com.talentica.presentation.leadCapturePage.notifications.view.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +13,15 @@ import android.view.ViewGroup;
 
 import com.talentica.R;
 import com.talentica.databinding.NotificationFragmentBinding;
-import com.talentica.presentation.internal.di.components.NotificationsComponent;
+import com.talentica.presentation.internal.di.components.LeadCaptureComponent;
+import com.talentica.presentation.leadCapturePage.base.view.activity.MainActivity;
 import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragment;
 import com.talentica.presentation.leadCapturePage.notifications.NotificationsRecyclerAdapter;
 import com.talentica.presentation.leadCapturePage.notifications.model.NotificationModel;
 import com.talentica.presentation.leadCapturePage.notifications.presenter.NotificationPresenterImpl;
 import com.talentica.presentation.leadCapturePage.notifications.view.NotificationView;
-import com.talentica.presentation.leadCapturePage.notifications.view.activity.NotificationActivity;
 import com.talentica.presentation.utils.DividerItemDecoration;
+import com.talentica.presentation.utils.Enums;
 import com.talentica.presentation.utils.Util;
 
 import java.util.Collection;
@@ -90,7 +89,7 @@ public class NotificationFragment extends BaseFragment implements NotificationVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent(NotificationsComponent.class).inject(this);
+        getComponent(LeadCaptureComponent.class).inject(this);
     }
 
 
@@ -133,9 +132,7 @@ public class NotificationFragment extends BaseFragment implements NotificationVi
 
     @Override
     public void setActionBar() {
-        ((NotificationActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2A2D35")));
-        ((NotificationActivity) getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.notifications));
-
+        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.NOTIFICATION, getResources().getString(R.string.notifications));
     }
 
 

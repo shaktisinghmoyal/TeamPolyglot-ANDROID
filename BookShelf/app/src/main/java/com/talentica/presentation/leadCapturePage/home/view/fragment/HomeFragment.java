@@ -143,8 +143,13 @@ public class HomeFragment extends BaseFragment implements HomeView, View.OnClick
     }
 
     @Override
+    public void setBottomBarIconForHome() {
+        ((MainActivity) getActivity()).setBottomBarIconForHome();
+    }
+
+    @Override
     public void setActionSearchBar() {
-        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.HOME);
+        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.HOME, getResources().getString(R.string.home_title));
     }
 
     private void initializeItems() {

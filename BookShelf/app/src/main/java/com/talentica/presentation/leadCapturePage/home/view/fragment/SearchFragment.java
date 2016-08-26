@@ -21,7 +21,6 @@ import com.talentica.presentation.leadCapturePage.base.view.fragment.BaseFragmen
 import com.talentica.presentation.leadCapturePage.home.presenter.SearchSuggestionPresenter;
 import com.talentica.presentation.leadCapturePage.home.view.SearchSuggestionsView;
 import com.talentica.presentation.utils.ClickListenerInterface;
-import com.talentica.presentation.utils.Enums;
 
 import javax.inject.Inject;
 
@@ -216,7 +215,7 @@ public class SearchFragment extends BaseFragment implements SearchSuggestionsVie
 
     @Override
     public void setActionSearchBar() {
-        ((MainActivity) getActivity()).setActionViewBar(Enums.actionBarTypeEnum.SEARCH_SUGGESTION);
+
     }
 
 

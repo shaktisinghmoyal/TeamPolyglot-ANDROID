@@ -1,11 +1,31 @@
 package com.talentica.presentation.leadCapturePage.myaccount.presenter;
 
-public interface MyBookPresenter {
-    void onClickMarkAsLent();
+import javax.inject.Inject;
 
-    void onClickRequestReturn();
+public class MyBookPresenter implements IMyBookPresenter {
+    private final String Tag = "MyBookPresenterImpl";
 
-    void onClickMarkAsReturn();
+    @Inject
+    public MyBookPresenter() {
+    }
 
-    void onClickRequestByOther();
+    @Override
+    public void onClickMarkAsLent() {
+
+    }
+
+    @Override
+    public void onClickRequestReturn() {
+
+    }
+
+    @Override
+    public void onClickMarkAsReturn() {
+
+    }
+
+    @Override
+    public void onClickRequestByOther() {
+
+    }
 }
